@@ -1,7 +1,8 @@
-
-<p align="left"> 
-    <img src="./ref/spectacles-logo.svg">
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./ref/spectacles-logo-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="/ref/spectacles-logo-light.svg">
+  <img alt="Spectacles Logo" src="path/to/light-mode-image.png">
+</picture>
 
 # Sample Projects
 
