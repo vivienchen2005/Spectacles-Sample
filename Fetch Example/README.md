@@ -11,13 +11,15 @@ This is an sample project which uses the Spectacles [Fetch API](https://develope
 
 Lens Studio: v5.3.0+
 
-OS Version: v5.58.621+
+Spectacles OS Version: v5.58.621+
 
 Spectacles App iOS: v0.58.1.0+
 
 Spectacles App Android: v0.58.1.0+
 
-To update your Spectacles Device 
+To update your Spectacles device and mobile app, please refer to this [guide](https://support.spectacles.com/hc/en-us/articles/30214953982740-Updating).
+
+You can download the latest version of Lens Studio from [here](https://ar.snap.com/download?lang=en-US).
 
 ## Getting the project
 
