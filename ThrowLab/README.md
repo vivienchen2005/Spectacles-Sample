@@ -69,10 +69,6 @@ The Tennis Ball object is available as an [.lspkg file](./TennisBall_Importable.
 
 While ThrowLab is primarily a reference project, feel free to provide improvements or suggestions. By sharing insights, you help everyone else build better Lenses.
 
-## License
-
-This sample project is provided as-is for demonstration purposes. Feel free to use any and all content presented in this project.
-
 ---
 
 By exploring the ThrowLab project, you’ll gain a practical understanding of implementing realistic throwing mechanics in AR. This foundation will help you build more engaging and interactive Lens Studio lenses.
