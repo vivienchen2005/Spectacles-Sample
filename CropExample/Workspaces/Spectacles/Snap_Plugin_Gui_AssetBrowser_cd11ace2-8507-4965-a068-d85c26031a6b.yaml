@@ -1,0 +1,16 @@
+CollapsedEntities:
+  type: stringset
+  value:
+    size: 10
+    values:
+      - 3DModels
+      - Echopark.hdr
+      - Images
+      - Materials
+      - Modules
+      - Prefabs
+      - Rendering
+      - Scripts/ChatGPT.ts
+      - SpectaclesInteractionKit
+      - SpectaclesInteractionKit/package.native
+  options: 4
