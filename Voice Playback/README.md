@@ -1,8 +1,8 @@
 # Voice Playback
 
-![Audio](https://img.shields.io/badge/Audio-Light%20Gray?color=D3D3D3) 
+[![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Audio](https://img.shields.io/badge/Audio-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/audio/playing-audio?)
 
-<img src="./README-ref/sample-list-voice-playback-rounded-edges.gif" alt="voice-playback" width="900" />
+<img src="./README-ref/sample-list-voice-playback-rounded-edges.gif" alt="voice-playback" width="500" />
 
 ## Overview
 

@@ -1,8 +1,9 @@
 # Fetch
 
-![Experimental API](https://img.shields.io/badge/Experimental%20API-Light%20Gray?color=D3D3D3) ![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3) ![Hand Gesture](https://img.shields.io/badge/Hand%20Gesture-Light%20Gray?color=D3D3D3) ![Fetch Request](https://img.shields.io/badge/Fetch%20Request-Light%20Gray?color=D3D3D3)
+[![Experimental API](https://img.shields.io/badge/Experimental%20API-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/apis/experimental-apis?) [![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Fetch](https://img.shields.io/badge/Fetch-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/apis/fetch?) [![Web View](https://img.shields.io/badge/Web%20View-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/apis/web-view?) 
 
-<img src="./README-ref/sample-list-fetch-rounded-edges.gif" alt="fetch" width="900" />
+
+<img src="./README-ref/sample-list-fetch-rounded-edges.gif" alt="fetch" width="500" />
 
 ## Overview
 

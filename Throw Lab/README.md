@@ -1,8 +1,9 @@
 # ThrowLab
 
-![Physics](https://img.shields.io/badge/Physics-Light%20Gray?color=D3D3D3) ![Hand Tracking](https://img.shields.io/badge/Hand%20Tracking-Light%20Gray?color=D3D3D3) ![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3) 
+[![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Physics](https://img.shields.io/badge/Physics-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/physics/physics-overview?) [![Gesture Module](https://img.shields.io/badge/Gesture%20Module-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/apis/gesture-module?)  
 
-<img src="./README-ref/sample-list-throw-lab-rounded-edges.gif" alt="throw-lab" width="900" />
+
+<img src="./README-ref/sample-list-throw-lab-rounded-edges.gif" alt="throw-lab" width="500" />
 
 ## Overview
 

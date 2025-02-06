@@ -1,9 +1,8 @@
 # Outdoor Navigation
 
-![Location AR](https://img.shields.io/badge/Location%20AR-Light%20Gray?color=D3D3D3) ![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3) ![Outdoor Navigation](https://img.shields.io/badge/Outdoor%20Navigation-Light%20Gray?color=D3D3D3) ![Map Component](https://img.shields.io/badge/Map%20Component-Light%20Gray?color=D3D3D3) ![Places](https://img.shields.io/badge/Places-Light%20Gray?color=D3D3D3)
-  
+[![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Location AR](https://img.shields.io/badge/Location%20AR-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/location-ar/custom-landmarker?) [![Outdoor Navigation](https://img.shields.io/badge/Outdoor%20Navigation-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/compatability-list?) [![Map Component](https://img.shields.io/badge/Map%20Component-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/location-ar/map-component?) [![Places](https://img.shields.io/badge/Places-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/remote-apis/snap-places-api?)
 
-<img src="./README-ref/sample-list-outdoor-navigation-rounded-edges.gif" alt="outdoor-navigation" width="900" />
+<img src="./README-ref/sample-list-outdoor-navigation-rounded-edges.gif" alt="outdoor-navigation" width="500" />
 
 > **NOTE:**
 > Multiple outdoor navigation features are in the work. For example user "HEADING". This example is an early experimentation.

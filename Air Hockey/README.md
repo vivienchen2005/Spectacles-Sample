@@ -1,9 +1,10 @@
 ### Air Hockey  
 
-![Networking](https://img.shields.io/badge/Networking-Light%20Gray?color=D3D3D3) ![Connected Lenses](https://img.shields.io/badge/Connected%20Lenses-Light%20Gray?color=D3D3D3) ![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3) ![Multiplayer](https://img.shields.io/badge/Multiplayer-Light%20Gray?color=D3D3D3) 
+[![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Networking](https://img.shields.io/badge/Networking-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/connected-lenses/overview?) [![Connected Lenses](https://img.shields.io/badge/Connected%20Lenses-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/connected-lenses/overview?) [![Sync Kit](https://img.shields.io/badge/Sync%20Kit-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Multiplayer](https://img.shields.io/badge/Multiplayer-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/lens-cloud/lens-cloud-overview?)
 
 
-<img src="./README-ref/sample-list-air-hockey-rounded-edges.gif" alt="air-hockey" width="900" />
+
+<img src="./README-ref/sample-list-air-hockey-rounded-edges.gif" alt="air-hockey" width="500" />
 
 ## Overview
 This is a sample [Connected Lens](https://developers.snap.com/spectacles/about-spectacles-features/connected-lenses/overview) project that uses [Spectacles Sync Kit](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-sync-kit/getting-started).

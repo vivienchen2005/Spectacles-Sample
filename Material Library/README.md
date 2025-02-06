@@ -1,8 +1,9 @@
 # Material Library
 
-![Graphics, Materials and Particles](https://img.shields.io/badge/Graphics%2C%20Materials%20and%20Particles-Light%20Gray?color=D3D3D3) ![Shaders](https://img.shields.io/badge/Shaders-Light%20Gray?color=D3D3D3) ![Post Effects](https://img.shields.io/badge/Post%20Effects-Light%20Gray?color=D3D3D3)
+[![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Graphics, Materials and Particles](https://img.shields.io/badge/Graphics%2C%20Materials%20and%20Particles-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/graphics/materials/overview?) [![Shaders](https://img.shields.io/badge/Shaders-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/graphics/materials/overview?) [![Post Effects](https://img.shields.io/badge/Post%20Effects-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/graphics/materials/post-effects?)
 
-<img src="./README-ref/sample-list-material-library-rounded-edges.gif" alt="material-library" width="900" />
+
+<img src="./README-ref/sample-list-material-library-rounded-edges.gif" alt="material-library" width="500" />
 
 ## Overview
 

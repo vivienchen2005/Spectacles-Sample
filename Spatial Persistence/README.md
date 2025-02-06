@@ -1,8 +1,8 @@
 # Spatial Persistence
 
-![Spatial Anchors](https://img.shields.io/badge/Spatial%20Anchors-Light%20Gray?color=D3D3D3) ![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)
+[![Spatial Anchors](https://img.shields.io/badge/Spatial%20Anchors-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/apis/spatial-anchors?) [![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Persistent Storage](https://img.shields.io/badge/Persistent%20Storage-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/persistent-cloud-storage/overview?) [![Multiplayer](https://img.shields.io/badge/Multiplayer-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/lens-cloud/lens-cloud-overview?)
 
-<img src="./README-ref/sample-list-spatial-persistance-rounded-edges.gif" alt="spatial-persistance" width="900" />
+<img src="./README-ref/sample-list-spatial-persistance-rounded-edges.gif" alt="spatial-persistance" width="500" />
 
 ## Overview
 

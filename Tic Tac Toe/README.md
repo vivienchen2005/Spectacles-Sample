@@ -1,8 +1,8 @@
 # Tic Tac Toe
 
-![Networking](https://img.shields.io/badge/Networking-Light%20Gray?color=D3D3D3) ![Connected Lenses](https://img.shields.io/badge/Connected%20Lenses-Light%20Gray?color=D3D3D3) ![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3) ![Multiplayer](https://img.shields.io/badge/Multiplayer-Light%20Gray?color=D3D3D3)
+[![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Networking](https://img.shields.io/badge/Networking-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/connected-lenses/overview?) [![Connected Lenses](https://img.shields.io/badge/Connected%20Lenses-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/connected-lenses/overview?) [![Sync Kit](https://img.shields.io/badge/Sync%20Kit-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Multiplayer](https://img.shields.io/badge/Multiplayer-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/lens-cloud/lens-cloud-overview?)
 
-<img src="./README-ref/sample-list-tic-tac-toe-rounded-edges.gif" alt="tic-tac-toe" width="900" />
+<img src="./README-ref/sample-list-tic-tac-toe-rounded-edges.gif" alt="tic-tac-toe" width="500" />
 
 ## Overview
 
