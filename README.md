@@ -1,10 +1,8 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./ref/spectacles-logo-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="/ref/spectacles-logo-light.svg">
-  <img alt="Spectacles Logo" src="path/to/light-mode-image.png">
-</picture>
 
-# Sample Projects
+<img src="./_README-ref/spectacles-2024-hero.png" alt="spectacles-2024-hero" width="900" style="border-radius: 15px; margin-bottom: 10px;" />
+
+
+# Spectacles Sample Projects
 
 This repository contains sample projects for [Spectacles (2024)](https://developers.snap.com/spectacles/get-started/introduction). Spectacles Lenses and experiences are powered by SnapOS, utilizing [Lens Studio](https://developers.snap.com/lens-studio/overview/getting-started/lens-studio-overview) as the authoring tool.
 
@@ -22,6 +20,15 @@ New to spatial experiences? Explore our [Introduction to Spatial Design](https:/
 > You can download Git LFS [here](https://git-lfs.github.com/).
 > Some developers experienced a "Long Path Error" in the process of cloning. You can see the resolution [here](https://www.reddit.com/r/Spectacles/comments/1hry5wj/comment/m54ij8l/?context=3).
 
+#### Install Git LFS
+```sh
+# Install Git LFS
+git lfs install
+
+# Clone the repository with LFS support
+git clone https://github.com/your-repo/sample-projects.git
+
+```
 
 > **API Keys:**
 > If some project take advantage of the Open AI API, You must provide your own OpenAI API key to use the functionalities provided by the project.
@@ -38,3 +45,10 @@ Extended Permissions mode on device must be enabled in some of the projects to a
 ## Support
 
 If you have any questions or need assistance, please don't hesitate to reach out. Our community is here to help, and you can connect with us and ask for support [here](https://www.reddit.com/r/Spectacles/). We look forward to hearing from you and are excited to assist you on your journey!
+
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./_README-ref/spectacles-logo-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="/_README-ref/spectacles-logo-light.svg">
+  <img alt="Spectacles Logo" src="path/to/light-mode-image.png" width="300">
+</picture>

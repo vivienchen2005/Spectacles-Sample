@@ -1,5 +1,0 @@
-ExternalSources:
-  type: "std::map<Es::Uuid, Es::Path>"
-  value:
-    - 7e048567-da33-4829-b028-d8c62ca978e8: /Users/skang2/Downloads/Union (2).png
-  options: 4
