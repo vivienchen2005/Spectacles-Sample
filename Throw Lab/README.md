@@ -2,12 +2,11 @@
 
 [![SIK](https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?) [![Physics](https://img.shields.io/badge/Physics-Light%20Gray?color=D3D3D3)](https://developers.snap.com/lens-studio/features/physics/physics-overview?) [![Gesture Module](https://img.shields.io/badge/Gesture%20Module-Light%20Gray?color=D3D3D3)](https://developers.snap.com/spectacles/about-spectacles-features/apis/gesture-module?)  
 
-
 <img src="./README-ref/sample-list-throw-lab-rounded-edges.gif" alt="throw-lab" width="500" />
 
 ## Overview
 
-**ThrowLab** is a sample Lens Studio project that demonstrates how to implement simple but realistic throwing mechanic in Lens Studio based on physics. It showcases a clean, componentized architecture that takes advantage of the new **Hand Velocity API** introduced in Lens Studio v3.4.
+This is a sample Lens Studio project that demonstrates how to implement simple but realistic throwing mechanic in Lens Studio based on physics. It showcases a clean, componentized architecture that takes advantage of the new **Hand Velocity API** introduced in Lens Studio v3.4.
 By exploring the ThrowLab project, you’ll gain a practical understanding of implementing realistic throwing mechanics in AR. This foundation will help you build more engaging and interactive Lens Studio lenses.
 
 > **NOTE:**
