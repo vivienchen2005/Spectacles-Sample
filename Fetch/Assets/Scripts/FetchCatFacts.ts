@@ -33,24 +33,5 @@ export class FetchCatFacts extends BaseScriptComponent {
         this.catFactReceived.invoke(randomCatFact.fact);
       })
       .catch(failAsync);
-
-    //   (error) => {
-    //   print("Error: " + error);
-    // });
-
-    let asyncFunction = async () => {
-      const response = await this.remoteService.fetch(this.url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      let randomCatFact = data as CatFact;
-      this.catFactReceived.invoke(randomCatFact.fact);
-    };
-    asyncFunction().catch((error) => {
-      print("Error: " + error);
-    });
   }
 }
