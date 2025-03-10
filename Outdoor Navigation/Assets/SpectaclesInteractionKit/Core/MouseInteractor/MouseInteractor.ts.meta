@@ -1,27 +1,27 @@
-- !<AssetImportMetadata/c7e4200d-b628-4140-9939-3e1283c5e2d6>
+- !<AssetImportMetadata/697e7a5c-1328-4211-b6f4-4baef2582334>
+  ImporterSettings: !<AssetImporterSettings>
+    {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> fa8d58de-519f-43c1-a79d-1bfa5fdecfb0
   ImporterName: TypeScriptAssetImporter
   PrimaryAsset: !<reference> fa8d58de-519f-43c1-a79d-1bfa5fdecfb0
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
   AssetDataMap:
-    TypeScriptAsset: !<own> a8a76588-2c09-47eb-b5b8-1c1e5fc3bf25
+    TypeScriptAsset: !<own> a87395f7-1364-45eb-b950-10fed667ddb1
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/062fe23e-8eb0-4cea-8f20-ce5fd48c73d2>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}
-- !<TypeScriptAssetData/a8a76588-2c09-47eb-b5b8-1c1e5fc3bf25>
-  SvgIcon: ""
+- !<TypeScriptAssetData/a87395f7-1364-45eb-b950-10fed667ddb1>
+  Icon: ""
   Description: ""
   InternalVersion: 0
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 0392308f-3ad1-4647-831e-e2235707591f
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -37,8 +37,7 @@
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
-    - _drawDebug: false
-      sphereCastEnabled: false
+    - sphereCastEnabled: false
       spherecastRadii: !<float[]>
         - 0.500000
         - 2.000000
@@ -50,6 +49,7 @@
       _maxRaycastDistance: !<float> 500.000000
       indirectTargetingVolumeMultiplier: !<float> 1.000000
       indirectDragThreshold: !<float> 3.000000
+      _drawDebug: false
       mouseTargetingMode: !<float> 2.000000
   ScriptTypes:
     -
@@ -73,3 +73,5 @@
     - '// @ui {"widget":"group_start", "label":"MouseInteractor"}'
     - '// @input float mouseTargetingMode = 2 {"hint":"Sets the return value of MouseInteractor.activeTargetingMode for cases where non-indirect targeting needs to be tested specifically. Useful whenever your code has checks for interactor.activeTargetingMode === TargetingMode.X.", "widget":"combobox", "values":[{"label":"Direct", "value":1}, {"label":"Indirect", "value":2}, {"label":"All", "value":3}, {"label":"Poke", "value":4}]}'
     - '// @ui {"widget":"group_end"}'
+  SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -102,4 +102,4 @@ export default interface CameraProvider {
    * @param x - the magnitude to multiply the camera's forward direction by
    */
   getForwardPositionParallelToGround(x: number): vec3
-};;;;;;;;;;
+}

@@ -1,27 +1,27 @@
-- !<AssetImportMetadata/f0a5e0a1-abb6-4520-9ef3-fdb8a9b56c2b>
+- !<AssetImportMetadata/1b6216fb-48e5-4bdf-92e2-84a685e3405e>
+  ImporterSettings: !<AssetImporterSettings>
+    {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 1af4a132-2a7c-4ce8-9cf0-6d4c3a862bd2
   ImporterName: TypeScriptAssetImporter
   PrimaryAsset: !<reference> 1af4a132-2a7c-4ce8-9cf0-6d4c3a862bd2
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
   AssetDataMap:
-    TypeScriptAsset: !<own> be86c2f1-8a67-4a8b-b56f-b659da4e39ae
+    TypeScriptAsset: !<own> 0a1cde00-1a24-4ae2-85cb-237c74880ef5
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/640ca932-44db-48ee-a309-525dc35e31e5>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}
-- !<TypeScriptAssetData/be86c2f1-8a67-4a8b-b56f-b659da4e39ae>
-  SvgIcon: ""
+- !<TypeScriptAssetData/0a1cde00-1a24-4ae2-85cb-237c74880ef5>
+  Icon: ""
   Description: ""
   InternalVersion: 0
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: b7cfe70a-9251-4ff7-b2c8-795aa2190dc0
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -37,3 +37,5 @@
       {}
   InputLines:
     []
+  SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

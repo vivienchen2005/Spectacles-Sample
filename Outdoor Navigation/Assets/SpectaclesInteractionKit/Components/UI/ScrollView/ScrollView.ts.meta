@@ -1,27 +1,27 @@
-- !<AssetImportMetadata/fa30f875-95ba-42a6-a373-24cbcb8cd417>
+- !<AssetImportMetadata/14a0e732-86b0-427f-b1fe-3699a5bc0b6b>
+  ImporterSettings: !<AssetImporterSettings>
+    {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 8ba7b68a-4b25-4d72-a4a4-a57730a77680
   ImporterName: TypeScriptAssetImporter
   PrimaryAsset: !<reference> 8ba7b68a-4b25-4d72-a4a4-a57730a77680
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
   AssetDataMap:
-    TypeScriptAsset: !<own> 7ffc1ba6-603a-4876-b6d1-48978d4e9816
+    TypeScriptAsset: !<own> e98fd325-103d-4b36-835b-64373a02227c
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/96b9a31c-8951-40da-9d8a-1ded21ea8760>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}
-- !<TypeScriptAssetData/7ffc1ba6-603a-4876-b6d1-48978d4e9816>
-  SvgIcon: ""
+- !<TypeScriptAssetData/e98fd325-103d-4b36-835b-64373a02227c>
+  Icon: ""
   Description: ""
   InternalVersion: 0
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 014ae827-c3ff-4f15-90f6-a47cda1fed86
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -36,11 +36,11 @@
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
-    - _debugDrawEnabled: false
-      enableHorizontalScroll: false
+    - enableHorizontalScroll: false
       enableVerticalScroll: true
-      _enableScrollInertia: true
       enableScrollLimit: true
+      _debugDrawEnabled: false
+      _enableScrollInertia: true
       _scrollLimit: 0.300000
       scrollAreaBounds: !<Vec2> {x: 1.000000, y: 1.000000}
   ScriptTypes:
@@ -54,3 +54,5 @@
     - // @input bool enableScrollLimit = true
     - '// @input float _scrollLimit = 0.3 {"widget":"slider", "min":0, "max":1, "step":0.01}'
     - '// @input vec2 scrollAreaBounds = "{1, 1}"'
+  SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

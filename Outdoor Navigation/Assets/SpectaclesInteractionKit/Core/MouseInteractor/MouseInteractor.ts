@@ -1,14 +1,14 @@
-import { InteractableHitInfo } from '../../Providers/TargetProvider/TargetProvider';
-import BaseInteractor from '../Interactor/BaseInteractor';
+import {InteractableHitInfo} from "../../Providers/TargetProvider/TargetProvider"
+import BaseInteractor from "../Interactor/BaseInteractor"
 import {
-    InteractorInputType,
-    InteractorTriggerType,
-    TargetingMode,
-} from '../Interactor/Interactor';
-import MouseTargetProvider from '../Interactor/MouseTargetProvider';
-import { TouchRayProvider } from '../Interactor/TouchRayProvider';
+  InteractorInputType,
+  InteractorTriggerType,
+  TargetingMode,
+} from "../Interactor/Interactor"
+import MouseTargetProvider from "../Interactor/MouseTargetProvider"
+import {TouchRayProvider} from "../Interactor/TouchRayProvider"
 
-const TARGETING_VOLUME_MULTIPLIER = 1;
+const TARGETING_VOLUME_MULTIPLIER = 1
 
 /**
  * {@link Interactor} implementation used for touch bases interactions
@@ -20,196 +20,172 @@ const TARGETING_VOLUME_MULTIPLIER = 1;
  */
 @component
 export class MouseInteractor extends BaseInteractor {
-  @ui.group_start('MouseInteractor')
+  @ui.group_start("MouseInteractor")
   @input
-  @hint('Sets the return value of MouseInteractor.activeTargetingMode for cases where non-indirect targeting needs to be tested specifically. Useful whenever your code has checks for interactor.activeTargetingMode === TargetingMode.X.')
-  @widget(new ComboBoxWidget([
-      new ComboBoxItem('Direct', 1),
-      new ComboBoxItem('Indirect', 2),
-      new ComboBoxItem('All', 3),
-      new ComboBoxItem('Poke', 4),
-  ]))
-    private mouseTargetingMode: number = 2;
+  @hint(
+    "Sets the return value of MouseInteractor.activeTargetingMode for cases where non-indirect targeting needs to be tested specifically. Useful whenever your code has checks for interactor.activeTargetingMode === TargetingMode.X.",
+  )
+  @widget(
+    new ComboBoxWidget([
+      new ComboBoxItem("Direct", 1),
+      new ComboBoxItem("Indirect", 2),
+      new ComboBoxItem("All", 3),
+      new ComboBoxItem("Poke", 4),
+    ]),
+  )
+  private mouseTargetingMode: number = 2
   @ui.group_end
-  private isDown = false;
+  private isDown = false
 
-  private touchRayProvider: TouchRayProvider;
-
-  private mouseTargetProvider: MouseTargetProvider;
+  private touchRayProvider!: TouchRayProvider
+  private mouseTargetProvider!: MouseTargetProvider
 
   onAwake() {
-      this.defineSceneEvents();
-      this.defineTouchEvents();
-      this.inputType = InteractorInputType.Mouse;
+    this.defineSceneEvents()
+    this.defineTouchEvents()
+    this.inputType = InteractorInputType.Mouse
 
-      this.touchRayProvider = new TouchRayProvider(this, this.maxRaycastDistance);
-      this.mouseTargetProvider = new MouseTargetProvider(this as BaseInteractor, {
-          rayProvider: this.touchRayProvider,
-          maxRayDistance: this.maxRaycastDistance,
-          targetingVolumeMultiplier: TARGETING_VOLUME_MULTIPLIER,
-          shouldPreventTargetUpdate: () => {
-              return this.currentInteractable !== null && this.isDown;
-          },
-          spherecastRadii: this.spherecastRadii,
-          spherecastDistanceThresholds: this.spherecastDistanceThresholds,
-      });
+    this.touchRayProvider = new TouchRayProvider(this, this.maxRaycastDistance)
+    this.mouseTargetProvider = new MouseTargetProvider(this as BaseInteractor, {
+      rayProvider: this.touchRayProvider,
+      maxRayDistance: this.maxRaycastDistance,
+      targetingVolumeMultiplier: TARGETING_VOLUME_MULTIPLIER,
+      shouldPreventTargetUpdate: () => {
+        return this.currentInteractable !== null && this.isDown
+      },
+      spherecastRadii: this.spherecastRadii,
+      spherecastDistanceThresholds: this.spherecastDistanceThresholds,
+    })
   }
 
   constructor() {
-      super();
+    super()
 
-      if (!global.deviceInfoSystem.isEditor()) {
-          this.interactionManager.deregisterInteractor(this);
-          this.enabled = false;
-          return;
-      }
+    if (!global.deviceInfoSystem.isEditor()) {
+      this.interactionManager.deregisterInteractor(this)
+      this.enabled = false
+    }
   }
 
-  /**
-   * @inheritdoc
-   */
   get startPoint(): vec3 | null {
-      return this.mouseTargetProvider.startPoint;
+    return this.mouseTargetProvider.startPoint
   }
 
-  /**
-   * @inheritdoc
-   */
   get endPoint(): vec3 | null {
-      return this.mouseTargetProvider.endPoint;
+    return this.mouseTargetProvider.endPoint
   }
 
-  /**
-   * @inheritdoc
-   */
   get direction(): vec3 | null {
-      return this.mouseTargetProvider.direction;
+    return this.mouseTargetProvider.direction
   }
 
-  /**
-   * @inheritdoc
-   */
   get distanceToTarget(): number | null {
-      return (
-          this.mouseTargetProvider.currentInteractableHitInfo?.hit.distance ?? null
-      );
+    return (
+      this.mouseTargetProvider.currentInteractableHitInfo?.hit.distance ?? null
+    )
   }
 
-  /**
-   * @inheritdoc
-   */
   get targetHitPosition(): vec3 | null {
-      return (
-          this.mouseTargetProvider.currentInteractableHitInfo?.hit.position ?? null
-      );
+    return (
+      this.mouseTargetProvider.currentInteractableHitInfo?.hit.position ?? null
+    )
   }
 
   get targetHitInfo(): InteractableHitInfo | null {
-      return this.mouseTargetProvider.currentInteractableHitInfo ?? null;
+    return this.mouseTargetProvider.currentInteractableHitInfo ?? null
   }
 
-  /**
-   * @inheritdoc
-   */
   get activeTargetingMode(): TargetingMode {
-      return this.mouseTargetingMode;
+    return this.mouseTargetingMode
   }
 
-  /**
-   * @inheritdoc
-   */
   get maxRaycastDistance(): number {
-      return this._maxRaycastDistance;
+    return this._maxRaycastDistance
   }
 
-  /**
-   * @inheritdoc
-   */
   get orientation(): quat | null {
-      return quat.quatIdentity();
+    return quat.quatIdentity()
   }
 
-  /** @inheritdoc */
   get interactionStrength(): number | null {
-      return this.currentTrigger === InteractorTriggerType.Select ? 1 : 0.5;
+    return this.currentTrigger === InteractorTriggerType.Select ? 1 : 0.5
   }
 
   /**
    * Set if the Interactor is should draw a debug gizmo of collider/raycasts in the scene.
    */
   set drawDebug(debug: boolean) {
-      this._drawDebug = debug;
+    this._drawDebug = debug
 
-      this.mouseTargetProvider.drawDebug = debug;
+    this.mouseTargetProvider.drawDebug = debug
   }
 
   /**
    * @returns if the Interactor is currently drawing a debug gizmo of collider/raycasts in the scene.
    */
   get drawDebug(): boolean {
-      return this._drawDebug;
+    return this._drawDebug
   }
 
-  /**
-   * @inheritdoc
-   */
   isActive(): boolean {
-      return this.enabled;
+    return this.enabled
   }
 
-  /**
-   * @inheritdoc
-   */
   isTargeting(): boolean {
-      return this.touchRayProvider.isAvailable();
+    return (
+      this.touchRayProvider !== undefined && this.touchRayProvider.isAvailable()
+    )
   }
 
-  /** @inheritdoc */
-  updateState(): void {
-      super.updateState();
+  override updateState(): void {
+    super.updateState()
 
-      if (!this.isActive()) {
-          return;
-      }
+    if (!this.isActive()) {
+      return
+    }
 
-      this.mouseTargetProvider.update();
+    this.mouseTargetProvider.update()
 
-      this.currentInteractable =
-      this.mouseTargetProvider.currentInteractableHitInfo?.interactable ?? null;
+    this.currentInteractable =
+      this.mouseTargetProvider.currentInteractableHitInfo?.interactable ?? null
 
-      this.currentTrigger = this.isDown
-          ? InteractorTriggerType.Select
-          : InteractorTriggerType.None;
+    this.currentTrigger = this.isDown
+      ? InteractorTriggerType.Select
+      : InteractorTriggerType.None
 
-      this.updateDragVector();
+    this.updateDragVector()
+
+    this.processTriggerEvents()
   }
 
   protected clearCurrentHitInfo(): void {
-      this.mouseTargetProvider.clearCurrentInteractableHitInfo();
+    this.mouseTargetProvider.clearCurrentInteractableHitInfo()
   }
 
   private defineSceneEvents(): void {
-      this.createEvent('OnEnableEvent').bind(() => {
-          this.enabled = true;
-      });
+    this.createEvent("OnEnableEvent").bind(() => {
+      this.enabled = true
+    })
 
-      this.createEvent('OnDisableEvent').bind(() => {
-          this.enabled = false;
-      });
+    this.createEvent("OnDisableEvent").bind(() => {
+      this.enabled = false
+    })
   }
 
   private defineTouchEvents(): void {
-      this.createEvent('TouchStartEvent').bind((...args) =>
-          this.onTouchStartEvent(...args));
+    this.createEvent("TouchStartEvent").bind((...args) =>
+      this.onTouchStartEvent(...args),
+    )
 
-      this.createEvent('TouchEndEvent').bind((...args) =>
-          this.onTouchEndEvent(...args));
+    this.createEvent("TouchEndEvent").bind((...args) =>
+      this.onTouchEndEvent(...args),
+    )
   }
   private onTouchStartEvent(ev: TouchStartEvent): void {
-      this.isDown = true;
+    this.isDown = true
   }
 
   private onTouchEndEvent(ev: TouchEndEvent): void {
-      this.isDown = false;
+    this.isDown = false
   }
 }

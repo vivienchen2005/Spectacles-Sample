@@ -1,124 +1,146 @@
-import { Interactable } from '../Interaction/Interactable/Interactable';
-import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
+import {validate} from "../../Utils/validate"
+import {Interactable} from "../Interaction/Interactable/Interactable"
+import {ToggleButton} from "../UI/ToggleButton/ToggleButton"
 
-/*
- * PinchButton provides basic pinch button functionality for the prefab pinch button.
- * It is meant to be added to a Scene Object with an Interactable component, with visual behavior configured in the Lens Studio scene.
+/**
+ * This class provides visual feedback for a {@link ToggleButton} by changing the material of the provided {@link RenderMeshVisual}s when the button is toggled on or off.
  */
-
 @component
 export class ToggleFeedback extends BaseScriptComponent {
   @input
-      toggledOffMaterial: Material;
+  toggledOffMaterial!: Material
   @input
-      toggledOffSelectMaterial: Material;
+  toggledOffSelectMaterial!: Material
   @input
-      toggledOnMaterial: Material;
+  toggledOnMaterial!: Material
   @input
-      toggledOnSelectMaterial: Material;
+  toggledOnSelectMaterial!: Material
   @input
-      disabledMaterial: Material;
+  disabledMaterial!: Material
   @input
-      meshVisuals: RenderMeshVisual[];
+  meshVisuals: RenderMeshVisual[] = []
 
-  private toggleButton: ToggleButton;
-  private interactable: Interactable;
+  private toggleButton: ToggleButton | null = null
+  private interactable: Interactable | null = null
 
-  private materials: Material[];
+  private materials: Material[] = []
 
-  onAwake() {
-      this.materials = [
-          this.toggledOffMaterial,
-          this.toggledOffSelectMaterial,
-          this.toggledOnMaterial,
-          this.toggledOnSelectMaterial,
-          this.disabledMaterial,
-      ];
+  onAwake(): void {
+    this.materials = [
+      this.toggledOffMaterial,
+      this.toggledOffSelectMaterial,
+      this.toggledOnMaterial,
+      this.toggledOnSelectMaterial,
+      this.disabledMaterial,
+    ]
 
-      this.defineScriptEvents();
+    this.defineScriptEvents()
   }
 
   private defineScriptEvents() {
-      this.createEvent('OnStartEvent').bind(() => {
-          this.init();
-      });
+    this.createEvent("OnStartEvent").bind(() => {
+      this.init()
+    })
   }
 
-  init() {
-      this.toggleButton = this.getSceneObject().getComponent(ToggleButton.getTypeName());
+  init(): void {
+    this.toggleButton = this.getSceneObject().getComponent(
+      ToggleButton.getTypeName(),
+    )
 
-      this.interactable = this.getSceneObject().getComponent(Interactable.getTypeName());
+    this.interactable = this.getSceneObject().getComponent(
+      Interactable.getTypeName(),
+    )
 
-      if (this.interactable === null || this.interactable === undefined) {
-          throw new Error('UIToggleButtonCustomize script requires an Interactable on the ToggleButton');
-      }
+    if (this.interactable === null || this.interactable === undefined) {
+      throw new Error(
+        "UIToggleButtonCustomize script requires an Interactable on the ToggleButton",
+      )
+    }
 
-      this.setupInteractableCallbacks(this.interactable);
+    this.setupInteractableCallbacks(this.interactable)
   }
 
   private removeMaterials(): void {
-      for (let i = 0; i < this.meshVisuals.length; i++) {
-          const materials = [];
+    for (let i = 0; i < this.meshVisuals.length; i++) {
+      let materials = []
 
-          const matCount = this.meshVisuals[i].getMaterialsCount();
+      const matCount = this.meshVisuals[i].getMaterialsCount()
 
-          for (let k = 0; k < matCount; k++) {
-              const material = this.meshVisuals[i].getMaterial(k);
+      for (let k = 0; k < matCount; k++) {
+        const material = this.meshVisuals[i].getMaterial(k)
 
-              if (this.materials.includes(material)) {
-                  continue;
-              }
+        if (this.materials.includes(material)) {
+          continue
+        }
 
-              materials.push(material);
-          }
-
-          this.meshVisuals[i].clearMaterials();
-
-          for (let k = 0; k < materials.length; k++) {
-              this.meshVisuals[i].addMaterial(materials[k]);
-          }
+        materials.push(material)
       }
+
+      this.meshVisuals[i].clearMaterials()
+
+      for (var k = 0; k < materials.length; k++) {
+        this.meshVisuals[i].addMaterial(materials[k])
+      }
+    }
   }
 
   // Changes the material of each RenderMeshVisual provided.
-  private changeMeshes(material: Material): void {
-      this.removeMaterials();
+  private changeMeshes(material: Material | undefined): void {
+    validate(material)
 
-      this.meshVisuals.forEach(function(mesh) {
-          mesh.addMaterial(material);
-      });
+    this.removeMaterials()
+
+    this.meshVisuals.forEach((mesh) => {
+      mesh.addMaterial(material)
+    })
+  }
+
+  /**
+   * Changes the materials depending on the {@link ToggleButton}'s status.
+   * @param materialOn - The material to be used if on.
+   * @param materialOff - The material to be used if off.
+   */
+  private changeToggleOnMesh(
+    materialOn: Material | undefined,
+    materialOff: Material | undefined,
+  ) {
+    validate(this.toggleButton)
+    this.changeMeshes(this.toggleButton.isToggledOn ? materialOn : materialOff)
   }
 
   // Sets up interactable callbacks.
-  setupInteractableCallbacks(interactable) {
-      interactable.onTriggerStart.add(() => {
-          this.changeMeshes(this.toggleButton.isToggledOn
-              ? this.toggledOnSelectMaterial
-              : this.toggledOffSelectMaterial);
-      });
+  setupInteractableCallbacks(interactable: Interactable): void {
+    validate(this.toggleButton)
 
-      interactable.onTriggerCanceled.add(() => {
-          this.changeMeshes(this.toggleButton.isToggledOn
-              ? this.toggledOnMaterial
-              : this.toggledOffMaterial);
-      });
+    interactable.onTriggerStart.add(() => {
+      this.changeToggleOnMesh(
+        this.toggledOnSelectMaterial,
+        this.toggledOffSelectMaterial,
+      )
+    })
 
-      this.toggleButton.createEvent('OnEnableEvent').bind(() => {
-          this.changeMeshes(this.toggleButton.isToggledOn
-              ? this.toggledOnMaterial
-              : this.toggledOffMaterial);
-      });
+    interactable.onTriggerCanceled.add(() => {
+      this.changeToggleOnMesh(this.toggledOnMaterial, this.toggledOffMaterial)
+    })
 
-      this.toggleButton.createEvent('OnDisableEvent').bind(() => {
-          this.changeMeshes(this.disabledMaterial);
-      });
+    this.toggleButton.createEvent("OnEnableEvent").bind(() => {
+      this.changeToggleOnMesh(this.toggledOnMaterial, this.toggledOffMaterial)
+    })
 
-      this.toggleButton.onStateChanged.add((isToggledOn) => {
-          this.changeMeshes(this.toggleButton.enabled === false
-              ? this.disabledMaterial
-              : isToggledOn
-                  ? this.toggledOnMaterial
-                  : this.toggledOffMaterial);
-      });
+    this.toggleButton.createEvent("OnDisableEvent").bind(() => {
+      this.changeMeshes(this.disabledMaterial)
+    })
+
+    this.toggleButton.onStateChanged.add((isToggledOn) => {
+      if (this.toggleButton?.enabled === false) {
+        this.changeMeshes(this.disabledMaterial)
+        return
+      }
+
+      this.changeMeshes(
+        isToggledOn ? this.toggledOnMaterial : this.toggledOffMaterial,
+      )
+    })
   }
 }

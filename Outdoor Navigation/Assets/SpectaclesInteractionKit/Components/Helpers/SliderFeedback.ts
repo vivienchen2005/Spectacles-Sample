@@ -1,146 +1,95 @@
-import { Slider } from '../UI/Slider/Slider';
+import {Interactable} from "../../Components/Interaction/Interactable/Interactable"
+import {Slider} from "../../Components/UI/Slider/Slider"
+import {validate} from "../../Utils/validate"
 
-const SLIDER_LEVEL_MIN = 0.15;
-const SLIDER_LEVEL_MAX = 0.85;
+const SLIDER_LEVEL_MIN: number = 0.1
+const SLIDER_LEVEL_MAX: number = 0.9
 
+/**
+ * This class provides visual feedback for a slider component. It manages the appearance of the slider's knob and track based on interaction events and the slider's value.
+ */
 @component
 export class SliderFeedback extends BaseScriptComponent {
   @input
-  @hint('The components under DebugElements will be hidden on start if showDebug is unchecked.')
-      showDebug: boolean = false;
-  @input
-      debugElements: SceneObject[] = [];
-  @ui.group_start('Slider Knob')
-  @input
-  @label('Mesh')
-      sliderKnobMesh: RenderMeshVisual;
-  @input
-  @label('Idle Material')
-      sliderKnobIdleMaterial: Material;
-  @input
-  @label('Selected Material')
-      sliderKnobSelectedMaterial: Material;
-  @ui.group_end
-  @ui.group_start('Slider Track')
-  @input
-      sliderTrackMesh: RenderMeshVisual;
-  @input
-      sliderTrackMaterial: Material;
-  @ui.group_end
-  @input
-  @allowUndefined
-      sliderProgressAudio: AudioTrackAsset;
+  renderMeshVisual!: RenderMeshVisual
 
-  private trackMaterial: Material;
-  private currentSlider: Slider;
-  private _audioComponent: AudioComponent;
+  @input
+  knobObject!: SceneObject
 
-  private materials: Material[];
+  private interactable: Interactable | null = null
+  private slider: Slider | null = null
+  private currentValue: number = 0
 
-  onAwake() {
-      this.materials = [
-          this.sliderKnobIdleMaterial,
-          this.sliderKnobSelectedMaterial,
-      ];
-
-      this.defineScriptEvents();
+  onAwake(): void {
+    this.init()
   }
 
-  private defineScriptEvents() {
-      this.createEvent('OnStartEvent').bind(() => {
-          this.init();
-      });
+  private init = (): void => {
+    if (isNull(this.renderMeshVisual)) {
+      throw new Error("No RenderMeshVisual component attached to this entity!")
+    }
+
+    if (isNull(this.knobObject)) {
+      throw new Error("No knobObject attached to this entity!")
+    }
+
+    this.renderMeshVisual.mainMaterial = this.renderMeshVisual
+      .getMaterial(0)
+      .clone()
+
+    this.interactable = this.knobObject.getComponent(Interactable.getTypeName())
+
+    if (isNull(this.interactable)) {
+      throw new Error("Interactable component not found in this entity!")
+    }
+
+    this.slider = this.getSceneObject().getComponent(Slider.getTypeName())
+
+    if (isNull(this.slider)) {
+      throw new Error("No Slider component attached to this entity!")
+    }
+
+    this.createEvent("OnStartEvent").bind(() => {
+      validate(this.slider)
+      validate(this.renderMeshVisual)
+      this.currentValue = this.slider.startValue
+
+      this.renderMeshVisual.mainPass.level = this.getSliderLevelFromValue(
+        this.slider.currentValue ?? 0,
+      )
+
+      this.setupSliderCallbacks()
+    })
   }
 
-  /**
-   * Returns the AudioComponent used for feedback for further configuration (volume).
-   */
-  get audioComponent(): AudioComponent {
-      return this._audioComponent;
+  private getSliderLevelFromValue = (value: number): number => {
+    validate(this.slider)
+    if (value <= this.slider.minValue) {
+      return 0
+    } else if (value >= this.slider.maxValue) {
+      return 1
+    } else {
+      const progress =
+        (value - this.slider.minValue) /
+        (this.slider.maxValue - this.slider.minValue)
+      return SLIDER_LEVEL_MIN + (SLIDER_LEVEL_MAX - SLIDER_LEVEL_MIN) * progress
+    }
   }
 
-  init() {
-      if (!this.showDebug) {
-          this.debugElements.forEach(function(element) {
-              element.enabled = false;
-          });
-      }
-
-      this.trackMaterial = this.sliderTrackMaterial.clone();
-      this.sliderTrackMesh.mainMaterial = this.trackMaterial;
-
-      this.currentSlider = this.getSceneObject().getComponent(Slider.getTypeName());
-      this._audioComponent = this.getSceneObject().createComponent('Component.AudioComponent');
-      this.audioComponent.playbackMode = Audio.PlaybackMode.LowLatency;
-
-      // Set up the material so that it reflects the selected colors and slider level
-      this.trackMaterial.mainPass.Level = this.getSliderLevelFromValue(this.currentSlider.currentValue);
-      // Set up the slider audio
-      if (!isNull(this.sliderProgressAudio)) {
-          this.audioComponent.audioTrack = this.sliderProgressAudio;
-      }
-
-      this.setupSliderCallbacks();
-  }
-
-  setupSliderCallbacks() {
-      // Modify the material on slider changes by subscribing to value updates
-      this.currentSlider.onValueUpdate.add((value) => {
-          this.trackMaterial.mainPass.Level = this.getSliderLevelFromValue(value);
-
-          if (!isNull(this.audioComponent.audioTrack)) {
-              this.audioComponent.play(1);
-          }
-      });
-
-      this.currentSlider.onSlideStart.add(() => {
-          this.changeMesh(this.sliderKnobSelectedMaterial);
-      });
-
-      this.currentSlider.onSlideEnd.add(() => {
-          this.changeMesh(this.sliderKnobIdleMaterial);
-      });
-  }
-
-  getSliderLevelFromValue(value) {
-      if (value <= this.currentSlider.minValue) {
-          return 0;
-      } else if (value >= this.currentSlider.maxValue) {
-          return 1;
-      } else {
-          const progress =
-        (value - this.currentSlider.minValue) /
-        (this.currentSlider.maxValue - this.currentSlider.minValue);
-          return SLIDER_LEVEL_MIN + (SLIDER_LEVEL_MAX - SLIDER_LEVEL_MIN) * progress;
-      }
-  }
-
-  private removeMaterials(): void {
-      const materials = [];
-
-      const matCount = this.sliderKnobMesh.getMaterialsCount();
-
-      for (let k = 0; k < matCount; k++) {
-          const material = this.sliderKnobMesh.getMaterial(k);
-
-          if (this.materials.includes(material)) {
-              continue;
-          }
-
-          materials.push(material);
-      }
-
-      this.sliderKnobMesh.clearMaterials();
-
-      for (let k = 0; k < materials.length; k++) {
-          this.sliderKnobMesh.addMaterial(materials[k]);
-      }
-  }
-
-  // Changes the material of provided RenderMeshVisual.
-  private changeMesh(material: Material): void {
-      this.removeMaterials();
-
-      this.sliderKnobMesh.addMaterial(material);
+  private setupSliderCallbacks = (): void => {
+    validate(this.interactable)
+    validate(this.slider)
+    validate(this.renderMeshVisual)
+    this.interactable.onTriggerStart.add(() => {
+      this.renderMeshVisual.mainPass.pinch = 1.0
+      this.renderMeshVisual.mainPass.level = this.currentValue
+    })
+    this.interactable.onTriggerEnd.add(() => {
+      this.renderMeshVisual.mainPass.pinch = 0.0
+    })
+    this.slider.onValueUpdate.add((value) => {
+      this.currentValue = value
+      this.renderMeshVisual.mainPass.level = this.getSliderLevelFromValue(value)
+    })
   }
 }

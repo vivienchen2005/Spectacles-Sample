@@ -1,27 +1,34 @@
-- !<AssetImportMetadata/74daf879-c4d5-4f37-a446-01f758be200e>
+- !<AssetImportMetadata/782f0aec-5dd6-47f5-a81a-6604c4c2d6f0>
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 2a71057d-f45b-4755-a592-fdd0e06065fc
   ImporterName: TypeScriptAssetImporter
   PrimaryAsset: !<reference> 2a71057d-f45b-4755-a592-fdd0e06065fc
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
+  ImporterSettings: !<AssetImporterSettings>
+    {}
   AssetDataMap:
-    TypeScriptAsset: !<own> f6801b30-1435-4a2d-a6b8-8e45e192c345
+    TypeScriptAsset: !<own> fdb10dcc-3568-4528-bd38-aedf49b34c32
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/f6bd6266-1800-4b92-8f1d-c81be7072527>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}
-- !<TypeScriptAssetData/f6801b30-1435-4a2d-a6b8-8e45e192c345>
-  SvgIcon: ""
+- !<TypeScriptAssetData/fdb10dcc-3568-4528-bd38-aedf49b34c32>
+  InputLines:
+    - '// @input Component.RenderMeshVisual meshVisual {"hint":"The mesh visual to modify into an extendable capsule."}'
+    - '// @input float capsuleLength = 10 {"hint":"The length of the cylindric section of the capsule (not including the end caps)."}'
+    - '// @input float radius = 1 {"hint":"The radius of the end caps and the radius of the cylindric section."}'
+    - '// @input int radianStepCount = 16 {"hint":"The number of points per circle in the mesh. Increase for a higher poly-count mesh."}'
+    - '// @input int cylinderStepCount = 16 {"hint":"The number of circles in the cylinder of the mesh. Increase for a higher poly-count mesh."}'
+    - '// @input int endXStepCount = 32 {"hint":"The number of circles in the end cap of the capsule of the mesh. Increase for a higher poly-count mesh."}'
+  Icon: ""
   Description: ""
   InternalVersion: 0
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 3f2a2eae-2293-437a-b8e7-7f8210bbf240
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -38,16 +45,11 @@
     - meshVisual: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
       capsuleLength: !<float> 10.000000
       radius: !<float> 1.000000
-      radianStepCount: 16
-      cylinderStepCount: 16
-      endXStepCount: 32
+      radianStepCount: !<float> 16.000000
+      cylinderStepCount: !<float> 16.000000
+      endXStepCount: !<float> 32.000000
   ScriptTypes:
     -
       {}
-  InputLines:
-    - '// @input Component.RenderMeshVisual meshVisual {"hint":"The mesh visual to modify into an extendable capsule."}'
-    - '// @input float capsuleLength = 10 {"hint":"The length of the cylindric section of the capsule (not including the end caps)."}'
-    - '// @input float radius = 1 {"hint":"The radius of the end caps and the radius of the cylindric section."}'
-    - '// @input int radianStepCount = 16 {"hint":"The number of points per circle in the mesh. Increase for a higher poly-count mesh."}'
-    - '// @input int cylinderStepCount = 16 {"hint":"The number of circles in the cylinder of the mesh. Increase for a higher poly-count mesh."}'
-    - '// @input int endXStepCount = 32 {"hint":"The number of circles in the end cap of the capsule of the mesh. Increase for a higher poly-count mesh."}'
+  SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

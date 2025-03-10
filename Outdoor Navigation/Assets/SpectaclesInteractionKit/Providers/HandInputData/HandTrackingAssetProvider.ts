@@ -1,4 +1,4 @@
-import { HandType } from './HandType';
+import {HandType} from "./HandType"
 
 /**
  * Interface defining apis to retrieve hand tracking assets
@@ -10,4 +10,4 @@ export default interface HandTrackingAssetProvider {
    * @param handType the {@link HandType} for this asset
    */
   get(handType: HandType): Asset
-};;;;;;;;;;
+}

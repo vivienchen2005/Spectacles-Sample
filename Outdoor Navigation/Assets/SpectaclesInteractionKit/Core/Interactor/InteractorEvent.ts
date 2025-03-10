@@ -1,16 +1,16 @@
-import { Interactable } from '../../Components/Interaction/Interactable/Interactable';
-import { Interactor } from './Interactor';
+import {Interactable} from "../../Components/Interaction/Interactable/Interactable"
+import {Interactor} from "./Interactor"
 
-export type EventPropagationPhase = 'TrickleDown' | 'Target' | 'BubbleUp'
+export type EventPropagationPhase = "TrickleDown" | "Target" | "BubbleUp"
 
 export type InteractableEventName =
-  | 'HoverEnter'
-  | 'HoverUpdate'
-  | 'HoverExit'
-  | 'TriggerStart'
-  | 'TriggerUpdate'
-  | 'TriggerEnd'
-  | 'TriggerCanceled'
+  | "HoverEnter"
+  | "HoverUpdate"
+  | "HoverExit"
+  | "TriggerStart"
+  | "TriggerUpdate"
+  | "TriggerEnd"
+  | "TriggerCanceled"
 
 export type DispatchableEventArgs = {
   interactor: Interactor
@@ -64,5 +64,5 @@ export type DragInteractorEvent = InteractorEvent & {
   /**
    * The drag vector projected onto the plane defined by the Interactable's forward and origin
    */
-  planecastDragVector: vec3
+  planecastDragVector: vec3 | null
 }

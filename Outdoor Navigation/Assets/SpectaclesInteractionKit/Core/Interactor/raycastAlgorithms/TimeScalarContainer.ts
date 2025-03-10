@@ -1,15 +1,15 @@
-import { ScalarSampleOps } from '../../../Utils/SampleOps';
-import { TimedDataContainer, WindowMode } from './TimeDataContainer';
+import {ScalarSampleOps} from "../../../Utils/SampleOps"
+import {TimedDataContainer, WindowMode} from "./TimeDataContainer"
 
 /**
  * Scalar specialization of TimedDataContainer
  */
 export class TimedScalarContainer extends TimedDataContainer<number> {
-    constructor(windowMode: WindowMode, windowSize: number) {
-        super(windowMode, windowSize, new ScalarSampleOps());
-    }
+  constructor(windowMode: WindowMode, windowSize: number) {
+    super(windowMode, windowSize, new ScalarSampleOps())
+  }
 
-    /**
+  /**
    * @returns the velocity aggregated, using signed delta values between the data points
    *
    * Tries to overcome the velocity measurement problem caused by data duplications
@@ -30,21 +30,21 @@ export class TimedScalarContainer extends TimedDataContainer<number> {
    *      \___/
    *     t1    t3
    */
-    aggregateSignedVelocity(): number | null {
-        if (this.data.length < 4) {
-            return null;
-        }
-
-        let velocitySum = 0;
-        let count = 0;
-        for (let i = 2; i < this.data.length; i++) {
-            const delta = this.data[i].data - this.data[i - 2].data;
-            const deltaTime = this.data[i].timestamp - this.data[i - 2].timestamp;
-            const velocity = delta / deltaTime;
-            velocitySum += velocity;
-            count++;
-        }
-
-        return velocitySum / count;
+  aggregateSignedVelocity(): number | null {
+    if (this.data.length < 4) {
+      return null
     }
+
+    let velocitySum = 0
+    let count = 0
+    for (let i = 2; i < this.data.length; i++) {
+      const delta = this.data[i].data - this.data[i - 2].data
+      const deltaTime = this.data[i].timestamp - this.data[i - 2].timestamp
+      const velocity = delta / deltaTime
+      velocitySum += velocity
+      count++
+    }
+
+    return velocitySum / count
+  }
 }

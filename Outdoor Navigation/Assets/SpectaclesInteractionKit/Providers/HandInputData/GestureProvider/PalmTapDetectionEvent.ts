@@ -3,9 +3,9 @@
  */
 export type PalmTapDetectionEvent =
   | {
-      state: 'unsupported'
+      state: "unsupported"
     }
   | {
-      state: 'available'
+      state: "available"
       data: {isTapping: boolean}
     }

@@ -1,4 +1,4 @@
-import { aabb } from './aabb';
+import {aabb} from "./aabb"
 
 /*
  * Spatial is an interface that when implemented shows that a View has 3D bounds around which to draw a UI as well as

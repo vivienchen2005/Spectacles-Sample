@@ -1,34 +1,41 @@
-import { Singleton } from '../../../Decorators/Singleton';
-import NativeLogger from '../../../Utils/NativeLogger';
+import {Singleton} from "../../../Decorators/Singleton"
+import NativeLogger from "../../../Utils/NativeLogger"
 
-const TAG = 'GestureModuleProvider';
 /**
- * Provides gesture related apis
+ * Provides gesture related APIs.
  */
 @Singleton
 export default class GestureModuleProvider {
-    public static getInstance: () => GestureModuleProvider;
+  public static getInstance: () => GestureModuleProvider
+  private readonly log: NativeLogger
+  private loadedModule: GestureModule | undefined
 
-    private gestureModule: GestureModule | undefined = undefined;
+  constructor() {
+    this.log = new NativeLogger("GestureModuleProvider")
+  }
 
-    private log = new NativeLogger(TAG);
-
-    /**
-   * Tries to create an Asset.GestureModule using the assetSystem.
+  /**
+   * Tries to create an ScriptObject.GestureModule using {@link ModuleLoader}.
    * Stores and returns the created object if it can be successfully created.
    * Returns undefined if error happens during creation.
    *
-   * @returns the created GestureModule or undefined if it cannot be created
+   * @returns the created {@link GestureModule} or undefined if it cannot be created.
    */
-    getGestureModule(): GestureModule | undefined {
-        if (this.gestureModule === undefined) {
-            try {
-                this.gestureModule =
-          require('LensStudio:GestureModule') as GestureModule;
-            } catch (error) {
-                this.log.e(`Error creating GestureModule: ${error}`);
-            }
-        }
-        return this.gestureModule;
+  getModule(): GestureModule | undefined {
+    if (this.loadedModule !== undefined) {
+      return this.loadedModule
     }
+
+    if (GestureModule.HandType === undefined) {
+      return undefined
+    }
+
+    try {
+      this.loadedModule = require("LensStudio:GestureModule") as GestureModule
+      return this.loadedModule
+    } catch (error) {
+      this.log.e(`Error creating module: ${error}`)
+      return undefined
+    }
+  }
 }

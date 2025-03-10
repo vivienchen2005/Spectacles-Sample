@@ -4,7 +4,15 @@
     - !<own> d77003ce-7af7-42d6-92ac-c0f365b9f803
 - !<PassInfo/d77003ce-7af7-42d6-92ac-c0f365b9f803>
   CachedProperties:
-    []
+    - matcapTextureBorderColor:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - matcapTextureDims:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - matcapTextureUvMinMax:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   DepthWrite: true
   DepthTest: true
   DepthFunction: LessEqual
@@ -25,9 +33,18 @@
     Port_Input0_N055:
       typeIdx: 4
       value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Port_Input0_N091:
+      typeIdx: 1
+      value: 1.000000
     Port_Input0_N096:
       typeIdx: 3
       value: {x: -0.250000, y: -0.250000}
+    Port_Input0_N106:
+      typeIdx: 1
+      value: 0.000000
+    Port_Input0_N107:
+      typeIdx: 1
+      value: 1.000000
     Port_Input0_N109:
       typeIdx: 1
       value: 1.000000
@@ -73,12 +90,18 @@
     Port_Input1_N084:
       typeIdx: 1
       value: 6.000000
+    Port_Input1_N085:
+      typeIdx: 1
+      value: 0.500000
     Port_Input1_N087:
       typeIdx: 1
       value: 2.750000
     Port_Input1_N093:
       typeIdx: 1
-      value: 0.000000
+      value: 0.000100
+    Port_Input1_N102:
+      typeIdx: 3
+      value: {x: 0.000000, y: 0.000000}
     Port_Input1_N149:
       typeIdx: 1
       value: 1.750000
@@ -205,6 +228,9 @@
     borderAlpha:
       typeIdx: 1
       value: 1.000000
+    cutOutCenter:
+      typeIdx: 1
+      value: 0.000000
     frameMargin:
       typeIdx: 1
       value: 1.000000
@@ -226,21 +252,12 @@
           borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
           mipmaps: false
         type: Texture2D
-    matcapTextureBorderColor:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-    matcapTextureDims:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     matcapTextureTransform:
       typeIdx: 7
       value:
         0: {x: 1.000000, y: 0.000000, z: 0.000000}
         1: {x: 0.000000, y: 1.000000, z: 0.000000}
         2: {x: 0.000000, y: 0.000000, z: 1.000000}
-    matcapTextureUvMinMax:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     opacity:
       typeIdx: 1
       value: 1.000000

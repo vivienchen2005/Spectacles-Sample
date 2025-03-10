@@ -1,6 +1,6 @@
-import { Interactable } from '../../Components/Interaction/Interactable/Interactable';
-import { InteractableHitInfo } from '../../Providers/TargetProvider/TargetProvider';
-import { PublicApi } from '../../Utils/Event';
+import {Interactable} from "../../Components/Interaction/Interactable/Interactable"
+import {InteractableHitInfo} from "../../Providers/TargetProvider/TargetProvider"
+import {PublicApi} from "../../Utils/Event"
 
 /**
  * Input types that discern a target interactable and translate events from their inputs
@@ -25,8 +25,8 @@ export enum TargetingMode {
   None = 0,
   Direct = 1 << 0,
   Indirect = 1 << 1,
-  All = Direct | Indirect,
   Poke = 1 << 2, // Poke is mutually exclusive with Direct and Indirect
+  All = Direct | Indirect | Poke,
 }
 
 /**
@@ -59,10 +59,6 @@ export enum DragType {
  * Defines available Interactor apis
  */
 export interface Interactor {
-  sceneObject: SceneObject
-
-  transform: Transform
-
   enabled: boolean
 
   inputType: InteractorInputType
@@ -111,6 +107,13 @@ export interface Interactor {
   activeTargetingMode: TargetingMode
 
   interactionStrength: number | null
+
+  drawDebug: boolean
+
+  onTriggerStart: PublicApi<Interactable | null>
+  onTriggerUpdate: PublicApi<Interactable | null>
+  onTriggerEnd: PublicApi<Interactable | null>
+  onTriggerCanceled: PublicApi<Interactable | null> // Maybe? Not sure.
 
   isTargeting(): boolean
 

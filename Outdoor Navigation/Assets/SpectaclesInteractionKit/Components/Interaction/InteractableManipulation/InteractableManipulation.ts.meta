@@ -1,27 +1,27 @@
-- !<AssetImportMetadata/c6737ffe-331c-4488-9104-c6a5495afeb5>
+- !<AssetImportMetadata/1080c118-12f8-477f-b35a-2c5a3ceaa416>
+  ImporterSettings: !<AssetImporterSettings>
+    {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 664b556b-1946-4c2c-866a-e675b4e86006
   ImporterName: TypeScriptAssetImporter
   PrimaryAsset: !<reference> 664b556b-1946-4c2c-866a-e675b4e86006
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
   AssetDataMap:
-    TypeScriptAsset: !<own> 7ab065f2-0daf-4870-8f2a-4e8a8893ffc5
+    TypeScriptAsset: !<own> 7663e845-55f5-41f0-b9ac-0743935809d6
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/f6dc3943-0463-4f68-b73e-194468fa7a59>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}
-- !<TypeScriptAssetData/7ab065f2-0daf-4870-8f2a-4e8a8893ffc5>
-  SvgIcon: ""
+- !<TypeScriptAssetData/7663e845-55f5-41f0-b9ac-0743935809d6>
+  Icon: ""
   Description: ""
   InternalVersion: 0
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 909212a6-cf9f-4c7d-914d-4499b09526e4
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -60,11 +60,11 @@
       showStretchZProperties: false
       zStretchFactorMin: !<float> 1.000000
       zStretchFactorMax: !<float> 12.000000
-      useFilter: true
       showFilterProperties: false
       minCutoff: !<float> 2.000000
       beta: 0.015000
       dcutoff: !<float> 1.000000
+      useFilter: true
       showTranslationProperties: false
       _enableXTranslation: true
       _enableYTranslation: true
@@ -98,3 +98,5 @@
     - // @input bool showRotationProperties
     - '// @input string _rotationAxis = "All" {"hint":"Enable rotation about all axes or a single world axis (x,y,z) when using to two hands.", "widget":"combobox", "values":[{"label":"All", "value":"All"}, {"label":"X", "value":"X"}, {"label":"Y", "value":"Y"}, {"label":"Z", "value":"Z"}], "showIf":"showRotationProperties", "showIfValue":true}'
     - '// @ui {"widget":"group_end"}'
+  SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

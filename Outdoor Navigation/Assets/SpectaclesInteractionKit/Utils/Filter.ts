@@ -8,13 +8,13 @@ export default interface Filter<T> {
    * @param timestamp - timestamp when the sample was measured
    */
   filter(sample: T, timestamp: number): T
-};;;;;;;;;;
+}
 
 /**
  * A filter that does nothing.
  */
 export class NoOpFilter<T> implements Filter<T> {
-    filter(sample: T, timestamp: number): T {
-        return sample;
-    }
+  filter(sample: T, timestamp: number): T {
+    return sample
+  }
 }

@@ -1,27 +1,27 @@
-- !<AssetImportMetadata/77649dff-aa10-44cd-98c5-0c8e16c9dbcb>
+- !<AssetImportMetadata/e5bec3c9-8172-4b55-b3d3-c3c32c32dcd6>
+  ImporterSettings: !<AssetImporterSettings>
+    {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 7876e94e-1942-4993-ab2d-d35e572dbe74
   ImporterName: TypeScriptAssetImporter
   PrimaryAsset: !<reference> 7876e94e-1942-4993-ab2d-d35e572dbe74
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
   AssetDataMap:
-    TypeScriptAsset: !<own> c39b7027-c636-436c-9d08-6d99958b47ca
+    TypeScriptAsset: !<own> 059eae64-6c0c-45cd-95e0-1adb996d46a5
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/b4b6067f-524d-44fe-a726-49783336950f>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}
-- !<TypeScriptAssetData/c39b7027-c636-436c-9d08-6d99958b47ca>
-  SvgIcon: ""
+- !<TypeScriptAssetData/059eae64-6c0c-45cd-95e0-1adb996d46a5>
+  Icon: ""
   Description: ""
   InternalVersion: 0
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 1e94284f-6536-40c7-abdf-7e75377d09d2
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -39,8 +39,8 @@
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
-    - _drawDebug: false
-      sphereCastEnabled: false
+    - sphereCastEnabled: false
+      indirectTargetingVolumeMultiplier: !<float> 1.000000
       spherecastRadii: !<float[]>
         - 0.500000
         - 2.000000
@@ -50,11 +50,11 @@
         - 12.000000
         - 30.000000
       _maxRaycastDistance: !<float> 500.000000
-      indirectTargetingVolumeMultiplier: !<float> 1.000000
       indirectDragThreshold: !<float> 3.000000
-      initializePositionAndRotationFilter: true
-      _touchpadScrollSpeed: !<float> 250.000000
       touchpadDragThreshold: 0.050000
+      _touchpadScrollSpeed: !<float> 250.000000
+      initializePositionAndRotationFilter: true
+      _drawDebug: false
   ScriptTypes:
     -
       {}
@@ -79,3 +79,5 @@
     - // @input float _touchpadScrollSpeed = 250
     - // @input float touchpadDragThreshold = 0.05
     - '// @ui {"widget":"group_end"}'
+  SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

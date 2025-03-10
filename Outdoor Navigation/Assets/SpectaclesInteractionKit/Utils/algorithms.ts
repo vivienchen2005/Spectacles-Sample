@@ -9,27 +9,29 @@
  * If it returns false, the search continues to the next object.
  * @returns the object returned by the predicate function, otherwise null.
  */
-export function bfs<T>(rootObjects: SceneObject[],
-    predicate: (sceneObject: SceneObject) => T): T | null {
-    for (const rootObject of rootObjects) {
-        const queue = [rootObject];
-        while (queue.length > 0) {
-            const currentObject = queue.shift();
-            if (currentObject !== undefined) {
-                const result = predicate(currentObject);
-                if (result !== null) {
-                    return result;
-                }
-
-                const childrenCount = currentObject.getChildrenCount();
-                for (let i = 0; i < childrenCount; i++) {
-                    queue.push(currentObject.getChild(i));
-                }
-            }
+export function bfs<T>(
+  rootObjects: SceneObject[],
+  predicate: (sceneObject: SceneObject) => T,
+): T | null {
+  for (const rootObject of rootObjects) {
+    const queue = [rootObject]
+    while (queue.length > 0) {
+      const currentObject = queue.shift()
+      if (currentObject !== undefined) {
+        const result = predicate(currentObject)
+        if (result !== null) {
+          return result
         }
-    }
 
-    return null;
+        const childrenCount = currentObject.getChildrenCount()
+        for (let i = 0; i < childrenCount; i++) {
+          queue.push(currentObject.getChild(i))
+        }
+      }
+    }
+  }
+
+  return null
 }
 
 /**
@@ -43,28 +45,30 @@ export function bfs<T>(rootObjects: SceneObject[],
  * If it returns false, the search continues to the next object.
  * @returns the collection of objects that match the the predicate function, otherwise an empty list.
  */
-export function filterTrees<T>(rootObjects: SceneObject[],
-    predicate: (sceneObject: SceneObject) => T): T[] {
-    const results: T[] = [];
-    for (const rootObject of rootObjects) {
-        const queue = [rootObject];
-        while (queue.length > 0) {
-            const currentObject = queue.shift();
-            if (currentObject !== undefined) {
-                const result = predicate(currentObject);
-                if (result !== null) {
-                    results.push(result);
-                }
-
-                const childrenCount = currentObject.getChildrenCount();
-                for (let i = 0; i < childrenCount; i++) {
-                    queue.push(currentObject.getChild(i));
-                }
-            }
+export function filterTrees<T>(
+  rootObjects: SceneObject[],
+  predicate: (sceneObject: SceneObject) => T,
+): T[] {
+  const results: T[] = []
+  for (const rootObject of rootObjects) {
+    const queue = [rootObject]
+    while (queue.length > 0) {
+      const currentObject = queue.shift()
+      if (currentObject !== undefined) {
+        const result = predicate(currentObject)
+        if (result !== null) {
+          results.push(result)
         }
-    }
 
-    return results;
+        const childrenCount = currentObject.getChildrenCount()
+        for (let i = 0; i < childrenCount; i++) {
+          queue.push(currentObject.getChild(i))
+        }
+      }
+    }
+  }
+
+  return results
 }
 
 /**
@@ -73,10 +77,12 @@ export function filterTrees<T>(rootObjects: SceneObject[],
  * @param rootObject The root of the tree to apply the function to.
  * @param toApply This function is called with every scene object descended from rootObject as an argument.
  */
-export function applyToDescendants(rootObject: SceneObject,
-    toApply: (sceneObject: SceneObject) => void): void {
-    for (const childObject of rootObject.children) {
-        applyToDescendants(childObject, toApply);
-    }
-    toApply(rootObject);
+export function applyToDescendants(
+  rootObject: SceneObject,
+  toApply: (sceneObject: SceneObject) => void,
+): void {
+  for (const childObject of rootObject.children) {
+    applyToDescendants(childObject, toApply)
+  }
+  toApply(rootObject)
 }

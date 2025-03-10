@@ -13,7 +13,7 @@ export type lineVertex = [
   number,
 
   number,
-  number
+  number,
 ]
 
 /**
@@ -23,28 +23,30 @@ export type lineVertex = [
  * @param widthOffset offset of the width
  * @returns miterOffset - add or subtract this from a vertex to get offset needed
  */
-export function getMiterOffset(prevSegment: vec3,
-    nextSegment: vec3,
-    widthOffset: number): vec3 {
-    const tangent = prevSegment.add(nextSegment).normalize();
-    const miter = new vec3(-tangent.y, tangent.x, 0);
-    const normalA = new vec3(-prevSegment.y, prevSegment.x, 0);
-    const scaleWidth = widthOffset / miter.dot(normalA);
-    return miter.uniformScale(scaleWidth);
+export function getMiterOffset(
+  prevSegment: vec3,
+  nextSegment: vec3,
+  widthOffset: number,
+): vec3 {
+  let tangent = prevSegment.add(nextSegment).normalize()
+  let miter = new vec3(-tangent.y, tangent.x, 0)
+  let normalA = new vec3(-prevSegment.y, prevSegment.x, 0)
+  let scaleWidth = widthOffset / miter.dot(normalA)
+  return miter.uniformScale(scaleWidth)
 }
 
 export function getSegmentNormalized(currentPoint: vec3, nextPoint: vec3) {
-    return currentPoint.sub(nextPoint).normalize();
+  return currentPoint.sub(nextPoint).normalize()
 }
 
 export function getTangent(prevSegment: vec3, nextSegment: vec3) {
-    return prevSegment.add(nextSegment).normalize();
+  return prevSegment.add(nextSegment).normalize()
 }
 
 export function getEndWidth(current: vec3, next: vec3, widthAtVertex: number) {
-    const direction = next.sub(current);
-    const normalizedDir = new vec3(-direction.y, direction.x, 0).normalize();
-    return normalizedDir.uniformScale(widthAtVertex);
+  let direction = next.sub(current)
+  let normalizedDir = new vec3(-direction.y, direction.x, 0).normalize()
+  return normalizedDir.uniformScale(widthAtVertex)
 }
 
 /**
@@ -54,58 +56,62 @@ export function getEndWidth(current: vec3, next: vec3, widthAtVertex: number) {
  * @param uv_v desired v coordinate for the vertex's uv map
  * vertices are shifted for thickness in the shader
  */
-export function buildSegment(point: vec3,
-    prevSegment: vec3,
-    tangent: vec3,
-    uv_v: number): number[] {
-    return [
+export function buildSegment(
+  point: vec3,
+  prevSegment: vec3,
+  tangent: vec3,
+  uv_v: number,
+): number[] {
+  return [
     //left vertices and tangent
-        point.x,
-        point.y,
-        point.z,
-        prevSegment.x,
-        prevSegment.y,
-        prevSegment.z,
-        tangent.x,
-        tangent.y,
-        tangent.z,
-        //left uv
-        0,
-        uv_v,
+    point.x,
+    point.y,
+    point.z,
+    prevSegment.x,
+    prevSegment.y,
+    prevSegment.z,
+    tangent.x,
+    tangent.y,
+    tangent.z,
+    //left uv
+    0,
+    uv_v,
 
-        //right vertices and tangent
-        point.x,
-        point.y,
-        point.z,
-        prevSegment.x,
-        prevSegment.y,
-        prevSegment.z,
-        tangent.x,
-        tangent.y,
-        tangent.z,
-        //right uv
-        1,
-        uv_v,
-    ];
+    //right vertices and tangent
+    point.x,
+    point.y,
+    point.z,
+    prevSegment.x,
+    prevSegment.y,
+    prevSegment.z,
+    tangent.x,
+    tangent.y,
+    tangent.z,
+    //right uv
+    1,
+    uv_v,
+  ]
 }
 
 // Sets up data for a single line vertex, for use in setVertexInterleaved
-export function buildVertex(position: vec3,
-    prevSegment: vec3,
-    tangent: vec3,
-    uv_u: number,
-    uv_v: number): lineVertex {
-    return [
-        position.x,
-        position.y,
-        position.z,
-        prevSegment.x,
-        prevSegment.y,
-        prevSegment.z,
-        tangent.x,
-        tangent.y,
-        tangent.z,
-        uv_u,
-        uv_v,
-    ];
+export function buildVertex(
+  position: vec3,
+  prevSegment: vec3,
+  tangent: vec3,
+  uv_u: number,
+  uv_v: number,
+): lineVertex {
+  return [
+    position.x,
+    position.y,
+    position.z,
+    prevSegment.x,
+    prevSegment.y,
+    prevSegment.z,
+    tangent.x,
+    tangent.y,
+    tangent.z,
+    uv_u,
+    uv_v,
+  ]
 }

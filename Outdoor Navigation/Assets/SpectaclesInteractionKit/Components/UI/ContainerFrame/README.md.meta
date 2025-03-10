@@ -1,16 +1,17 @@
-- !<AssetImportMetadata/730cfe62-fd0e-4baa-9c74-42016e9c2ff4>
+- !<AssetImportMetadata/77897ade-cc3b-4e25-9927-ac9eb128ffaa>
   ImportedAssetIds:
     BinAsset: !<reference> 454bd92c-6cf4-4e04-9deb-2695e1573e24
+    MarkdownAsset: !<reference> b4861d08-3f2d-44ae-821c-1aa2c71f5896
   ImporterName: BinAssetImporter
   PrimaryAsset: !<reference> 454bd92c-6cf4-4e04-9deb-2695e1573e24
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
   AssetDataMap:
     {}
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/f63e13f3-95c2-4540-95b6-12e4bd9e06e2>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}

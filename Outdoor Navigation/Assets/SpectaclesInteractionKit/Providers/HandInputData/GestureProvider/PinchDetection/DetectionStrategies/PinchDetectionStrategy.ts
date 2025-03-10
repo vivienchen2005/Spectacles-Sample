@@ -1,5 +1,5 @@
-import { PublicApi } from '../../../../../Utils/Event';
-import { PinchEventType } from '../../PinchEventType';
+import {PublicApi} from "../../../../../Utils/Event"
+import {PinchEventType} from "../../PinchEventType"
 
 /**
  * Interface that all methods of detecting pinch should adhere to in order to be usable in PinchDetector

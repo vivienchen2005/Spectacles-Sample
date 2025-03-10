@@ -1,16 +1,16 @@
-- !<AssetImportMetadata/28ebde3a-265e-44b3-8790-722b86f7ded8>
+- !<AssetImportMetadata/93256023-add1-442a-acfe-adb19aa7a1d4>
   ImportedAssetIds:
     FileAudioTrack: !<reference> edad7d53-55da-40b1-9025-fad0e7207862
   ImporterName: FileAudioTrackImporter
   PrimaryAsset: !<reference> edad7d53-55da-40b1-9025-fad0e7207862
   PackageType: NotAPackage
-  PackagePolicy: CannotBeUnpacked
-  AssetDataMap:
+  ImporterSettings: !<AssetImporterSettings>
     {}
+  AssetDataMap:
+    FileAudioTrack: !<own> 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CannotBeUnpacked
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/abcea15a-c7d4-4423-aee3-6d32e0b5d004>
-    {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
     {}

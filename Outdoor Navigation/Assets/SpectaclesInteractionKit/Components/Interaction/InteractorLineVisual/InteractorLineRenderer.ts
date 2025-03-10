@@ -1,4 +1,4 @@
-import LineRenderer from '../../../Utils/views/LineRenderer/LineRenderer';
+import LineRenderer from "../../../Utils/views/LineRenderer/LineRenderer"
 
 export enum VisualStyle {
   Full = 0,
@@ -12,31 +12,31 @@ export enum VisualStyle {
  * It uses a special shader material in order to display the line gradients and visuals shown in the spec.
  */
 export default class InteractorLineRenderer extends LineRenderer {
-    /**
+  /**
    * @returns visual gradient style of the line
    */
-    get visualStyle(): VisualStyle {
-        return this.material.mainPass.visualStyle as VisualStyle;
-    }
+  get visualStyle(): VisualStyle {
+    return this.material.mainPass.visualStyle as VisualStyle
+  }
 
-    /**
+  /**
    * Set the visual gradient style of the line
    */
-    set visualStyle(style: VisualStyle) {
-        this.material.mainPass.visualStyle = style;
-    }
+  set visualStyle(style: VisualStyle) {
+    this.material.mainPass.visualStyle = style
+  }
 
-    /**
+  /**
    * @returns maximum opacity level of the line
    */
-    get opacity(): number {
-        return this.material.mainPass.maxAlpha as number;
-    }
+  get opacity(): number {
+    return this.material.mainPass.maxAlpha as number
+  }
 
-    /**
+  /**
    * Set the maximum opacity level of the line
    */
-    set opacity(opacity: number) {
-        this.material.mainPass.maxAlpha = opacity;
-    }
+  set opacity(opacity: number) {
+    this.material.mainPass.maxAlpha = opacity
+  }
 }

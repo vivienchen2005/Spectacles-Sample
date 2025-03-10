@@ -1,9 +1,9 @@
-import { PublicApi } from '../../Utils/Event';
-import { TargetingData } from '../TargetProvider/TargetingData';
-import { PalmTapDetectionEvent } from './GestureProvider/PalmTapDetectionEvent';
-import { HandType } from './HandType';
-import { HandVisuals } from './HandVisuals';
-import { Keypoint } from './Keypoint';
+import {PublicApi} from "../../Utils/Event"
+import {TargetingData} from "../TargetProvider/TargetingData"
+import {PalmTapDetectionEvent} from "./GestureProvider/PalmTapDetectionEvent"
+import {HandType} from "./HandType"
+import {HandVisuals} from "./HandVisuals"
+import {Keypoint} from "./Keypoint"
 
 /**
  * Describes the API for the BaseHand, which is part of the API accessible by
@@ -40,6 +40,16 @@ export interface BaseHand {
    * Event called when the user's pinch is canceled by the system.
    */
   readonly onPinchCancel: PublicApi<void>
+
+  /**
+   * Event called when the hand is holding a phone.
+   */
+  readonly onPhoneInHandBegin: PublicApi<void>
+
+  /**
+   * Event called when the hand is not holding a phone.
+   */
+  readonly onPhoneInHandEnd: PublicApi<void>
 
   /**
    * The Keypoint of the wrist joint

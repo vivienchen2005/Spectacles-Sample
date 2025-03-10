@@ -9,12 +9,12 @@
  * @param getPropertyFunction
  */
 export function lazyProperty<T>(getPropertyFunction: () => T): () => T {
-    let lazyProperty: T | undefined;
+  let lazyProperty: T | undefined
 
-    return () => {
-        if (lazyProperty === undefined) {
-            lazyProperty = getPropertyFunction();
-        }
-        return lazyProperty;
-    };
+  return () => {
+    if (lazyProperty === undefined) {
+      lazyProperty = getPropertyFunction()
+    }
+    return lazyProperty
+  }
 }
