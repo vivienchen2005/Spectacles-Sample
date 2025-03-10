@@ -351,6 +351,38 @@ Extended Permissions mode on device must be enabled in some of the projects to a
       <p>Sample project for recording and playing back audio on Spectacles.</p>
     </td>
   </tr>
+  <tr>
+      <td align="center" valign="top" width="33%">
+      <a href="#">
+        <img src="./Custom Locations/README-ref/scan-sample.gif" alt="custom-locations" width="250px" />
+      </a>
+      <h3>Custom Locations</h3>
+      <p>
+<a href="https://developers.snap.com/spectacles/about-spectacles-features/apis/custom-locations">
+  <img src="https://img.shields.io/badge/Location%20AR-Light%20Gray?color=D3D3D3" />
+</a>
+      </p>
+      <p>Map real life areas and create AR experiences around those locations.</p>
+    </td>
+          <td align="center" valign="top" width="33%">
+      <a href="#">
+        <img src="./Path Pioneer/README-ref/sample-list-path-pioneer-rounded-edges.gif" alt="path-pioneer" width="250px" />
+      </a>
+      <h3>Path Pioneer</h3>
+      <p>
+<a href="https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?">
+  <img src="https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3" />
+</a>
+<a href="https://developers.snap.com/lens-studio/api/lens-scripting/classes/Built-In.RayCastHit.html">
+  <img src="https://img.shields.io/badge/Raycast-Light%20Gray?color=D3D3D3" />
+</a>
+<a href="https://developers.snap.com/lens-studio/features/graphics/materials/overview">
+  <img src="https://img.shields.io/badge/Graphics%20Material%20Particles-Light%20Gray?color=D3D3D3" />
+</a>
+      </p>
+      <p>Sample project for path creation and path walking experience.</p>
+    </td>
+  </tr>
 </table>
 
 ## Support
