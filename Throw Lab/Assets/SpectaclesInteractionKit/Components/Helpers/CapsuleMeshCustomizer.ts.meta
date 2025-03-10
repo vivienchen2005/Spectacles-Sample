@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> f6801b30-1435-4a2d-a6b8-8e45e192c345
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/6069f3b7-9b44-49c8-9d5c-d74299ee1ae1>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 129a0c71-4086-4aba-864c-996aad2e5ec0
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -51,3 +51,4 @@
     - '// @input int radianStepCount = 16 {"hint":"The number of points per circle in the mesh. Increase for a higher poly-count mesh."}'
     - '// @input int cylinderStepCount = 16 {"hint":"The number of circles in the cylinder of the mesh. Increase for a higher poly-count mesh."}'
     - '// @input int endXStepCount = 32 {"hint":"The number of circles in the end cap of the capsule of the mesh. Increase for a higher poly-count mesh."}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

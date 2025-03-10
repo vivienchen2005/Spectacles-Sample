@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 86e6d2fc-812a-4f7f-b683-66729c20de2a
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/a430a7d5-f091-4c5a-90a7-947e180026be>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 704fff5f-a195-4536-b6ec-154941586ba3
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -44,3 +44,4 @@
     - "// @input Asset.RenderMesh[] meshes"
     - "// @input float[] thresholds"
     - // @input Asset.Material material
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

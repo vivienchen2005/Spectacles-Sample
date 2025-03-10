@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 18c20de2-889f-4f39-81d1-a0efe231404e
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/00109f62-5631-4031-917a-a1ff8ff13e20>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 59506f98-a12a-4285-a995-24210f1ce369
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -39,3 +39,4 @@
   InputLines:
     - // @input Component.AudioComponent audio
     - // @input DartBoardController dartboardController
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

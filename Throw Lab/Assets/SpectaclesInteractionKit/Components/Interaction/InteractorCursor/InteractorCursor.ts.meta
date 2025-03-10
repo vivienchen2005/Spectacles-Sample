@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 9d68d35e-ae73-4d84-8dd5-d2de73d185d7
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/183f5982-fd04-42dc-86c4-0d5748268452>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 0a7a4f4c-0fda-45d3-bc59-479b1ec16681
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -42,3 +42,4 @@
     - // @input bool enableCursorSnapping = true
     - // @input bool enableFilter
     - // @input Component.ScriptComponent _interactor
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

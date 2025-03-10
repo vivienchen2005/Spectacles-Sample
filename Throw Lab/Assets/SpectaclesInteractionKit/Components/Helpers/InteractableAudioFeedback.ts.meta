@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> e9c7603a-51a5-43c7-9485-e0243db210e8
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/d49e1c70-da1b-494a-9a44-34e7bd10327e>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 0f78edab-2dc2-45ce-8806-5b4006e870a7
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -42,3 +42,4 @@
     - '// @input Asset.AudioTrackAsset hoverAudioTrack {"hint":"This sound will play when the Interactable is hovered"}'
     - '// @input Asset.AudioTrackAsset triggerStartAudioTrack {"hint":"This sound will play when starting the trigger the Interactable"}'
     - '// @input Asset.AudioTrackAsset triggerEndAudioTrack {"hint":"This sound will play when ending the trigger of the Interactable"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

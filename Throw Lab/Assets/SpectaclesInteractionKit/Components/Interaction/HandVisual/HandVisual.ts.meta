@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 6e2d4fe0-6ea9-4aaa-8c7b-9500cdac3fb3
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/ca9caa3d-63eb-4917-93d1-a1ba957b7750>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 9bfee11e-be19-4135-8416-d78affe5b861
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -173,3 +173,4 @@
     - '// @input float gradientQuadRenderOrder = 9997 {"hint":"The render order of the gradient quad tracked to the hand"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> c476947d-296a-4397-b428-cae49bcdc3c1
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/67c18e38-d905-456a-b69b-3ab426e3e531>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 97f23e50-a38d-4a96-aa8a-8bac64404290
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -39,3 +39,4 @@
   InputLines:
     - // @input Asset.ObjectPrefab itemPrefab
     - // @input float itemsCount = 10
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

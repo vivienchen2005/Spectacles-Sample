@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> c39b7027-c636-436c-9d08-6d99958b47ca
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/5aefd70b-90a1-4abb-b1ac-25b090c1ddb0>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 8b0dd068-057d-4635-bba6-6ddbe02a5fcc
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -79,3 +79,4 @@
     - // @input float _touchpadScrollSpeed = 250
     - // @input float touchpadDragThreshold = 0.05
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

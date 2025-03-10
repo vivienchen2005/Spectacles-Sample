@@ -9,10 +9,10 @@
     {}
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/cda58cf0-275c-446f-a5b5-88b590dea118>
+  ImporterSettings: !<AssetImporterSettings>
     {}
-  CompressionSettings: !<SingleCompressionSettings/9da1be5b-8d47-4550-bf7c-956773d18e63>
-    CompressionSettings: !<TextureCompressionSettings/04bd342e-90ca-4ca3-b62f-9d86aa9689a5>
+  CompressionSettings: !<SingleCompressionSettings>
+    CompressionSettings: !<TextureCompressionSettings>
       Level: Medium
     CompressorName: Size
   ExtraData:

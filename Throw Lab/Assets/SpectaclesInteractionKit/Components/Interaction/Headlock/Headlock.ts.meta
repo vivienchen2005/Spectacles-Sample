@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 28c0914b-70ba-4c3d-b30f-4490506d17f5
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/aa250891-09d9-43bc-b70e-a22fdc455cdd>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 970e9326-2519-4185-b0ff-209bbd6d3827
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -81,3 +81,4 @@
     - '// @input float _yawBufferDegrees {"hint":"How many degrees of leeway along each direction (left/right) before change starts to occur"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

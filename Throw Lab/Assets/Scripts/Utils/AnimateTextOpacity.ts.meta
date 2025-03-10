@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 6b355342-cc4a-4e81-8a60-16364fb13bfd
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/7dbd172a-9afd-4c2b-97fa-9f5f3215733e>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 2b48d929-01fe-465e-a035-6f2c8b0fc43d
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -42,3 +42,4 @@
     - // @input float animDelay = 0.05
     - // @input float animDuration = 1
     - // @input bool isTexture
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

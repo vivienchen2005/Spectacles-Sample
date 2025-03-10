@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> a8a76588-2c09-47eb-b5b8-1c1e5fc3bf25
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/1bd41091-fb3f-4ef0-8e24-093187656e94>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 94572049-f80a-497f-b3c2-f76a1ee2dab7
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -73,3 +73,4 @@
     - '// @ui {"widget":"group_start", "label":"MouseInteractor"}'
     - '// @input float mouseTargetingMode = 2 {"hint":"Sets the return value of MouseInteractor.activeTargetingMode for cases where non-indirect targeting needs to be tested specifically. Useful whenever your code has checks for interactor.activeTargetingMode === TargetingMode.X.", "widget":"combobox", "values":[{"label":"Direct", "value":1}, {"label":"Indirect", "value":2}, {"label":"All", "value":3}, {"label":"Poke", "value":4}]}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

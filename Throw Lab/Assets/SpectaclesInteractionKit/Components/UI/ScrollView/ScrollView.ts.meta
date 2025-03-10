@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 7ffc1ba6-603a-4876-b6d1-48978d4e9816
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/528b0d45-f6ba-481d-bdc1-736c77d34f38>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: ea76a312-4331-44bc-ac6b-6a5beef21c5d
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -54,3 +54,4 @@
     - // @input bool enableScrollLimit = true
     - '// @input float _scrollLimit = 0.3 {"widget":"slider", "min":0, "max":1, "step":0.01}'
     - '// @input vec2 scrollAreaBounds = "{1, 1}"'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -9,7 +9,7 @@
     ObjectPrefab: !<own> bcf79171-e3af-478f-9922-e903fac6deae
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/18c02c3c-4acc-46a6-b66f-aaa8c67a2fc8>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -77,6 +77,23 @@
   BodySettingValue: 0.002000
   Damping: 0.010000
   AngularDamping: 0.010000
+- !<ScriptComponent/365f5ea2-c55e-4681-bbf9-1414e4cb0f77>
+  PrefabRemaps:
+    []
+  Name: Grabbable
+  Enabled: true
+  ScriptAsset: !<reference> 64087653-79d3-4558-b642-7d4c33f1c6f3
+  ScriptInputsDefault:
+    handColliderName: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      collider: !<reference.ColliderComponent> 2cb88679-de07-4e2a-93b7-7100c3dbd984
+      handColliderName: ColliderTargetProvider
+  ScriptTypes:
+    "":
+      {}
 - !<ScriptComponent/3b9e9ab7-db86-42c3-98a9-b36db6d51fc7>
   PrefabRemaps:
     []
@@ -101,7 +118,7 @@
   PrefabRemaps:
     []
   Name: InteractableManipulation
-  Enabled: true
+  Enabled: false
   ScriptAsset: !<reference> 664b556b-1946-4c2c-866a-e675b4e86006
   ScriptInputsDefault:
     manipulateRootSceneObject: true
@@ -212,6 +229,7 @@
     - 5f685549-9033-47f5-9118-c9f929cb8d69: 9eb9b166-b61b-41de-9dc2-a0584f21e338
     - 64053e25-3f29-4179-99c7-0cf04b17f809: 0b388b74-0d73-439e-a856-b74056983794
     - 6e65c824-339b-4301-adec-3600de4274e9: 42d670ae-4c48-4f96-9487-297611188903
+    - 723d601b-48bb-427e-925d-7d7c9e124c59: 365f5ea2-c55e-4681-bbf9-1414e4cb0f77
     - 9624b6d5-2bf1-40ac-9b61-1ecbb0ff48f3: 22da7cd5-79e1-409a-8d49-ed5d6a434529
     - c32951e3-2b0c-4260-9459-3524d5fc46fa: 252e09c3-f3fc-4d10-9511-442396e8974e
   SourceState: !<own> 252e09c3-f3fc-4d10-9511-442396e8974e
@@ -219,7 +237,7 @@
   PrefabRemaps:
     []
   Name: TennisBall
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 13.957748, y: -25.847389, z: -20.163143}
@@ -234,6 +252,7 @@
     - !<own> 0b388b74-0d73-439e-a856-b74056983794
     - !<own> 3b9e9ab7-db86-42c3-98a9-b36db6d51fc7
     - !<own> 42d670ae-4c48-4f96-9487-297611188903
+    - !<own> 365f5ea2-c55e-4681-bbf9-1414e4cb0f77
     - !<own> 69fbf677-918b-4fee-a3d4-66c9bf4b8fc1
 - !<SceneObject/f50edab8-121a-4711-8ba5-03bb714d90ac>
   PrefabRemaps:

@@ -3,7 +3,9 @@ import WorldCameraFinderProvider from "SpectaclesInteractionKit/Providers/Camera
 import { SIK } from "SpectaclesInteractionKit/SIK";
 import { Buffer } from "Scripts/Utils/Buffer";
 import { InteractorEvent } from "SpectaclesInteractionKit/Core/Interactor/InteractorEvent";
-import { InteractorInputType } from "SpectaclesInteractionKit/Core/Interactor/Interactor";
+import { Interactor, InteractorInputType } from "SpectaclesInteractionKit/Core/Interactor/Interactor";
+import { Grabbable } from "./Grabbable";
+import { ScreenLogger } from "./Utils/ScreenLogger";
 
 /**
  * @component
@@ -23,6 +25,14 @@ export class TennisBallBehavior extends BaseScriptComponent {
      */
     @input
     audio: AudioComponent
+
+    @input
+    @hint('This is the material that will provide the mesh outline')
+    public targetOutlineMaterial: Material;
+
+    @input
+    @allowUndefined
+    public meshVisual:RenderMeshVisual;
 
     /**
      * Reference to the physics body component of the tennis ball.
@@ -78,11 +88,33 @@ export class TennisBallBehavior extends BaseScriptComponent {
      */
     private GROUND_Y_OFFSET = -350
 
+    private grabbable:Grabbable;
+    
+    private isGrabbed: boolean = false;
+    private isHandOverlapping: boolean = false;
+
+    private highlightMaterial: Material;
+    
+    initialHandPos: vec3;
+    initialTPos: vec3;
+    initialHandRot: quat;
+    initialTRot: quat;
+
     /**
      * Called once when the component is initialized.
      * Sets up physics, audio, and interaction events.
      */
     onAwake() {
+
+        if (!this.grabbable) {
+            this.grabbable = this.sceneObject.getComponent(Grabbable.getTypeName());
+        }
+
+        if (!this.grabbable) {
+            print("This module requires the Grabbable component.");
+            return;
+        }
+
         // Set audio playback mode for minimal latency on collision sound.
         this.audio.playbackMode = Audio.PlaybackMode.LowLatency
 
@@ -91,10 +123,22 @@ export class TennisBallBehavior extends BaseScriptComponent {
         this.physicsBody.mass = this.OBJECT_MASS
         this.physicsBody.onCollisionEnter.add(this.onCollisionEnter.bind(this))
 
+        this.highlightMaterial = this.targetOutlineMaterial.clone();
+
         // Configure interactable event handlers for picking up and releasing the ball.
-        this.interactable = this.sceneObject.getComponent(Interactable.getTypeName())
-        this.interactable.onTriggerStart(this.onTriggerStart.bind(this))
-        this.interactable.onTriggerEnd(this.onTriggerEnd.bind(this))
+        // this.interactable = this.sceneObject.getComponent(Interactable.getTypeName())
+        // this.interactable.onTriggerStart(this.onTriggerStart.bind(this))
+        // this.interactable.onTriggerEnd(this.onTriggerEnd.bind(this))
+        
+        this.grabbable.onHoverStartEvent.add(() => {
+            this.addMaterialToRenderMeshArray();
+        }); 
+        this.grabbable.onHoverEndEvent.add(() => {
+            this.removeMaterialFromRenderMeshArray();
+        });
+
+        this.grabbable.onGrabStartEvent.add(this.onTriggerStart.bind(this)); 
+        this.grabbable.onGrabEndEvent.add(this.onTriggerEnd.bind(this));
 
         // Register an update event callback to handle per-frame logic.
         this.createEvent("UpdateEvent").bind(this.onUpdate.bind(this))
@@ -148,10 +192,14 @@ export class TennisBallBehavior extends BaseScriptComponent {
      *
      * @param e Interactor event containing info about which hand started the interaction.
      */
-    onTriggerStart(e: InteractorEvent) {
-        let inputType = e.interactor.inputType
+    onTriggerStart(interactor:Interactor) {
         // Determine which hand we are using based on the input type.
-        this.hand = this.handInputData.getHand(inputType == InteractorInputType.LeftHand ? 'left' : 'right');
+        this.hand = this.handInputData.getHand(interactor.inputType == InteractorInputType.LeftHand ? 'left' : 'right');
+
+        this.initialHandPos = this.hand.indexKnuckle.position;
+        this.initialTPos = this.t.getWorldPosition();
+        this.initialHandRot = this.hand.indexKnuckle.rotation;
+        this.initialTRot = this.t.getWorldRotation();
 
         // Calculate a "start point" in front of the hand where the ball should appear when grabbed.
         let startPoint = this.hand.indexKnuckle.position.add(this.hand.thumbKnuckle.position).uniformScale(0.5)
@@ -197,11 +245,69 @@ export class TennisBallBehavior extends BaseScriptComponent {
         this.accumulatedForce = vec3.zero()
     }
 
+    addMaterialToRenderMeshArray() {
+        const matCount = this.meshVisual.getMaterialsCount();
+
+        let addMaterial = true;
+        for (let k = 0; k < matCount; k++) {
+            const material = this.meshVisual.getMaterial(k);
+            if (material.isSame(this.highlightMaterial)) {
+                addMaterial = false;
+                break;
+            }
+        }
+
+        if (addMaterial) {
+            const materials = this.meshVisual.materials;
+            materials.unshift(this.highlightMaterial);
+            this.meshVisual.materials = materials;
+        }
+    }
+
+    removeMaterialFromRenderMeshArray() {
+        const materials = [];
+
+        const matCount = this.meshVisual.getMaterialsCount();
+
+        for (let k = 0; k < matCount; k++) {
+            const material = this.meshVisual.getMaterial(k);
+
+            if (material.isSame(this.highlightMaterial)) {
+                continue;
+            }
+
+            materials.push(material);
+        }
+
+        this.meshVisual.clearMaterials();
+
+        for (let k = 0; k < materials.length; k++) {
+            this.meshVisual.addMaterial(materials[k]);
+        }
+    }
+
+    getDeltaHandPos () {
+        return this.hand.indexKnuckle.position.sub(this.initialHandPos);
+    }
+
+    getDeltaHandRot () {
+        return this.hand.indexKnuckle.rotation.multiply(this.initialHandRot.invert());
+    }
+
     /**
      * Called every frame. Updates the ball's physics state and checks if it should be destroyed.
      * When holding, accumulates force from hand acceleration. Also handles rotation buffering.
      */
     onUpdate() {
+
+        // If the ball is being held, update its position and rotation based on hand movement
+        if (this.isHolding) {
+            let nPos = this.initialTPos.add(this.getDeltaHandPos())
+            this.t.setWorldPosition(nPos);
+            let nRot = this.getDeltaHandRot().multiply(this.initialTRot)
+            this.t.setWorldRotation(nRot);
+        }
+
         let handVelocity = this.getHandVelocity()
 
         // If the ball is currently held, accumulate force based on changes in hand velocity (acceleration).

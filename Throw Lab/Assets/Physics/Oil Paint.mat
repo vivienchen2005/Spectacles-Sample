@@ -4,7 +4,15 @@
     - !<own> c9e75677-9100-4d23-9506-cd43b6f82a54
 - !<PassInfo/c9e75677-9100-4d23-9506-cd43b6f82a54>
   CachedProperties:
-    []
+    - screenTextureBorderColor:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - screenTextureDims:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - screenTextureUvMinMax:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   DepthWrite: false
   DepthTest: false
   DepthFunction: LessEqual
@@ -37,12 +45,6 @@
           borderColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
           mipmaps: false
         type: Texture2D
-    screenTextureBorderColor:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-    screenTextureDims:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     screenTextureSize:
       typeIdx: 5
       value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
@@ -52,7 +54,4 @@
         0: {x: 1.000000, y: 0.000000, z: 0.000000}
         1: {x: 0.000000, y: 1.000000, z: 0.000000}
         2: {x: 0.000000, y: 0.000000, z: 1.000000}
-    screenTextureUvMinMax:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   Pass: !<reference> 276af118-d05c-4169-a857-8d352be8ad8c

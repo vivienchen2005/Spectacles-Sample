@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 7560e417-8bfb-46ea-8645-cd1b3d4f473e
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/a440f4e4-4899-4fe5-9cd3-4550c0b97c32>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 2ab3ae80-b17c-432b-b0f3-5d8020586404
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -57,3 +57,4 @@
     - '// @input float lineStyle = 2 {"widget":"combobox", "values":[{"label":"Full", "value":0}, {"label":"Split", "value":1}, {"label":"FadedEnd", "value":2}]}'
     - // @input bool shouldStick = true
     - // @input Component.ScriptComponent _interactor
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

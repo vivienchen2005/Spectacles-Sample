@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 1c1b1840-0260-44b8-a1b3-b7999dd94319
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/0501152f-0bd3-4458-a33e-5b1cc223523f>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 9671d6cd-8cb7-413d-9b23-53790040fef3
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -52,3 +52,4 @@
     - // @input Asset.Material toggledOnSelectMaterial
     - // @input Asset.Material disabledMaterial
     - "// @input Component.RenderMeshVisual[] meshVisuals"
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 6b6b0310-d56a-41e1-940b-878ec3169a77
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/549ba58f-a9bd-4f95-ab2b-f76cb3bc6fd6>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 0b5d5072-0d37-4a37-a0c8-1b19f68172d6
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -36,3 +36,4 @@
       {}
   InputLines:
     - // @input Component.AudioComponent audio
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

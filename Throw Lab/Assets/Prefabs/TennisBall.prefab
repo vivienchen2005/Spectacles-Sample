@@ -51,7 +51,7 @@
   PrefabRemaps:
     []
   Name: TennisBall
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 13.957748, y: -25.847389, z: -20.163143}
@@ -66,6 +66,7 @@
     - !<own> 64053e25-3f29-4179-99c7-0cf04b17f809
     - !<own> 0d7ca074-d01b-481c-8158-f2d561cddb8f
     - !<own> 6e65c824-339b-4301-adec-3600de4274e9
+    - !<own> 723d601b-48bb-427e-925d-7d7c9e124c59
     - !<own> 45bbec06-75e1-444a-9139-211c3ccca82c
 - !<RenderMeshVisual/45ae402e-67fb-4c5d-9d1f-f7a818223f06>
   PrefabRemaps:
@@ -100,6 +101,8 @@
   ScriptInputs:
     "":
       audio: !<reference.AudioComponent> 9624b6d5-2bf1-40ac-9b61-1ecbb0ff48f3
+      targetOutlineMaterial: !<reference.Material> 7231c7bc-6c14-4331-ad23-9ab928107707
+      meshVisual: !<reference.RenderMeshVisual> 45ae402e-67fb-4c5d-9d1f-f7a818223f06
   ScriptTypes:
     "":
       {}
@@ -154,7 +157,7 @@
   PrefabRemaps:
     []
   Name: InteractableManipulation
-  Enabled: true
+  Enabled: false
   ScriptAsset: !<reference> 664b556b-1946-4c2c-866a-e675b4e86006
   ScriptInputsDefault:
     manipulateRootSceneObject: true
@@ -200,6 +203,23 @@
       _enableZTranslation: true
       showRotationProperties: false
       _rotationAxis: All
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/723d601b-48bb-427e-925d-7d7c9e124c59>
+  PrefabRemaps:
+    []
+  Name: Grabbable
+  Enabled: true
+  ScriptAsset: !<reference> 64087653-79d3-4558-b642-7d4c33f1c6f3
+  ScriptInputsDefault:
+    handColliderName: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      collider: !<reference.ColliderComponent> 0350ff28-12c5-4b24-aca8-b1d5ec41fa72
+      handColliderName: ColliderTargetProvider
   ScriptTypes:
     "":
       {}

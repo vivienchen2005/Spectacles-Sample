@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> affc12b2-1dd2-49b6-9e60-d48ba14bf896
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/18020884-b822-446f-85e2-1d6e5ea7d8ce>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: e4e5cc7c-30b4-4a5a-b972-40206733e64f
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -88,3 +88,4 @@
     - '// @input float directColliderExitRadius = 1.5 {"hint":"The radius around the midpoint of the index/thumb to de-target Interactables (for bistable thresholding)."}'
     - // @input float directDragThreshold = 3
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

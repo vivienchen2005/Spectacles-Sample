@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> ac923494-59dd-4deb-808e-41bf1fc2cc9d
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/d4292636-cb93-475b-8db9-ec50fb8cdf5d>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,18 +21,25 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 8db4d74a-c329-4697-8918-c6f2e8fe2de3
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
   ScriptInputsHidden:
     audio: false
+    meshVisual: false
+    targetOutlineMaterial: false
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
     - audio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      targetOutlineMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      meshVisual: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input Component.AudioComponent audio
+    - '// @input Asset.Material targetOutlineMaterial {"hint":"This is the material that will provide the mesh outline"}'
+    - // @input Component.RenderMeshVisual meshVisual
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

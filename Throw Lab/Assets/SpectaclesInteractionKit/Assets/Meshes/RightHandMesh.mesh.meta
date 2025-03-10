@@ -9,15 +9,15 @@
     {}
   DependentFiles:
     []
-  ImporterSettings: !<FileMeshImporterSettings/0b40664a-9fc5-4e32-a347-2053fe58270c>
+  ImporterSettings: !<FileMeshImporterSettings>
     ModifiedVertexFormats:
       boneData: Float
       normal: Float
       position: Float
       tangent: Float
       texture0: Float
-  CompressionSettings: !<SingleCompressionSettings/2633e409-fd92-43db-9e65-725a177fb7a5>
-    CompressionSettings: !<MeshCompressionSettings/b4881e5c-712f-43a3-aed6-c776dadf6059>
+  CompressionSettings: !<SingleCompressionSettings>
+    CompressionSettings: !<MeshCompressionSettings>
       EnableDracoCompression: false
       CompressionLevel: 0
       PositionBits: 11

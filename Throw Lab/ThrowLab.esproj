@@ -1,16 +1,19 @@
 studioVersion:
   major: 5
-  minor: 4
-  patch: 0
-  build: 24121706
+  minor: 7
+  patch: 1
+  build: 25030601
   type: Public
-updateCheckpoint: 52
+coreVersion: 301
+clientVersion: 13.300000
+updateCheckpoint: 55
 sceneId: 0a1ccb1a-fe88-4fbb-9883-e3af3c75fd99
 viewConfig:
   simulation:
     device: No Simulation
     cameraFov: 66.519997
     fullFrameAspect: nan
+    resolutionScale: 1.000000
     viewport: Maximized
     output: Live
     stereoOutputEye: Center
@@ -23,14 +26,14 @@ metaInfo:
     []
   lensName: ThrowLab
   lensDescriptors:
-    []
+    - GEN_AI_ICON
   lensApplicability:
     - Front
     - Back
   lensClientCompatibilities:
     - Spectacles
   platformBundlesEnabled: false
-  iconHash: b06172d2f3f02f3e88da2894ddb98896
+  iconHash: 8e4b6f80c5c379e9f6c8b8521612cb89
   videoPreviewHash: ""
   fromTemplateName: Spectacles
   fromTemplateUrl: Lens Studio 5.1.0.24091700

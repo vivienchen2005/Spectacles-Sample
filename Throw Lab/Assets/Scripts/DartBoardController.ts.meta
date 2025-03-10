@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 5afd0fdd-4f76-4424-8f6b-2d4599504e69
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/14df1a70-b8e1-4559-967d-db682a21aa05>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 734a8915-b128-4a72-9cdc-ea7dc71154cc
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -39,3 +39,4 @@
   InputLines:
     - // @input Component.AudioComponent dartHitSounds
     - // @input Component.AudioComponent dartBouncedSound
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

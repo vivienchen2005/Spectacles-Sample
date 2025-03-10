@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 5dd8a447-2f95-4012-b338-ccf1d5dba1ad
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/35bb0f1f-2e76-4932-bd13-f7620d051a12>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 34b0bcd4-8f7b-453f-a411-fdae346a62b9
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -49,7 +49,8 @@
     - // @input bool _xAxisEnabled
     - // @input bool _yAxisEnabled = true
     - // @input bool _zAxisEnabled
-    - '// @input vec3 _axisBufferDegrees {"hint":"How big the angle must be to start rotating about that axis"}'
-    - '// @input vec3 _axisEasing {"hint":"How fast the target should rotate to follow camera, instant follow = 1, delay follow = 0.1"}'
+    - '// @input vec3 _axisBufferDegrees = {0,0,0} {"hint":"How big the angle must be to start rotating about that axis"}'
+    - '// @input vec3 _axisEasing = {1,1,1} {"hint":"How fast the target should rotate to follow camera, instant follow = 1, delay follow = 0.1"}'
     - '// @input float duration = 0.033 {"hint":"The expected duration between updates, expecting ~30FPS = 0.033; lower duration = faster rotation"}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> f838197b-6768-4b3e-b721-9adc341db48d
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/7adbf2f4-0dc7-47c0-a7f0-e7f319c4811a>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 8af6e3af-e3a4-450d-af98-d905435423a8
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -51,7 +51,7 @@
       {}
   InputLines:
     - '// @input bool showDebug {"hint":"The components under DebugElements will be hidden on start if showDebug is unchecked."}'
-    - "// @input SceneObject[] debugElements"
+    - "// @input SceneObject[] debugElements = {}"
     - '// @ui {"widget":"group_start", "label":"Slider Knob"}'
     - '// @input Component.RenderMeshVisual sliderKnobMesh {"label":"Mesh"}'
     - '// @input Asset.Material sliderKnobIdleMaterial {"label":"Idle Material"}'
@@ -62,3 +62,4 @@
     - // @input Asset.Material sliderTrackMaterial
     - '// @ui {"widget":"group_end"}'
     - // @input Asset.AudioTrackAsset sliderProgressAudio
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

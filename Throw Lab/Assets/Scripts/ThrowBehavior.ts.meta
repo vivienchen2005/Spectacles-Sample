@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 75fc3ecb-cd6a-4853-9674-0a3dddd37c49
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/6b85671b-d56a-41b5-8415-05c96c120686>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 5a10041f-6de1-4856-ae90-7f5d4dc0e5dd
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -42,3 +42,4 @@
     - // @input Asset.ObjectPrefab objectPrefab
     - // @input Component.Text debugText
     - // @input SceneObject debugBall
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

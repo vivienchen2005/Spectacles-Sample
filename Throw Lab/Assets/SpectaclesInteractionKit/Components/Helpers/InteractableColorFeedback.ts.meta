@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 29e5d11b-41b7-47bd-8efa-3afc818e3555
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/e6187837-be22-44d7-a00d-d7c2822a12e8>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 6a331424-d0ec-47e6-b83c-77941c20f887
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -49,3 +49,4 @@
     - '// @input vec4 pinchedColor = "{0.46, 0.46, 0.46, 1}" {"widget":"color"}'
     - '// @input vec4 disabledColor = "{1, 1, 1, 0}" {"widget":"color"}'
     - '// @input Component.RenderMeshVisual[] meshVisuals {"hint":"The meshes which will have their baseColor changed on pinch/hover events"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

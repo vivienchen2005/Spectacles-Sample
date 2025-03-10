@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> b86e782f-e9bd-41ee-91d4-75d22a8eb1d3
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/29e246b2-5bcc-4141-ad88-79c06ea817da>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 2443288b-5523-4e35-8936-4b5a6b130cf1
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -43,5 +43,6 @@
     - "// @input bool editEventCallbacks {\"hint\":\"Enable this to add functions from another script to this component's callback events\"}"
     - '// @ui {"widget":"group_start", "label":"On Button Pinched Callbacks", "showIf":"editEventCallbacks"}'
     - '// @input Component.ScriptComponent customFunctionForOnButtonPinched {"hint":"The script containing functions to be called when button is pinched"}'
-    - '// @input string[] onButtonPinchedFunctionNames {"hint":"The names for the functions on the provided script, to be called on button pinch"}'
+    - '// @input string[] onButtonPinchedFunctionNames = {} {"hint":"The names for the functions on the provided script, to be called on button pinch"}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

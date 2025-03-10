@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 7ab065f2-0daf-4870-8f2a-4e8a8893ffc5
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/7e288704-297b-4a2f-9498-3edef8faac98>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 8364e07c-c94d-4956-a47b-687a36a7966d
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -98,3 +98,4 @@
     - // @input bool showRotationProperties
     - '// @input string _rotationAxis = "All" {"hint":"Enable rotation about all axes or a single world axis (x,y,z) when using to two hands.", "widget":"combobox", "values":[{"label":"All", "value":"All"}, {"label":"X", "value":"X"}, {"label":"Y", "value":"Y"}, {"label":"Z", "value":"Z"}], "showIf":"showRotationProperties", "showIfValue":true}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

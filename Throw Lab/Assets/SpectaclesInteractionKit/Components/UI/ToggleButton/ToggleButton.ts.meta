@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> e01f7979-10e0-44a7-be68-4334ea620a13
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/f4142eb8-ce1f-4a26-8a82-f28437c53eed>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: bedc87ee-23d8-4323-8b17-567252a62b9d
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -52,5 +52,6 @@
     - "// @input bool editEventCallbacks {\"hint\":\"Enable this to add functions from another script to this component's callback events\"}"
     - '// @ui {"widget":"group_start", "label":"On State Changed Callbacks", "showIf":"editEventCallbacks"}'
     - '// @input Component.ScriptComponent customFunctionForOnStateChanged {"hint":"The script containing functions to be called on toggle state change"}'
-    - '// @input string[] onStateChangedFunctionNames {"hint":"The names for the functions on the provided script, to be called on toggle state change"}'
+    - '// @input string[] onStateChangedFunctionNames = {} {"hint":"The names for the functions on the provided script, to be called on toggle state change"}'
     - '// @ui {"widget":"group_end"}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

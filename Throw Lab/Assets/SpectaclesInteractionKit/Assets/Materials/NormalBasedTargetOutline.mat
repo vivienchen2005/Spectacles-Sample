@@ -42,13 +42,13 @@
       value: 0
     alphaTestThreshold:
       typeIdx: 1
-      value: 0.500000
+      value: 0.512000
     lineColor:
       typeIdx: 5
       value: {x: 1.000000, y: 1.000000, z: 0.039216, w: 1.000000}
     lineWeight:
       typeIdx: 1
-      value: 0.250000
+      value: 0.500000
     overrideTimeDelta:
       typeIdx: 1
       value: 0.000000

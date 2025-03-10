@@ -9,15 +9,15 @@
     {}
   DependentFiles:
     []
-  ImporterSettings: !<FileMeshImporterSettings/ed393be0-ecb7-4fa0-9995-519ba794f3e9>
+  ImporterSettings: !<FileMeshImporterSettings>
     ModifiedVertexFormats:
       color: UNorm Byte
       normal: Float
       position: Float
       tangent: Float
       texture0: Float
-  CompressionSettings: !<SingleCompressionSettings/5fd69468-7fe6-40fa-bf2a-2a7141840a17>
-    CompressionSettings: !<MeshCompressionSettings/ac749805-922a-4ea6-874e-15694af146a7>
+  CompressionSettings: !<SingleCompressionSettings>
+    CompressionSettings: !<MeshCompressionSettings>
       EnableDracoCompression: false
       CompressionLevel: 0
       PositionBits: 11

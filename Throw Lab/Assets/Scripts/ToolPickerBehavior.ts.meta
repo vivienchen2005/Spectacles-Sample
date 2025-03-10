@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> bb436dc2-922f-48b6-8764-45f317323809
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/0ce2dc6d-babe-4097-9eb9-62e3ed3beb7c>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: e6597bd2-1b23-4083-b1f3-a0b1579b4c63
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -44,3 +44,4 @@
     - "// @input Asset.ObjectPrefab[] toolPrefabs"
     - "// @input SceneObject[] toolSpawnPoints"
     - // @input SceneObject containerObj
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

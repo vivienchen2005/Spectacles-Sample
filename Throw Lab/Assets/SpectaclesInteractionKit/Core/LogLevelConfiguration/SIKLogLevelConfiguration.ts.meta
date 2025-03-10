@@ -9,7 +9,7 @@
     TypeScriptAsset: !<own> 92263fdd-c53c-4031-8006-284e983c9d56
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/5b941882-72fa-484d-9ae2-fdba94442b9e>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
   ExtraData:
@@ -21,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: ba81c609-4514-4131-a588-51fdd57faf7b
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -36,3 +36,4 @@
       {}
   InputLines:
     - '// @input int logLevelFilter = 8 {"widget":"combobox", "values":[{"label":"Error", "value":3}, {"label":"Warning", "value":4}, {"label":"Info", "value":6}, {"label":"Debug", "value":7}, {"label":"Verbose", "value":8}]}'
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
