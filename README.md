@@ -382,6 +382,19 @@ Extended Permissions mode on device must be enabled in some of the projects to a
       </p>
       <p>Sample project for path creation and path walking experience.</p>
     </td>
+        </td>
+          <td align="center" valign="top" width="33%">
+      <a href="#">
+        <img src="./Spatial Image Gallery/README-ref/spatial-image-example.gif" alt="spatial-image" width="250px" />
+      </a>
+      <h3>Spatial Image Gallery</h3>
+      <p>
+<a href="https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?">
+  <img src="https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3" />
+</a>
+      </p>
+      <p>Convert your 2D images to 3D.</p>
+    </td>
   </tr>
 </table>
 
