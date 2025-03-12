@@ -1,5 +1,5 @@
 const TAG = "ConfigurationValidator"
-const SIK_VERSION = "0.9.0"
+const SIK_VERSION = "0.11.0"
 
 /**
  * This class is responsible for validating the configuration settings for running the Spectacles Interaction Kit (SIK) in Lens Studio.

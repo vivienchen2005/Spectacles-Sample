@@ -9,7 +9,7 @@
     []
   Name: Physics Collider
   Enabled: true
-  Shape: !<Box/00000000-0000-0000-0000-000000000000>
+  Shape: !<Box>
     FitVisual: false
     Size: {x: 1.000000, y: 1.000000, z: 0.050000}
   Matter: !<reference> 00000000-0000-0000-0000-000000000000

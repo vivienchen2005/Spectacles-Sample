@@ -1087,7 +1087,7 @@
   Autoplay: true
   ClipRangeType: Frames
   AnimationClips:
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: IDLE
       Weight: 1.000000
@@ -1099,7 +1099,7 @@
       BlendMode: Default
       ScaleMode: Multiply
       PlaybackMode: Loop
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: SLEEP
       Weight: 0.000000
@@ -1111,7 +1111,7 @@
       BlendMode: Default
       ScaleMode: Multiply
       PlaybackMode: Loop
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: STAND_UP
       Weight: 0.000000

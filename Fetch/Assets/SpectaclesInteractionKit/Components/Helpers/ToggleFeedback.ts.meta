@@ -1,5 +1,5 @@
 - !<AssetImportMetadata/be8f10ea-b630-4ddf-a2bc-49439232d353>
-  ImporterSettings: !<AssetImporterSettings/d720b13b-f5e6-408c-b320-236fd974ba5e>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> c43e5f10-7849-461a-b196-daa4e553b147
@@ -12,6 +12,8 @@
   DependentFiles:
     []
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/42e21fa4-8521-4f4e-a507-2f4c836de53d>
   Icon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: c34a28e0-bc3c-47b1-a980-e191d11c1f6b
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -49,5 +51,6 @@
     - // @input Asset.Material toggledOnMaterial
     - // @input Asset.Material toggledOnSelectMaterial
     - // @input Asset.Material disabledMaterial
-    - "// @input Component.RenderMeshVisual[] meshVisuals"
+    - "// @input Component.RenderMeshVisual[] meshVisuals = {}"
   SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

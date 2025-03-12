@@ -3,6 +3,7 @@ import {HandType} from "../../Providers/HandInputData/HandType"
 import TargetProvider, {
   InteractableHitInfo,
 } from "../../Providers/TargetProvider/TargetProvider"
+import {clamp} from "../../Utils/mathUtils"
 import {isDescendantOf} from "../../Utils/SceneObjectUtils"
 import {TargetingMode} from "../Interactor/Interactor"
 import {WindowMode} from "./raycastAlgorithms/TimeDataContainer"
@@ -14,6 +15,8 @@ export type PokeTargetProviderConfig = {
 }
 
 const POKE_SPHERECAST_RADIUS = 0.7
+
+const POKE_STRENGTH_DISTANCE_THRESHOLD_CM = 2.5
 
 /**
  * Hand based poke target provider. Uses a sphere cast from index mid joint
@@ -32,6 +35,8 @@ export class PokeTargetProvider extends TargetProvider {
   private endPointHistory = new TimedVec3Container(WindowMode.FRAME, 4)
 
   private _drawDebug: boolean = this.config.drawDebug
+
+  private initialPokePosition: vec3 | null = null
 
   constructor(protected config: PokeTargetProviderConfig) {
     super()
@@ -77,6 +82,7 @@ export class PokeTargetProvider extends TargetProvider {
     if (!this.isAvailable()) {
       this._currentInteractableHitInfo = null
       this.endPointHistory.clear()
+      this.initialPokePosition = null
       return
     }
     this.raycastJoints()
@@ -88,11 +94,23 @@ export class PokeTargetProvider extends TargetProvider {
       this.startPoint,
       this.endPoint,
       (hits) => {
+        const currentInteractable =
+          this.currentInteractableHitInfo?.interactable ?? null
         this._currentInteractableHitInfo =
           this.getInteractableHitFromRayCast(hits)
 
+        if (this.currentInteractableHitInfo === null) {
+          this.initialPokePosition = null
+        } else if (
+          this.initialPokePosition === null ||
+          this.currentInteractableHitInfo.interactable !== currentInteractable
+        ) {
+          this.initialPokePosition =
+            this.currentInteractableHitInfo.hit.position
+        }
+
         this.endPointHistory.pushWithoutDuplicate(getTime(), this.endPoint)
-      }
+      },
     )
   }
 
@@ -110,12 +128,22 @@ export class PokeTargetProvider extends TargetProvider {
   }
 
   protected override getInteractableHitFromRayCast(
-    hits: RayCastHit[]
+    hits: RayCastHit[],
+    offset = 0,
+    allowOutOfFovInteraction = false,
   ): InteractableHitInfo | null {
     const hitInfos: InteractableHitInfo[] = []
     for (const hit of hits) {
+      if (
+        !allowOutOfFovInteraction &&
+        this.camera !== null &&
+        !this.camera.inFoV(hit.position)
+      ) {
+        continue
+      }
+
       const interactable = this.interactionManager.getInteractableByCollider(
-        hit.collider
+        hit.collider,
       )
 
       if (
@@ -132,7 +160,7 @@ export class PokeTargetProvider extends TargetProvider {
             .multiplyPoint(hit.position),
           hit: {
             collider: hit.collider,
-            distance: hit.distance,
+            distance: hit.distance + offset,
             normal: hit.normal,
             position: hit.position,
             skipRemaining: false,
@@ -161,7 +189,7 @@ export class PokeTargetProvider extends TargetProvider {
   }
 
   private getNearestDeeplyNestedInteractable(
-    hitInfos: InteractableHitInfo[]
+    hitInfos: InteractableHitInfo[],
   ): InteractableHitInfo | null {
     const infos = hitInfos.reverse()
 
@@ -172,7 +200,7 @@ export class PokeTargetProvider extends TargetProvider {
         targetHitInfo === null ||
         isDescendantOf(
           currentHitInfo.interactable.sceneObject,
-          targetHitInfo.interactable.sceneObject
+          targetHitInfo.interactable.sceneObject,
         )
       ) {
         targetHitInfo = currentHitInfo
@@ -194,7 +222,23 @@ export class PokeTargetProvider extends TargetProvider {
 
   /** @inheritdoc */
   getInteractionStrength() {
-    return this.currentInteractableHitInfo !== null ? 1 : 0
+    if (this.currentInteractableHitInfo === null) {
+      return 0
+    }
+    const hit = this.currentInteractableHitInfo.hit
+
+    const distance = hit.position.distance(this.initialPokePosition)
+
+    const interactionStrength =
+      clamp(distance, 0, POKE_STRENGTH_DISTANCE_THRESHOLD_CM) /
+      Math.min(
+        POKE_STRENGTH_DISTANCE_THRESHOLD_CM,
+        this.initialPokePosition.distance(
+          hit.collider.getTransform().getWorldPosition(),
+        ),
+      )
+
+    return interactionStrength
   }
 
   /** @inheritdoc */

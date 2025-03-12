@@ -1,9 +1,11 @@
+import {InteractionPlane} from "../../Components/Interaction/InteractionPlane/InteractionPlane"
 import {HandInputData} from "../../Providers/HandInputData/HandInputData"
 import {HandType} from "../../Providers/HandInputData/HandType"
 import TrackedHand from "../../Providers/HandInputData/TrackedHand"
 import TargetProvider, {
   InteractableHitInfo,
 } from "../../Providers/TargetProvider/TargetProvider"
+import Event, {PublicApi} from "../../Utils/Event"
 import {validate} from "../../Utils/validate"
 import BaseInteractor from "../Interactor/BaseInteractor"
 import {DirectTargetProvider} from "../Interactor/DirectTargetProvider"
@@ -27,8 +29,20 @@ export type RaycastType =
   | "AnchorHead"
   | "Proxy"
 
-const TAG = "HandInteractor"
+export enum FieldTargetingMode {
+  FarField,
+  NearField,
+  Direct,
+  BehindNearField,
+}
+
 const HANDUI_INTERACTION_DISTANCE_THRESHOLD_CM = 15
+
+// The threshold to reject a near field interaction (the default hand ray must be within a 45 degree angle to the plane's normal).
+const NEAR_FIELD_ANGLE_THRESHOLD_RADIAN = Math.PI / 4
+
+// The minimum pinch strength required to trigger a pinch instead of a poke during direct targeting.
+export const MINIMUM_PINCH_STRENGTH = 0.2
 
 /**
  * This class handles hand interactions within the Spectacles Interaction Kit. It provides various configurations for hand types and raycast types.
@@ -76,10 +90,16 @@ export class HandInteractor extends BaseInteractor {
 
   @input
   private directDragThreshold: number = 3.0
+
   @ui.group_end
   protected handProvider: HandInputData = HandInputData.getInstance()
 
-  private hand: TrackedHand | undefined
+  private onFieldTargetingModeChangedEvent: Event<FieldTargetingMode> =
+    new Event<FieldTargetingMode>()
+  readonly onFieldTargetingModeChanged: PublicApi<FieldTargetingMode> =
+    this.onFieldTargetingModeChangedEvent.publicApi()
+
+  private _hand: TrackedHand | undefined
 
   private handRayProvider: HandRayProvider | undefined
 
@@ -92,17 +112,21 @@ export class HandInteractor extends BaseInteractor {
   private pokeTargetProvider: PokeTargetProvider | undefined
   private activeTargetProvider: TargetProvider | undefined
 
+  private _fieldTargetingMode: FieldTargetingMode = FieldTargetingMode.FarField
+  private _currentInteractionPlane: InteractionPlane | null = null
+
   onAwake(): void {
     this.inputType =
       this.handType === "left"
         ? InteractorInputType.LeftHand
         : InteractorInputType.RightHand
 
-    this.hand = this.handProvider.getHand(this.handType as HandType)
+    this._hand = this.handProvider.getHand(this.handType as HandType)
 
     this.handRayProvider = new HandRayProvider({
       handType: this.handType as HandType,
       raycastAlgorithm: this.raycastAlgorithm as RaycastType,
+      handInteractor: this,
     })
 
     this.indirectTargetProvider = new IndirectTargetProvider(
@@ -133,6 +157,7 @@ export class HandInteractor extends BaseInteractor {
         shouldPreventTargetUpdate: () => {
           return this.preventTargetUpdate()
         },
+        sceneObjectName: `${this.handType === `left` ? `Left` : `Right`}HandColliderTargetProvider`,
         debugEnabled: this.drawDebug,
         colliderEnterRadius: this.directColliderEnterRadius,
         colliderExitRadius: this.directColliderExitRadius,
@@ -149,6 +174,13 @@ export class HandInteractor extends BaseInteractor {
     this.dragProvider = this.indirectDragProvider
 
     this.defineSceneEvents()
+  }
+
+  /**
+   * @returns the TrackedHand that this HandInteractor is using for tracking information.
+   */
+  get hand(): TrackedHand | null {
+    return this._hand ?? null
   }
 
   get startPoint(): vec3 | null {
@@ -232,6 +264,8 @@ export class HandInteractor extends BaseInteractor {
     super.updateState()
     this.updateTarget()
     this.updateDragVector()
+
+    this.processTriggerEvents()
   }
 
   protected override clearDragProviders(): void {
@@ -266,6 +300,58 @@ export class HandInteractor extends BaseInteractor {
     }
   }
 
+  /**
+   * Clears an InteractionPlane from the cache of planes if it is nearby.
+   * @param plane
+   */
+  clearInteractionPlane(plane: InteractionPlane) {
+    this.directTargetProvider.clearInteractionPlane(plane)
+
+    const fieldTargetingMode = this.updateNearestPlane()
+
+    if (this.fieldTargetingMode !== fieldTargetingMode) {
+      this._fieldTargetingMode = fieldTargetingMode
+      this.onFieldTargetingModeChangedEvent.invoke(fieldTargetingMode)
+    }
+  }
+
+  get fieldTargetingMode(): FieldTargetingMode {
+    return this._fieldTargetingMode
+  }
+
+  get currentInteractionPlane(): InteractionPlane | null {
+    return this._currentInteractionPlane
+  }
+
+  /**
+   * @returns a normalized value between 0 and 1 representing proximity to an InteractionPlane when in near field mode,
+   *          null if in FarField mode.
+   */
+  get nearFieldProximity(): number | null {
+    if (this.fieldTargetingMode === FieldTargetingMode.FarField) {
+      return null
+    }
+
+    if (
+      this.fieldTargetingMode === FieldTargetingMode.NearField ||
+      this.fieldTargetingMode === FieldTargetingMode.Direct
+    ) {
+      return (
+        1 -
+        this.currentInteractionPlane.projectPoint(this.hand.indexTip.position)
+          .distance /
+          this.currentInteractionPlane.proximityDistance
+      )
+    } else {
+      return (
+        1 +
+        this.currentInteractionPlane.projectPoint(this.hand.indexTip.position)
+          .distance /
+          this.currentInteractionPlane.behindDistance
+      )
+    }
+  }
+
   isTargeting(): boolean {
     return this.hand?.isInTargetingPose() ?? false
   }
@@ -274,7 +360,9 @@ export class HandInteractor extends BaseInteractor {
    * Returns true if the hand interactor and the hand it is associated with are both enabled.
    */
   isActive(): boolean {
-    return this.enabled && (this.hand?.enabled ?? false)
+    return (
+      this.enabled && (this.hand?.enabled ?? false) && !this.hand.isPhoneInHand
+    )
   }
 
   /**
@@ -284,6 +372,17 @@ export class HandInteractor extends BaseInteractor {
     validate(this.hand)
 
     return this.hand.enabled && this.hand.isTracked()
+  }
+
+  /**
+   * Returns true if the hand is targeting via far field raycasting.
+   */
+  isFarField(): boolean {
+    return this.fieldTargetingMode === FieldTargetingMode.FarField
+  }
+
+  isWithinDirectZone(): boolean {
+    return this.fieldTargetingMode === FieldTargetingMode.Direct
   }
 
   protected clearCurrentHitInfo(): void {
@@ -308,6 +407,16 @@ export class HandInteractor extends BaseInteractor {
     if (!this.isActive()) {
       this.indirectTargetProvider?.reset()
       return
+    }
+
+    // If the user is mid-interaction, do not hijack raycast logic to avoid jerky interactions.
+    if (!this.preventTargetUpdate()) {
+      const fieldTargetingMode = this.updateNearestPlane()
+
+      if (this.fieldTargetingMode !== fieldTargetingMode) {
+        this._fieldTargetingMode = fieldTargetingMode
+        this.onFieldTargetingModeChangedEvent.invoke(fieldTargetingMode)
+      }
     }
 
     this.pokeTargetProvider?.update()
@@ -337,9 +446,34 @@ export class HandInteractor extends BaseInteractor {
         } else if (this.directTargetProvider?.hasTarget()) {
           this.activeTargetProvider = this.directTargetProvider
           this.dragProvider = this.directDragProvider
-        } else {
-          this.activeTargetProvider = this.indirectTargetProvider
-          this.dragProvider = this.indirectDragProvider
+        } else if (this.hand.targetingData?.intendsToTarget) {
+          if (
+            this.currentInteractionPlane &&
+            this.currentInteractionPlane.projectPoint(
+              this.hand.indexTip.position,
+            ).isWithinDirectZone
+          ) {
+            this.activeTargetProvider =
+              this.hand.getPinchStrength() >= MINIMUM_PINCH_STRENGTH
+                ? this.directTargetProvider
+                : this.pokeTargetProvider
+            this.dragProvider = this.directDragProvider
+          } else {
+            this.activeTargetProvider = this.indirectTargetProvider
+            // During a near field raycast, use direct drag threshold.
+            this.dragProvider =
+              this.fieldTargetingMode === FieldTargetingMode.FarField
+                ? this.indirectDragProvider
+                : this.directDragProvider
+          }
+        }
+        // If the hand is not intending to raycast target, choose the more likely of the collider target providers.
+        else {
+          this.activeTargetProvider =
+            this.hand.getPinchStrength() >= MINIMUM_PINCH_STRENGTH
+              ? this.directTargetProvider
+              : this.pokeTargetProvider
+          this.dragProvider = this.directDragProvider
         }
       }
     }
@@ -414,8 +548,69 @@ export class HandInteractor extends BaseInteractor {
     )
   }
 
+  // Check for cached planes (via direct collider overlap), choosing the nearest plane if multiple are available.
+  private updateNearestPlane(): FieldTargetingMode {
+    const interactionPlanes = this.directTargetProvider.currentInteractionPlanes
+
+    let nearestPlane: InteractionPlane | null = null
+    let distance = Number.POSITIVE_INFINITY
+
+    const planeRaycastLocus = this.directTargetProvider.colliderPosition
+    if (planeRaycastLocus === null) {
+      this._currentInteractionPlane = null
+      return FieldTargetingMode.FarField
+    }
+
+    for (const interactionPlane of interactionPlanes) {
+      const planeProjection = interactionPlane.projectPoint(planeRaycastLocus)
+
+      // Check if the locus is within the interaction zone or behind zone, then check if the locus is closer to this plane than prior planes.
+      const isNearPlane =
+        planeProjection !== null &&
+        (planeProjection.isWithinInteractionZone ||
+          planeProjection.isWithinBehindZone) &&
+        Math.abs(planeProjection.distance) < distance
+
+      const normal = interactionPlane.normal
+      const handDirection = this.handRayProvider.raycast.getRay()
+
+      // Check if the hand direction faces the plane enough to target the plane.
+      const isTowardPlane =
+        handDirection !== null &&
+        handDirection.direction.angleTo(normal.uniformScale(-1)) <
+          NEAR_FIELD_ANGLE_THRESHOLD_RADIAN
+
+      // If both checks are true, cache the plane.
+      if (isNearPlane && isTowardPlane) {
+        nearestPlane = interactionPlane
+        distance = planeProjection.distance
+      }
+    }
+
+    this._currentInteractionPlane = nearestPlane
+
+    // Return to far field targeting if no nearby planes were found.
+    if (this._currentInteractionPlane === null) {
+      return FieldTargetingMode.FarField
+    }
+
+    // Check if the index tip is past the plane for purpose of visuals.
+    const indexPoint = this.hand.indexTip.position
+    const indexProjection =
+      this._currentInteractionPlane.projectPoint(indexPoint)
+    const isIndexInBehindZone = indexProjection.isWithinBehindZone
+    const isIndexInDirectZone = indexProjection.isWithinDirectZone
+
+    if (isIndexInBehindZone) {
+      return FieldTargetingMode.BehindNearField
+    } else if (isIndexInDirectZone) {
+      return FieldTargetingMode.Direct
+    } else {
+      return FieldTargetingMode.NearField
+    }
+  }
+
   private onDestroy() {
-    this.release()
     this.directTargetProvider?.destroy()
     this.indirectTargetProvider?.destroy()
     this.pokeTargetProvider?.destroy()

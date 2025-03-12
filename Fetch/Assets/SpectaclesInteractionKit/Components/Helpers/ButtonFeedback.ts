@@ -1,7 +1,7 @@
-import {Interactable} from "../Interaction/Interactable/Interactable"
 import {SIK} from "../../SIK"
-import {ToggleButton} from "../UI/ToggleButton/ToggleButton"
 import {validate} from "../../Utils/validate"
+import {Interactable} from "../Interaction/Interactable/Interactable"
+import {ToggleButton} from "../UI/ToggleButton/ToggleButton"
 
 const PINCH_BUTTON: number = 0
 const TOGGLE_BUTTON: number = 1
@@ -189,8 +189,6 @@ export class ButtonFeedback extends BaseScriptComponent {
       this.meshHoverMaterial = this.meshHoverMaterial.clone()
       this.meshPinchedMaterial = this.meshPinchedMaterial.clone()
 
-      this.changeButtonState(this.meshIdleMaterial)
-
       if (this.defaultIcon !== undefined) {
         this.meshIdleMaterial.mainPass.iconEnabled = true
         this.meshHoverMaterial.mainPass.iconEnabled = true
@@ -242,44 +240,20 @@ export class ButtonFeedback extends BaseScriptComponent {
           }
         }
       }
-
-      if (this.onIcon !== undefined && this.defaultIcon !== undefined) {
-        this.meshIdleMaterial.mainPass.iconEnabled = false
-        this.meshHoverMaterial.mainPass.iconEnabled = false
-        this.meshPinchedMaterial.mainPass.iconEnabled = false
-
-        if (this.buttonType === TOGGLE_BUTTON) {
-          if (
-            this.meshToggledIdleMaterial !== undefined &&
-            this.meshToggledHoverMaterial !== undefined &&
-            this.meshToggledPinchedMaterial !== undefined
-          ) {
-            this.meshToggledIdleMaterial = this.meshToggledIdleMaterial.clone()
-            this.meshToggledHoverMaterial =
-              this.meshToggledHoverMaterial.clone()
-            this.meshToggledPinchedMaterial =
-              this.meshToggledPinchedMaterial.clone()
-
-            this.meshToggledIdleMaterial.mainPass.iconEnabled = false
-            this.meshToggledHoverMaterial.mainPass.iconEnabled = false
-            this.meshToggledPinchedMaterial.mainPass.iconEnabled = false
-          }
-        } else if (this.buttonType === STATE_BUTTON) {
-          if (
-            this.meshStateIdleMaterial !== undefined &&
-            this.meshStateHoverMaterial !== undefined &&
-            this.meshStatePinchedMaterial !== undefined
-          ) {
-            this.meshStateIdleMaterial = this.meshStateIdleMaterial.clone()
-            this.meshStateHoverMaterial = this.meshStateHoverMaterial.clone()
-            this.meshStatePinchedMaterial =
-              this.meshStatePinchedMaterial.clone()
-
-            this.meshStateIdleMaterial.mainPass.iconEnabled = false
-            this.meshStateHoverMaterial.mainPass.iconEnabled = false
-            this.meshStatePinchedMaterial.mainPass.iconEnabled = false
-          }
-        }
+      if (this.buttonType === TOGGLE_BUTTON) {
+        this.changeButtonState(
+          this.toggleButton.isToggledOn
+            ? this.meshToggledIdleMaterial
+            : this.meshIdleMaterial,
+        )
+      } else if (this.buttonType === STATE_BUTTON) {
+        this.changeButtonState(
+          this.toggleButton.isToggledOn
+            ? this.meshStateIdleMaterial
+            : this.meshIdleMaterial,
+        )
+      } else {
+        this.changeButtonState(this.meshIdleMaterial)
       }
     })
   }
@@ -399,15 +373,20 @@ export class ButtonFeedback extends BaseScriptComponent {
 
   private onToggleButtonEnabled = (): void => {
     validate(this.toggleButton)
-    validate(this.meshToggledIdleMaterial)
-    validate(this.meshStateIdleMaterial)
-    this.changeButtonState(
-      this.toggleButton.isToggledOn
-        ? this.buttonType === TOGGLE_BUTTON
-          ? this.meshToggledIdleMaterial
-          : this.meshStateIdleMaterial
-        : this.meshIdleMaterial,
-    )
+
+    let material = this.meshIdleMaterial
+
+    if (this.toggleButton.isToggledOn) {
+      if (this.buttonType === TOGGLE_BUTTON) {
+        validate(this.meshToggledIdleMaterial)
+        material = this.meshToggledIdleMaterial
+      } else {
+        validate(this.meshStateIdleMaterial)
+        material = this.meshStateIdleMaterial
+      }
+    }
+
+    this.changeButtonState(material)
   }
 
   private initializeHoverState_ToggleButton = (): void => {

@@ -1,22 +1,16 @@
 CollapsedEntities:
   type: stringset
   value:
-    size: 596
+    size: 562
     values:
+      - 3D Assets
       - Device Camera Texture.deviceCameraTexture
       - Echopark.hdr
       - Echopark.hdr/Diffuse
       - Echopark.hdr/Specular
+      - LSTween/package.native
       - Render Target.renderTarget
       - Scene.scene
-      - Scripts/JS/CameraAPI.js
-      - Scripts/JS/SpeechToText.js
-      - Scripts/JS/TextToSpeechOpenAI.js
-      - Scripts/JS/VisionOpenAI.js
-      - Scripts/TS/CameraAPI.ts
-      - Scripts/TS/SpeechToText.ts
-      - Scripts/TS/TextToSpeechOpenAI.ts
-      - Scripts/TS/VisionOpenAI.ts
       - SpectaclesInteractionKit
       - SpectaclesInteractionKit/Assets
       - SpectaclesInteractionKit/Assets/Audio
@@ -42,35 +36,9 @@ CollapsedEntities:
       - SpectaclesInteractionKit/Assets/Materials/PinchButtonToggleOnIcon.mat
       - SpectaclesInteractionKit/Assets/Materials/PinchButtonToggleOnSelect.mat
       - SpectaclesInteractionKit/Assets/Materials/PlatformUI
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 1.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 10.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 2.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 3.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 4.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 5.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 6.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 7.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 8.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close 9.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_close.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_glow 1.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_glow 2.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/3D resources/Materials/SystemSettings/SysSet_round_button_glow.mat
       - SpectaclesInteractionKit/Assets/Materials/PlatformUI/RoundButtonHover.mat
       - SpectaclesInteractionKit/Assets/Materials/PlatformUI/RoundButtonPinched.mat
       - SpectaclesInteractionKit/Assets/Materials/PlatformUI/RoundButton_Idle.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources/Materials
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources/Materials/LensExplorer
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources/Materials/LensExplorer/LensExp_scroll 1.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources/Materials/LensExplorer/LensExp_scroll 2.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources/Materials/LensExplorer/LensExp_scroll.mat
-      - SpectaclesInteractionKit/Assets/Materials/PlatformUI/SWIS/SWIS/3D resources/Materials/LensExplorer/LensExp_scroll_bg.mat
       - SpectaclesInteractionKit/Assets/Materials/PlatformUI/Slider_Platform.mat
       - SpectaclesInteractionKit/Assets/Materials/ScaleBasedTargetOutline.mat
       - SpectaclesInteractionKit/Assets/Materials/ScrollBarButton.mat
@@ -527,7 +495,6 @@ CollapsedEntities:
       - SpectaclesInteractionKit/Providers/HandInputData/DefaultHandTrackingAssetProvider.ts
       - SpectaclesInteractionKit/Providers/HandInputData/GestureProvider
       - SpectaclesInteractionKit/Providers/HandInputData/GestureProvider/GestureModuleProvider.ts
-      - SpectaclesInteractionKit/Providers/HandInputData/GestureProvider/MotionControllerProvider.ts
       - SpectaclesInteractionKit/Providers/HandInputData/GestureProvider/PalmTapDetection
       - SpectaclesInteractionKit/Providers/HandInputData/GestureProvider/PalmTapDetection/PalmTapDetector.ts
       - SpectaclesInteractionKit/Providers/HandInputData/GestureProvider/PalmTapDetection/PalmTapDetectorStateMachine.ts
@@ -585,7 +552,6 @@ CollapsedEntities:
       - SpectaclesInteractionKit/Utils/algorithms.ts
       - SpectaclesInteractionKit/Utils/animate.ts
       - SpectaclesInteractionKit/Utils/color.ts
-      - SpectaclesInteractionKit/Utils/debounce.ts
       - SpectaclesInteractionKit/Utils/lazyProperty.ts
       - SpectaclesInteractionKit/Utils/logger.ts
       - SpectaclesInteractionKit/Utils/mathUtils.ts

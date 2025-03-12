@@ -1,12 +1,12 @@
 import Event, {PublicApi, unsubscribe} from "../../../Utils/Event"
 
-import {DragInteractorEvent} from "../../../Core/Interactor/InteractorEvent"
 import {DragType} from "../../../Core/Interactor/Interactor"
-import {Interactable} from "../../Interaction/Interactable/Interactable"
-import NativeLogger from "../../../Utils/NativeLogger"
+import {DragInteractorEvent} from "../../../Core/Interactor/InteractorEvent"
 import animate from "../../../Utils/animate"
 import {createCallback} from "../../../Utils/InspectorCallbacks"
+import NativeLogger from "../../../Utils/NativeLogger"
 import {validate} from "../../../Utils/validate"
+import {Interactable} from "../../Interaction/Interactable/Interactable"
 
 const TAG = "Slider"
 

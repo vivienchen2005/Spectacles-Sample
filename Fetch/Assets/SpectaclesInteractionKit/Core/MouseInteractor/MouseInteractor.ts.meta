@@ -1,5 +1,5 @@
 - !<AssetImportMetadata/697e7a5c-1328-4211-b6f4-4baef2582334>
-  ImporterSettings: !<AssetImporterSettings/f246e527-ff10-4819-b573-2c5e6566d98b>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> fa8d58de-519f-43c1-a79d-1bfa5fdecfb0
@@ -12,6 +12,8 @@
   DependentFiles:
     []
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/a87395f7-1364-45eb-b950-10fed667ddb1>
   Icon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 0392308f-3ad1-4647-831e-e2235707591f
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -54,9 +56,9 @@
       {}
   InputLines:
     - '// @ui {"widget":"group_start", "label":"Interactor"}'
-    - // @input bool _drawDebug = false
+    - // @input bool _drawDebug
     - '// @ui {"widget":"group_start", "label":"Spherecast Configuration"}'
-    - // @input bool sphereCastEnabled = false
+    - // @input bool sphereCastEnabled
     - '// @input number[] spherecastRadii = "{0.5, 2.0, 4.0}" {"showIf":"sphereCastEnabled", "showIfValue":true}'
     - '// @input number[] spherecastDistanceThresholds = "{0, 12, 30}" {"showIf":"sphereCastEnabled", "showIfValue":true}'
     - '// @ui {"widget":"group_end"}'
@@ -65,10 +67,11 @@
     - // @input float indirectTargetingVolumeMultiplier = 1
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_start", "label":"Indirect Drag Provider"}'
-    - // @input float indirectDragThreshold = 3.0
+    - // @input float indirectDragThreshold = 3
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_start", "label":"MouseInteractor"}'
     - '// @input float mouseTargetingMode = 2 {"hint":"Sets the return value of MouseInteractor.activeTargetingMode for cases where non-indirect targeting needs to be tested specifically. Useful whenever your code has checks for interactor.activeTargetingMode === TargetingMode.X.", "widget":"combobox", "values":[{"label":"Direct", "value":1}, {"label":"Indirect", "value":2}, {"label":"All", "value":3}, {"label":"Poke", "value":4}]}'
     - '// @ui {"widget":"group_end"}'
   SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

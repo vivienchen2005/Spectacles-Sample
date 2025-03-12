@@ -4,7 +4,7 @@
   ImporterName: ObjectPrefabImporter
   PrimaryAsset: !<reference> f99407ce-416a-43f3-baf8-668a42712de9
   PackageType: NotAPackage
-  ImporterSettings: !<AssetImporterSettings/afa7b84d-9d0a-4f31-a44d-001866d4bfcd>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   AssetDataMap:
     ObjectPrefab: !<own> 196d6160-b41d-4a14-ba8d-1e2f22cd58af
@@ -12,6 +12,8 @@
   DependentFiles:
     []
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<SceneObject/02319969-ba76-49c0-a8a7-c9eec87c898e>
   PrefabRemaps:
     []
@@ -343,12 +345,13 @@
     - f0e07390-6185-4a35-9a7b-632bf9d48126: 44415fc7-6947-441f-99e7-9450e0ccf1a1
     - f1e10bfb-c13f-486f-9058-a205aa2a22a5: 1da5369a-0a57-44fd-b95e-19f783d821ce
     - f24eade7-4784-4f7b-8f89-10cd7e47127e: 48249f39-6d5a-41d8-83cc-0409b5f8692b
+    - f99407ce-416a-43f3-baf8-668a42712de9: adb4d8be-05e0-4326-a57f-a784fbcac7e8
     - fa0dcbdf-ddc9-4890-90e2-d81f925fe239: 8801761f-0f54-45c6-813f-b47607427671
     - fa8a056a-2062-4c94-a29d-dedf42c65e7d: 4bb5f23b-7e1b-4d1c-9915-f6ebed07b1b5
     - faa471eb-2331-4766-902e-ad90ebaada39: d9006d4b-becc-45b4-b4a0-fd6cb7b56ad4
     - fc8e7153-7b17-491b-9c4b-1a7d19a6e707: 1faa76f4-0a8a-41a7-b244-a899b640af05
     - ff21c245-9565-4f69-827d-5d3a6411b557: b6f97bee-e308-4b10-a90c-7fc2b7abdce6
-  SourceState: !<own> f1c37ae1-ada7-4496-a942-0ba91e0eeab0
+  SourceState: !<own> adb4d8be-05e0-4326-a57f-a784fbcac7e8
 - !<SceneObject/1bd8ab64-7fb1-4a85-9796-25bc7abd6d2c>
   PrefabRemaps:
     []
@@ -757,6 +760,7 @@
   Enabled: true
   ScriptAsset: !<reference> f9b29b39-ec8c-41bd-8b53-769ae9b818b8
   ScriptInputsDefault:
+    selectVisual: true
     autoJointMapping: true
     wrist: true
     thumbToWrist: true
@@ -784,12 +788,15 @@
     pinkyMidJoint: true
     pinkyUpperJoint: true
     pinkyTip: true
+    shouldThumbPokeGlow: true
     occluderEnabled: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       handType: right
+      selectVisual: Default
+      handInteractor: !<MappingBased.HandInteractor> 3b4499e2-4660-4970-804b-bf357efc077e
       handMesh: !<reference.RenderMeshVisual> ba88cf3f-f114-480e-b50c-16d2e5c7aee6
       root: !<reference.SceneObject> 81735e6e-4177-45a5-92d7-5b1b50dffc7b
       autoJointMapping: true
@@ -819,17 +826,20 @@
       pinkyMidJoint: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       pinkyUpperJoint: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       pinkyTip: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      glowEnabled: true
+      shouldThumbPokeGlow: false
       unitPlaneMesh: !<reference.RenderMesh> a453f19f-0832-419f-bd8f-b3296b433b23
       tipGlowMaterial: !<reference.Material> 26460eea-cbec-488e-aefd-efde6c5d0085
-      idleColor: !<Vec4> {x: 1.000000, y: 0.686275, z: 0.000000, w: 1.000000}
-      pinchDownColor: !<Vec4> {x: 0.968627, y: 0.827451, z: 0.000000, w: 1.000000}
+      hoverColor: !<Vec4> {x: 0.764706, y: 0.447059, z: 0.000000, w: 1.000000}
+      triggerColor: !<Vec4> {x: 0.807843, y: 0.705882, z: 0.196078, w: 1.000000}
+      behindColor: !<Vec4> {x: 0.800000, y: 0.200000, z: 0.211765, w: 1.000000}
       tapProximityThreshold: !<float> 8.000000
       pinchTexture: !<reference.Texture> 3391429c-5c74-4b5c-b9fc-4ad3ba30bda4
       tapTexture: !<reference.Texture> e33d2c7f-1d12-4250-92fb-433c25ce1923
       occluderEnabled: false
       occluderUnitPlaneMesh: !<reference.RenderMesh> a453f19f-0832-419f-bd8f-b3296b433b23
       radialGradientOcclusionMaterial: !<reference.Material> af45ff34-c96f-42c2-8446-8282edf6dece
+      handOutlineMaterial: !<reference.Material> 7ac80b6c-979a-4a00-a694-099f296be161
+      handOccluderMaterial: !<reference.Material> bb8479b9-021e-4c42-809a-60edf99cbeac
   ScriptTypes:
     "":
       {}
@@ -1656,6 +1666,12 @@
     []
   Components:
     - !<own> 27508fa9-b52f-4370-8fef-42c8edcd4eb2
+- !<ObjectPrefab/adb4d8be-05e0-4326-a57f-a784fbcac7e8>
+  PackagePath: ""
+  objects:
+    - !<own> e7415058-e260-4d15-8e39-b18993b5cf8d
+  LazyLoading: false
+  RetainAssets: true
 - !<SceneObject/b207db77-1740-4b4e-8adc-1900c1ddef4e>
   PrefabRemaps:
     []
@@ -1744,7 +1760,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> e22e919c-a7b1-4d7b-91ab-67d2d30b6d92
+    - !<reference> 43c2bfcb-b31e-47f0-9c8e-c21a6aecb314
   Mesh: !<reference> 47f5077e-1337-41f0-8131-4bd28ad21552
   Skin: !<reference> 825afebf-e4c6-4fcc-a2c3-be25107df190
   BlendShapesEnabled: true
@@ -2169,6 +2185,7 @@
   Enabled: true
   ScriptAsset: !<reference> f9b29b39-ec8c-41bd-8b53-769ae9b818b8
   ScriptInputsDefault:
+    selectVisual: true
     autoJointMapping: true
     wrist: true
     thumbToWrist: true
@@ -2196,12 +2213,15 @@
     pinkyMidJoint: true
     pinkyUpperJoint: true
     pinkyTip: true
+    shouldThumbPokeGlow: true
     occluderEnabled: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       handType: left
+      selectVisual: Default
+      handInteractor: !<MappingBased.HandInteractor> 9355ccc3-323a-44ae-91a7-60b502ddfdde
       handMesh: !<reference.RenderMeshVisual> 53c9b92b-eb2e-443f-8fef-61fc991884d0
       root: !<reference.SceneObject> 1bd8ab64-7fb1-4a85-9796-25bc7abd6d2c
       autoJointMapping: true
@@ -2231,17 +2251,20 @@
       pinkyMidJoint: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       pinkyUpperJoint: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       pinkyTip: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      glowEnabled: true
+      shouldThumbPokeGlow: false
       unitPlaneMesh: !<reference.RenderMesh> a453f19f-0832-419f-bd8f-b3296b433b23
       tipGlowMaterial: !<reference.Material> 26460eea-cbec-488e-aefd-efde6c5d0085
-      idleColor: !<Vec4> {x: 1.000000, y: 0.686275, z: 0.000000, w: 1.000000}
-      pinchDownColor: !<Vec4> {x: 0.968627, y: 0.827451, z: 0.000000, w: 1.000000}
+      hoverColor: !<Vec4> {x: 0.764706, y: 0.447059, z: 0.000000, w: 1.000000}
+      triggerColor: !<Vec4> {x: 0.807843, y: 0.705882, z: 0.196078, w: 1.000000}
+      behindColor: !<Vec4> {x: 0.800000, y: 0.200000, z: 0.211765, w: 1.000000}
       tapProximityThreshold: !<float> 8.000000
       pinchTexture: !<reference.Texture> 3391429c-5c74-4b5c-b9fc-4ad3ba30bda4
       tapTexture: !<reference.Texture> e33d2c7f-1d12-4250-92fb-433c25ce1923
       occluderEnabled: false
       occluderUnitPlaneMesh: !<reference.RenderMesh> a453f19f-0832-419f-bd8f-b3296b433b23
       radialGradientOcclusionMaterial: !<reference.Material> af45ff34-c96f-42c2-8446-8282edf6dece
+      handOutlineMaterial: !<reference.Material> 7ac80b6c-979a-4a00-a694-099f296be161
+      handOccluderMaterial: !<reference.Material> 5d5c762b-f0dd-4c06-b76f-bcb8f8fb525f
   ScriptTypes:
     "":
       {}
@@ -2305,12 +2328,6 @@
     - !<own> 03ad211b-26e8-4405-8449-f7b1d3ca7582
   Components:
     []
-- !<ObjectPrefab/f1c37ae1-ada7-4496-a942-0ba91e0eeab0>
-  PackagePath: ""
-  objects:
-    - !<own> e7415058-e260-4d15-8e39-b18993b5cf8d
-  LazyLoading: false
-  RetainAssets: true
 - !<SceneObject/f294040d-274f-4147-96d3-a5e75b3346b4>
   PrefabRemaps:
     []

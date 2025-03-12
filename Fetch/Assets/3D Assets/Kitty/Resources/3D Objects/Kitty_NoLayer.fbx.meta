@@ -107,7 +107,7 @@
     Scene: !<own> 4ede72c9-12bd-4c05-816e-62432308b92c
   DependentFiles:
     []
-  ImporterSettings: !<FbxImporterSettings/a897616f-5540-4a72-9690-d7fb0a63c9ea>
+  ImporterSettings: !<FbxImporterSettings>
     UseLegacyImporter: false
     WithMaterials: true
     NamingConvention: ByCategory
@@ -123,20 +123,22 @@
     GeneratePivots: true
     TriangulateNURBS: true
     UseLegacyFbxLoader: false
-  CompressionSettings: !<ComplexCompressionSettings/fb612c97-4bc9-463d-b523-f4a59f9a352b>
+  CompressionSettings: !<ComplexCompressionSettings>
     Presets:
-      None Compression: !<SingleCompressionSettings/051e53be-c54d-4f83-bcdb-c2df11bc1df8>
+      None Compression: !<SingleCompressionSettings>
         CompressorName: None
         CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
-      Performance Compression: !<SingleCompressionSettings/b8372011-7c29-4e51-86a5-2ce6278a3637>
+      Performance Compression: !<SingleCompressionSettings>
         CompressorName: Performance
-        CompressionSettings: !<TextureCompressionSettings/7ebe1432-2523-4a1c-8172-43b6f310946d>
+        CompressionSettings: !<TextureCompressionSettings>
           Level: Medium
     ExtensionMappings:
       mesh: None Compression
       jpg: Performance Compression
     Overrides:
       {}
+  ExtraData:
+    {}
 - !<SceneObject/03b78f48-fad2-447b-8b4a-f79401c95e6a>
   PrefabRemaps:
     []
@@ -551,7 +553,7 @@
   Autoplay: true
   ClipRangeType: Frames
   AnimationClips:
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: BaseLayer
       Weight: 1.000000

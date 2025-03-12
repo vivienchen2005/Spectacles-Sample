@@ -3,15 +3,41 @@ import {
   InteractorEvent,
 } from "../../../Core/Interactor/InteractorEvent"
 
-import Event from "../../../Utils/Event"
-import {InteractionConfigurationProvider} from "../../../Providers/InteractionConfigurationProvider/InteractionConfigurationProvider"
 import {InteractionManager} from "../../../Core/InteractionManager/InteractionManager"
-import {InteractorInputType} from "../../../Core/Interactor/Interactor"
+import {
+  InteractorInputType,
+  TargetingMode,
+} from "../../../Core/Interactor/Interactor"
+import {InteractionConfigurationProvider} from "../../../Providers/InteractionConfigurationProvider/InteractionConfigurationProvider"
+import Event from "../../../Utils/Event"
 import NativeLogger from "../../../Utils/NativeLogger"
 
 export type InteractableEventArgs = Omit<InteractorEvent, "interactable">
 
+const POKE_DIRECTION_THRESHOLD = 0.7
+
 const TAG = "Interactable"
+
+enum PokeXDirection {
+  None = 0,
+  Right = 1,
+  Left = 2,
+  All = 3,
+}
+
+enum PokeYDirection {
+  None = 0,
+  Up = 1,
+  Down = 2,
+  All = 3,
+}
+
+enum PokeZDirection {
+  None = 0,
+  Forward = 1,
+  Back = 2,
+  All = 3,
+}
 
 /**
  * This class represents an interactable object that can respond to various interaction events such as hover, trigger, and drag. It provides event handlers for these interactions and uses the InteractionConfigurationProvider for configuration.
@@ -38,6 +64,9 @@ export class Interactable extends BaseScriptComponent {
 
   private interactionConfigurationProvider: InteractionConfigurationProvider =
     InteractionConfigurationProvider.getInstance()
+
+  private isHovered = false
+  private triggeredType = TargetingMode.None
 
   // Native Logging
   private log = new NativeLogger(TAG)
@@ -162,6 +191,49 @@ export class Interactable extends BaseScriptComponent {
   @input
   allowMultipleInteractors: boolean = true
 
+  @ui.separator
+  @input
+  private enablePokeDirectionality: boolean = false
+
+  @input
+  @label("X")
+  @showIf("enablePokeDirectionality")
+  @widget(
+    new ComboBoxWidget([
+      new ComboBoxItem("None", 0),
+      new ComboBoxItem("Right", 1),
+      new ComboBoxItem("Left", 2),
+      new ComboBoxItem("All", 3),
+    ]),
+  )
+  private acceptableXDirections: number = 3
+
+  @input
+  @label("Y")
+  @showIf("enablePokeDirectionality")
+  @widget(
+    new ComboBoxWidget([
+      new ComboBoxItem("None", 0),
+      new ComboBoxItem("Up", 1),
+      new ComboBoxItem("Down", 2),
+      new ComboBoxItem("All", 3),
+    ]),
+  )
+  private acceptableYDirections: number = 3
+
+  @input
+  @label("Z")
+  @showIf("enablePokeDirectionality")
+  @widget(
+    new ComboBoxWidget([
+      new ComboBoxItem("None", 0),
+      new ComboBoxItem("Forward", 1),
+      new ComboBoxItem("Back", 2),
+      new ComboBoxItem("All", 3),
+    ]),
+  )
+  private acceptableZDirections: number = 3
+
   onAwake(): void {
     this.createEvent("OnDestroyEvent").bind(() => this.release())
     this.createEvent("OnEnableEvent").bind(() => {
@@ -182,6 +254,7 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - the interactor that is driving the event {@link Interactor}
    */
   hoverEnter = (eventArgs: InteractableEventArgs): void => {
+    this.isHovered = true
     if (this._hoveringInteractor === InteractorInputType.None) {
       this.onHoverEnterEvent.invoke({
         ...eventArgs,
@@ -202,6 +275,9 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - event parameters, with omitted interactable
    */
   hoverUpdate = (eventArgs: InteractableEventArgs): void => {
+    if (!this.isHovered) {
+      return
+    }
     this.onHoverUpdateEvent.invoke({
       ...eventArgs,
       interactable: this,
@@ -213,6 +289,7 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - event parameters, with omitted interactable
    */
   hoverExit = (eventArgs: InteractableEventArgs): void => {
+    this.isHovered = false
     this._hoveringInteractor &= ~eventArgs.interactor.inputType
     this.onInteractorHoverExitEvent.invoke({
       ...eventArgs,
@@ -234,6 +311,14 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - event parameters, with omitted interactable
    */
   triggerStart = (eventArgs: InteractableEventArgs): void => {
+    this.triggeredType = this.validatePokeDirectionality(eventArgs)
+      ? eventArgs.interactor.activeTargetingMode
+      : TargetingMode.None
+
+    if (this.triggeredType === TargetingMode.None) {
+      return
+    }
+
     if (this._triggeringInteractor === InteractorInputType.None) {
       this.onTriggerStartEvent.invoke({
         ...eventArgs,
@@ -255,6 +340,9 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - event parameters, with omitted interactable
    */
   triggerUpdate = (eventArgs: InteractableEventArgs): void => {
+    if ((this.triggeredType & eventArgs.interactor.activeTargetingMode) === 0) {
+      return
+    }
     this.onTriggerUpdateEvent.invoke({
       ...eventArgs,
       interactable: this,
@@ -267,6 +355,9 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - event parameters, with omitted interactable
    */
   triggerEnd = (eventArgs: InteractableEventArgs): void => {
+    if ((this.triggeredType & eventArgs.interactor.activeTargetingMode) === 0) {
+      return
+    }
     this._triggeringInteractor &= ~eventArgs.interactor.inputType
     this.onInteractorTriggerEndEvent.invoke({
       ...eventArgs,
@@ -281,7 +372,6 @@ export class Interactable extends BaseScriptComponent {
       })
       this.log.v("InteractionEvent : " + "On Trigger End Event")
     }
-
     this.dragEnd(eventArgs)
   }
 
@@ -290,13 +380,15 @@ export class Interactable extends BaseScriptComponent {
    * @param eventArgs - event parameters, with omitted interactable
    */
   triggerCanceled = (eventArgs: InteractableEventArgs): void => {
-    this._triggeringInteractor === InteractorInputType.None
+    if ((this.triggeredType & eventArgs.interactor.activeTargetingMode) === 0) {
+      return
+    }
+    this._triggeringInteractor = InteractorInputType.None
     this.onTriggerCanceledEvent.invoke({
       ...eventArgs,
       interactable: this,
     })
     this.log.v("InteractionEvent : " + "On Trigger Canceled Event")
-
     this.dragEnd(eventArgs)
   }
 
@@ -355,5 +447,47 @@ export class Interactable extends BaseScriptComponent {
     for (let i = 0; i < this.colliders.length; i++) {
       this.colliders[i].enabled = enable
     }
+  }
+
+  /**
+   * Validates the directionality of a poke trigger.
+   *
+   * @param eventArgs - The event arguments containing details about the trigger event.
+   * @returns `true` if the poke directionality is valid, otherwise `false`.
+   *
+   */
+  private validatePokeDirectionality(
+    eventArgs: InteractableEventArgs,
+  ): boolean {
+    let isValid = true
+    if (
+      (eventArgs.interactor.activeTargetingMode & TargetingMode.Poke) !== 0 &&
+      this.enablePokeDirectionality
+    ) {
+      isValid = false
+      if (
+        ((this.acceptableXDirections & PokeXDirection.Left) !== 0 &&
+          this.getTransform().left.dot(eventArgs.interactor.direction) >=
+            POKE_DIRECTION_THRESHOLD) ||
+        ((this.acceptableXDirections & PokeXDirection.Right) !== 0 &&
+          this.getTransform().right.dot(eventArgs.interactor.direction) >=
+            POKE_DIRECTION_THRESHOLD) ||
+        ((this.acceptableYDirections & PokeYDirection.Up) !== 0 &&
+          this.getTransform().up.dot(eventArgs.interactor.direction) >=
+            POKE_DIRECTION_THRESHOLD) ||
+        ((this.acceptableYDirections & PokeYDirection.Down) !== 0 &&
+          this.getTransform().down.dot(eventArgs.interactor.direction) >=
+            POKE_DIRECTION_THRESHOLD) ||
+        ((this.acceptableZDirections & PokeZDirection.Forward) !== 0 &&
+          this.getTransform().forward.dot(eventArgs.interactor.direction) >=
+            POKE_DIRECTION_THRESHOLD) ||
+        ((this.acceptableZDirections & PokeZDirection.Back) !== 0 &&
+          this.getTransform().back.dot(eventArgs.interactor.direction) >=
+            POKE_DIRECTION_THRESHOLD)
+      ) {
+        isValid = true
+      }
+    }
+    return isValid
   }
 }

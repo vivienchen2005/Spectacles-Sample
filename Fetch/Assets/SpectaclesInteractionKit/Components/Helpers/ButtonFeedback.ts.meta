@@ -9,9 +9,11 @@
     TypeScriptAsset: !<own> e8e9c81c-0f34-40b5-b143-b0d4a262d482
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/fe3f442f-5884-4965-b3aa-a89aa9a0c4d6>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/e8e9c81c-0f34-40b5-b143-b0d4a262d482>
   SvgIcon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 479b9632-8de4-4994-97d9-4b208a65f545
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -75,12 +77,12 @@
     -
       {}
   InputLines:
-    - '// @input int buttonType = 0 {"widget":"combobox", "values":[{"label":"Pinch Button", "value":0}, {"label":"Toggle Button", "value":1}, {"label":"State Button", "value":2}]}'
+    - '// @input int buttonType {"widget":"combobox", "values":[{"label":"Pinch Button", "value":0}, {"label":"Toggle Button", "value":1}, {"label":"State Button", "value":2}]}'
     - '// @ui {"widget":"separator"}'
     - // @input Component.RenderMeshVisual renderMeshVisual
-    - '// @input bool useGlowMesh = false {"showIf":"buttonType", "showIfValue":0}'
+    - '// @input bool useGlowMesh {"showIf":"buttonType", "showIfValue":0}'
     - '// @input Component.RenderMeshVisual glowRenderMeshVisual {"showIf":"useGlowMesh", "showIfValue":true}'
-    - // @input float maxBlendShapeWeight = 1.0
+    - // @input float maxBlendShapeWeight = 1
     - '// @ui {"widget":"separator"}'
     - '// @input string meshBlendShapeName = "Pinch"'
     - // @input Asset.Material meshIdleMaterial
@@ -97,7 +99,8 @@
     - '// @input Asset.Material meshStatePinchedMaterial {"showIf":"buttonType", "showIfValue":2}'
     - '// @input Asset.Material meshStateHoverMaterial {"showIf":"buttonType", "showIfValue":2}'
     - '// @input Asset.Material meshStateIdleMaterial {"showIf":"buttonType", "showIfValue":2}'
-    - '// @input bool persistentPinchedState = false {"showIf":"buttonType", "showIfValue":2}'
+    - '// @input bool persistentPinchedState {"showIf":"buttonType", "showIfValue":2}'
     - '// @ui {"widget":"separator"}'
     - // @input Asset.Texture defaultIcon
     - // @input Asset.Texture onIcon
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

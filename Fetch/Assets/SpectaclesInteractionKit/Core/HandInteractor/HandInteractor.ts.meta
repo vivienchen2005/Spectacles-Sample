@@ -1,5 +1,5 @@
 - !<AssetImportMetadata/3f73f4ab-4c5a-4451-ac39-f111185608de>
-  ImporterSettings: !<AssetImporterSettings/9b4705b0-a819-4b56-be4d-d03c68687f85>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 4d0b0ec7-e669-4c4e-b2f7-32b9c59f24cc
@@ -12,6 +12,8 @@
   DependentFiles:
     []
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/a029768b-59d0-48c2-a71a-20c5c304030b>
   Icon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 07048e7e-a5df-4f31-ac23-bf6838a2a18b
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -64,9 +66,9 @@
       {}
   InputLines:
     - '// @ui {"widget":"group_start", "label":"Interactor"}'
-    - // @input bool _drawDebug = false
+    - // @input bool _drawDebug
     - '// @ui {"widget":"group_start", "label":"Spherecast Configuration"}'
-    - // @input bool sphereCastEnabled = false
+    - // @input bool sphereCastEnabled
     - '// @input number[] spherecastRadii = "{0.5, 2.0, 4.0}" {"showIf":"sphereCastEnabled", "showIfValue":true}'
     - '// @input number[] spherecastDistanceThresholds = "{0, 12, 30}" {"showIf":"sphereCastEnabled", "showIfValue":true}'
     - '// @ui {"widget":"group_end"}'
@@ -75,15 +77,16 @@
     - // @input float indirectTargetingVolumeMultiplier = 1
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_start", "label":"Indirect Drag Provider"}'
-    - // @input float indirectDragThreshold = 3.0
+    - // @input float indirectDragThreshold = 3
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_start", "label":"Hand Interactor"}'
     - '// @input string handType = "right" {"widget":"combobox", "values":[{"label":"Left", "value":"left"}, {"label":"Right", "value":"right"}]}'
     - "// @input string raycastAlgorithm = \"Proxy\" {\"hint\":\"Forwards the TargetingData received from LensCore's Gesture Module\", \"widget\":\"combobox\", \"values\":[{\"label\":\"AnchorVariableShoulder\", \"value\":\"AnchorVariableShoulder\"}, {\"label\":\"LegacySingleCamera\", \"value\":\"LegacySingleCamera\"}, {\"label\":\"AnchorHead\", \"value\":\"AnchorHead\"}, {\"label\":\"Proxy\", \"value\":\"Proxy\"}]}"
-    - "// @input bool forcePokeOnNonDominantPalmProximity = false {\"hint\":\"Forces the usage of Poke targeting when interacting near the nondominant hand's palm.\"}"
+    - "// @input bool forcePokeOnNonDominantPalmProximity {\"hint\":\"Forces the usage of Poke targeting when interacting near the nondominant hand's palm.\"}"
     - '// @input float directColliderEnterRadius = 1 {"hint":"The radius around the midpoint of the index/thumb to target Interactables."}'
     - '// @input float directColliderExitRadius = 1.5 {"hint":"The radius around the midpoint of the index/thumb to de-target Interactables (for bistable thresholding)."}'
-    - // @input float directDragThreshold = 3.0
+    - // @input float directDragThreshold = 3
     - '// @ui {"widget":"group_end"}'
   SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

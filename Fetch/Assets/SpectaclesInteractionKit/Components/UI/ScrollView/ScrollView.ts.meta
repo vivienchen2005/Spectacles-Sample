@@ -1,5 +1,5 @@
 - !<AssetImportMetadata/14a0e732-86b0-427f-b1fe-3699a5bc0b6b>
-  ImporterSettings: !<AssetImporterSettings/4e8f4d40-b806-4610-a39c-897ab93c1f53>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> 8ba7b68a-4b25-4d72-a4a4-a57730a77680
@@ -12,6 +12,8 @@
   DependentFiles:
     []
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/e98fd325-103d-4b36-835b-64373a02227c>
   Icon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 014ae827-c3ff-4f15-90f6-a47cda1fed86
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -45,11 +47,12 @@
     -
       {}
   InputLines:
-    - // @input bool _debugDrawEnabled = false
-    - // @input bool enableHorizontalScroll = false
+    - // @input bool _debugDrawEnabled
+    - // @input bool enableHorizontalScroll
     - // @input bool enableVerticalScroll = true
     - // @input bool _enableScrollInertia = true
     - // @input bool enableScrollLimit = true
     - '// @input float _scrollLimit = 0.3 {"widget":"slider", "min":0, "max":1, "step":0.01}'
     - '// @input vec2 scrollAreaBounds = "{1, 1}"'
   SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

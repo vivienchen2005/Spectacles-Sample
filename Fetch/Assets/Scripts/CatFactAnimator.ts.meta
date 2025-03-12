@@ -9,9 +9,11 @@
     TypeScriptAsset: !<own> 1cd7d956-6fa3-4380-9840-b89fb61cf276
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/0cdfa5f8-2da0-4e3d-86e0-626140201449>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/1cd7d956-6fa3-4380-9840-b89fb61cf276>
   SvgIcon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 4ba2c55f-4750-4c03-8b1c-63b075de6ebd
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -52,3 +54,4 @@
     - // @input Component.AnimationPlayer animationPlayer
     - // @input Component.Image hintImage
     - // @input Component.ScriptComponent animationStateMachine
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -10,11 +10,13 @@
     AnimatedTexture: !<own> f446dfca-0f61-4d01-a8a5-1cf69b1cfc25
   DependentFiles:
     - LPD_87_Hint_TAP_new.png
-  ImporterSettings: !<AssetImporterSettings/623a06ff-9235-4d5a-8acc-e2157446b66e>
+  ImporterSettings: !<AssetImporterSettings>
     {}
-  CompressionSettings: !<SingleCompressionSettings/b09ee270-ca8d-4f4d-9aea-79ea6773ad0d>
+  CompressionSettings: !<SingleCompressionSettings>
     CompressorName: None
     CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<AnimatedTextureData/f446dfca-0f61-4d01-a8a5-1cf69b1cfc25>
   AutoPlay: true
   Reversed: false

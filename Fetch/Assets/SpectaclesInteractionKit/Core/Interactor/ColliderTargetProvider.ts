@@ -1,3 +1,4 @@
+import {InteractionPlane} from "../../Components/Interaction/InteractionPlane/InteractionPlane"
 import TargetProvider from "../../Providers/TargetProvider/TargetProvider"
 import {notEmpty} from "../../Utils/notEmpty"
 import BaseInteractor from "./BaseInteractor"
@@ -7,6 +8,7 @@ import BaseInteractor from "./BaseInteractor"
  */
 export type ColliderTargetProviderConfig = {
   shouldPreventTargetUpdate?: () => boolean
+  sceneObjectName?: string
 }
 
 /**
@@ -15,15 +17,18 @@ export type ColliderTargetProviderConfig = {
 export abstract class ColliderTargetProvider extends TargetProvider {
   protected ownerSceneObject: SceneObject
 
+  // If the collider is in an interaction plane's interaction zone, cache the plane.
+  protected _currentInteractionPlanes: InteractionPlane[] = []
+
   protected interactor: BaseInteractor
   constructor(
     interactor: BaseInteractor,
-    protected config: ColliderTargetProviderConfig
+    protected config: ColliderTargetProviderConfig,
   ) {
     super()
     this.interactor = interactor
     this.ownerSceneObject = global.scene.createSceneObject(
-      "ColliderTargetProvider"
+      config.sceneObjectName ?? "ColliderTargetProvider",
     )
     this.ownerSceneObject.setParent(this.interactor.sceneObject)
   }
@@ -36,6 +41,25 @@ export abstract class ColliderTargetProvider extends TargetProvider {
   /** @inheritdoc */
   get endPoint(): vec3 {
     return this.colliderPosition
+  }
+
+  /**
+   * Returns an array of InteractionPlanes with interaction zones overlapping with the collider.
+   */
+  get currentInteractionPlanes(): InteractionPlane[] {
+    return this._currentInteractionPlanes
+  }
+
+  /**
+   * Clears an InteractionPlane from the cache (in the event of the InteractionPlane being de-registered).
+   * @param plane - the InteractionPlane to clear.
+   */
+  clearInteractionPlane(plane: InteractionPlane): void {
+    const index = this.currentInteractionPlanes.indexOf(plane)
+
+    if (index !== -1) {
+      this._currentInteractionPlanes.splice(index, 1)
+    }
   }
 
   /**
@@ -66,6 +90,7 @@ export abstract class ColliderTargetProvider extends TargetProvider {
     } else {
       this.ownerSceneObject.enabled = false
       this.clearCurrentInteractableHitInfo()
+      this._currentInteractionPlanes = []
     }
   }
 
@@ -79,7 +104,7 @@ export abstract class ColliderTargetProvider extends TargetProvider {
     radius: number,
     onOverlapStay: ((eventArgs: OverlapStayEventArgs) => void) | null,
     onOverlapExit: ((eventArgs: OverlapExitEventArgs) => void) | null,
-    debugDrawEnabled: boolean
+    debugDrawEnabled: boolean,
   ): ColliderComponent {
     const collider = sceneObject.createComponent("Physics.ColliderComponent")
 
@@ -102,7 +127,7 @@ export abstract class ColliderTargetProvider extends TargetProvider {
 
   protected onColliderOverlapStay(
     event: OverlapEnterEventArgs,
-    allowOutOfFovInteraction = true
+    allowOutOfFovInteraction = false,
   ): void {
     if (this.config.shouldPreventTargetUpdate?.()) {
       return
@@ -136,8 +161,10 @@ export abstract class ColliderTargetProvider extends TargetProvider {
     this._currentInteractableHitInfo = this.getInteractableHitFromRayCast(
       hits,
       0,
-      allowOutOfFovInteraction
+      allowOutOfFovInteraction,
     )
+
+    this.updateInteractionPlanesFromOverlap(event.currentOverlaps)
   }
 
   protected onColliderOverlapExit(event: OverlapEnterEventArgs): void {
@@ -145,6 +172,32 @@ export abstract class ColliderTargetProvider extends TargetProvider {
       event.overlap.collider === this._currentInteractableHitInfo?.hit.collider
     ) {
       this._currentInteractableHitInfo = null
+    }
+
+    this.removeInteractionPlaneFromOverlap(event.overlap)
+  }
+
+  protected updateInteractionPlanesFromOverlap(overlaps: Overlap[]): void {
+    for (const overlap of overlaps) {
+      const plane = overlap.collider
+        .getSceneObject()
+        .getComponent(InteractionPlane.getTypeName())
+      if (plane !== null && !this._currentInteractionPlanes.includes(plane)) {
+        this._currentInteractionPlanes.push(plane)
+      }
+    }
+  }
+
+  protected removeInteractionPlaneFromOverlap(overlap: Overlap): void {
+    const plane = overlap.collider
+      .getSceneObject()
+      .getComponent(InteractionPlane.getTypeName())
+    if (plane !== null) {
+      const index = this.currentInteractionPlanes.indexOf(plane)
+
+      if (index !== -1) {
+        this._currentInteractionPlanes.splice(index, 1)
+      }
     }
   }
 }

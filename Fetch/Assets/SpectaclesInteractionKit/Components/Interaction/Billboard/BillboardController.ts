@@ -1,5 +1,7 @@
 import WorldCameraFinderProvider from "../../../Providers/CameraProvider/WorldCameraFinderProvider"
-import BillboardRotationCalculator from "./BillboardRotationCalculator"
+import BillboardRotationCalculator, {
+  ALMOST_ONE,
+} from "./BillboardRotationCalculator"
 
 export type BillboardConfig = {
   script: ScriptComponent
@@ -23,6 +25,7 @@ export enum RotationAxis {
 }
 const rotationAxes = [RotationAxis.X, RotationAxis.Y, RotationAxis.Z]
 const VEC_UP = vec3.up()
+const VEC_DOWN = vec3.down()
 
 const TAG = "BillboardController"
 
@@ -98,7 +101,7 @@ export default class BillboardController {
     return new vec3(
       this.xAxisCalculator.axisEasing,
       this.yAxisCalculator.axisEasing,
-      this.zAxisCalculator.axisEasing
+      this.zAxisCalculator.axisEasing,
     )
   }
   public set axisEasing(easing: vec3) {
@@ -111,7 +114,7 @@ export default class BillboardController {
     return new vec3(
       MathUtils.RadToDeg * this.xAxisCalculator.axisBufferRadians,
       MathUtils.RadToDeg * this.yAxisCalculator.axisBufferRadians,
-      MathUtils.RadToDeg * this.zAxisCalculator.axisBufferRadians
+      MathUtils.RadToDeg * this.zAxisCalculator.axisBufferRadians,
     )
   }
   public set axisBufferDegrees(bufferDegrees: vec3) {
@@ -166,23 +169,31 @@ export default class BillboardController {
             this.getRightVector(),
             this.getForwardVector(),
             this.getTargetToCameraVector(),
-            this.getUpVector()
+            this.getUpVector(),
           )
           break
         case RotationAxis.Y:
-          rotationQuaternion = this.yAxisCalculator.getRotation(
-            VEC_UP,
-            this.getForwardVector(),
-            this.getTargetToCameraVector(),
-            this.getRightVector().uniformScale(-1)
-          )
+          {
+            let upVector: vec3
+            if (this.getUpVector().dot(VEC_DOWN) > ALMOST_ONE) {
+              upVector = VEC_DOWN
+            } else {
+              upVector = VEC_UP
+            }
+            rotationQuaternion = this.yAxisCalculator.getRotation(
+              upVector,
+              this.getForwardVector(),
+              this.getTargetToCameraVector(),
+              this.getRightVector().uniformScale(-1),
+            )
+          }
           break
         case RotationAxis.Z:
           rotationQuaternion = this.zAxisCalculator.getRotation(
             this.getForwardVector(),
             this.getUpVector(),
             this.getCameraUpVector(),
-            this.getRightVector()
+            this.getRightVector(),
           )
           break
         default:
@@ -190,7 +201,7 @@ export default class BillboardController {
       }
 
       this.targetTransform.setWorldRotation(
-        rotationQuaternion.multiply(this.targetTransform.getWorldRotation())
+        rotationQuaternion.multiply(this.targetTransform.getWorldRotation()),
       )
     }
   }
@@ -204,23 +215,31 @@ export default class BillboardController {
             this.getRightVector(),
             this.getForwardVector(),
             this.getTargetToCameraVector(),
-            this.getUpVector()
+            this.getUpVector(),
           )
           break
         case RotationAxis.Y:
-          rotationQuaternion = this.yAxisCalculator.resetRotation(
-            VEC_UP,
-            this.getForwardVector(),
-            this.getTargetToCameraVector(),
-            this.getRightVector().uniformScale(-1)
-          )
+          {
+            let upVector: vec3
+            if (this.getUpVector().dot(VEC_DOWN) > ALMOST_ONE) {
+              upVector = VEC_DOWN
+            } else {
+              upVector = VEC_UP
+            }
+            rotationQuaternion = this.yAxisCalculator.resetRotation(
+              upVector,
+              this.getForwardVector(),
+              this.getTargetToCameraVector(),
+              this.getRightVector().uniformScale(-1),
+            )
+          }
           break
         case RotationAxis.Z:
           rotationQuaternion = this.zAxisCalculator.resetRotation(
             this.getForwardVector(),
             this.getUpVector(),
             this.getCameraUpVector(),
-            this.getRightVector()
+            this.getRightVector(),
           )
           break
         default:
@@ -228,7 +247,7 @@ export default class BillboardController {
       }
 
       this.targetTransform.setWorldRotation(
-        rotationQuaternion.multiply(this.targetTransform.getWorldRotation())
+        rotationQuaternion.multiply(this.targetTransform.getWorldRotation()),
       )
     }
   }

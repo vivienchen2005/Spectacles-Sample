@@ -1,12 +1,12 @@
 import animate, {CancelSet} from "../../../Utils/animate"
 
-import {Billboard} from "../Billboard/Billboard"
 import {HandInputData} from "../../../Providers/HandInputData/HandInputData"
 import {HandType} from "../../../Providers/HandInputData/HandType"
+import {withAlpha} from "../../../Utils/color"
 import {LensConfig} from "../../../Utils/LensConfig"
 import {MovingAverageFilter} from "../../../Utils/MovingAverageFilter"
 import {validate} from "../../../Utils/validate"
-import {withAlpha} from "../../../Utils/color"
+import {Billboard} from "../Billboard/Billboard"
 
 const TAG = "RadialOcclusionView"
 

@@ -9,9 +9,11 @@
     ObjectPrefab: !<own> 17e25da7-b6a9-4675-ad89-5fbf6ff85aa2
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/ceac5895-5e88-4063-8135-308bc11c23d6>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<SceneObject/05cc94d0-992d-4ed9-8e4b-166b80e0afe0>
   PrefabRemaps:
     []
@@ -485,7 +487,7 @@
   Autoplay: true
   ClipRangeType: Frames
   AnimationClips:
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: IDLE
       Weight: 1.000000
@@ -497,7 +499,7 @@
       BlendMode: Default
       ScaleMode: Multiply
       PlaybackMode: Loop
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: SLEEP
       Weight: 0.000000
@@ -509,7 +511,7 @@
       BlendMode: Default
       ScaleMode: Multiply
       PlaybackMode: Loop
-    - !<AnimationClip/00000000-0000-0000-0000-000000000000>
+    - !<AnimationClip>
       AnimationAsset: !<reference> d2c49cf4-4b69-463d-aba6-68a9aac8e599
       Name: STAND_UP
       Weight: 0.000000

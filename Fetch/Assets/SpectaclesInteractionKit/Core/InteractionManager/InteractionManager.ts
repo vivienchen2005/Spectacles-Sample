@@ -7,9 +7,11 @@ import {
 } from "../Interactor/Interactor"
 
 import {Interactable} from "../../Components/Interaction/Interactable/Interactable"
+import {InteractionPlane} from "../../Components/Interaction/InteractionPlane/InteractionPlane"
 import {Singleton} from "../../Decorators/Singleton"
 import {LensConfig} from "../../Utils/LensConfig"
 import {getSafeReference} from "../../Utils/SafeReference"
+import {HandInteractor} from "../HandInteractor/HandInteractor"
 import BaseInteractor from "../Interactor/BaseInteractor"
 import {DispatchableEventArgs} from "../Interactor/InteractorEvent"
 import {EventDispatcher} from "./EventDispatcher"
@@ -29,6 +31,7 @@ export class InteractionManager {
 
   private interactors = new Set<Interactor>()
   private interactables = new Set<Interactable>()
+  private interactionPlanes = new Set<InteractionPlane>()
 
   private interactableSceneObjects = new Map<SceneObject, Interactable>()
   private colliderToInteractableMap = new Map<ColliderComponent, Interactable>()
@@ -115,6 +118,64 @@ export class InteractionManager {
   }
 
   /**
+   * Adds an {@link InteractionPlane} to the interaction manager's registry,
+   * so it can be used to determine which {interactors} are interacting
+   * with interaction planes.
+   * @param interactionPlane The {@link InteractionPlane} to register.
+   */
+  registerInteractionPlane(interactionPlane: InteractionPlane): void {
+    if (interactionPlane === null || interactionPlane === undefined) {
+      this.log.e("Cannot register null or uninitialized interaction plane.")
+      return
+    }
+    this.interactionPlanes.add(interactionPlane)
+
+    if (this.debugModeEnabled) {
+      interactionPlane.drawDebug = true
+    }
+
+    this.log.d(
+      `Registered interaction plane "${interactionPlane.sceneObject.name}"`,
+    )
+  }
+
+  /**
+   * Removes an {@link InteractionPlane} from the interaction manager's registry.
+   * @param interactionPlane The {@link InteractionPlane} to deregister.
+   */
+  deregisterInteractionPlane(interactionPlane: InteractionPlane): void {
+    if (interactionPlane === null || interactionPlane === undefined) {
+      this.log.e("Cannot deregister null or uninitialized interaction plane.")
+      return
+    }
+
+    /*
+     * When an Interactable is deregistered, check our list of Interactors and clear their current InteractionPlane
+     * if it is the same as the InteractionPlane that was just deregistered
+     */
+    const handInteractors = this.getInteractorsByType(
+      InteractorInputType.BothHands,
+    ) as HandInteractor[]
+    for (const handInteractor of handInteractors) {
+      handInteractor.clearInteractionPlane(interactionPlane)
+    }
+
+    if (this.interactionPlanes.delete(interactionPlane)) {
+      this.log.d(
+        `Deregistered interaciton plane  "${interactionPlane.sceneObject.name}"`,
+      )
+    }
+  }
+
+  getInteractionPlanes(): InteractionPlane[] {
+    const interactionPlanes = []
+    for (const plane of this.interactionPlanes) {
+      interactionPlanes.push(plane)
+    }
+    return interactionPlanes
+  }
+
+  /**
    * Adds an {@link Interactable} to the interaction manager's registry.
    * This registry helps speed up calculations when raycasting
    * objects in the scene.
@@ -139,7 +200,7 @@ export class InteractionManager {
     }
 
     this.log.d(
-      `Registered interactable "${interactable.sceneObject.name}" with ${colliders.length} colliders`
+      `Registered interactable "${interactable.sceneObject.name}" with ${colliders.length} colliders`,
     )
   }
 
@@ -220,7 +281,7 @@ export class InteractionManager {
    * @param targetingMode the targeting mode that the interactable(s) are configured to
    */
   getInteractablesByTargetingMode(
-    targetingMode: TargetingMode
+    targetingMode: TargetingMode,
   ): Interactable[] {
     return this.getInteractablesThatTarget(targetingMode)
   }
@@ -265,6 +326,10 @@ export class InteractionManager {
 
     for (const collider of this.colliderToInteractableMap.keys()) {
       collider.debugDrawEnabled = enabled
+    }
+
+    for (const plane of this.interactionPlanes.keys()) {
+      plane.drawDebug = enabled
     }
   }
 
@@ -482,7 +547,7 @@ export class InteractionManager {
    * @returns an array of {@link ColliderComponent}
    */
   private findOrCreateColliderForInteractable(
-    interactable: Interactable
+    interactable: Interactable,
   ): ColliderComponent[] {
     let colliders = interactable.colliders
     let sceneObject = interactable.sceneObject
@@ -491,7 +556,7 @@ export class InteractionManager {
     }
     if (colliders.length === 0) {
       this.log.d(
-        `No ColliderComponent in ${sceneObject.name}'s hierarchy. Creating one...`
+        `No ColliderComponent in ${sceneObject.name}'s hierarchy. Creating one...`,
       )
 
       colliders.push(sceneObject.createComponent("Physics.ColliderComponent"))
@@ -514,7 +579,7 @@ export class InteractionManager {
   private findCollidersForSceneObject(
     sceneObject: SceneObject,
     colliders: ColliderComponent[],
-    isRoot: boolean = false
+    isRoot: boolean = false,
   ): ColliderComponent[] {
     const interactable = sceneObject.getComponent(Interactable.getTypeName())
 
@@ -523,16 +588,16 @@ export class InteractionManager {
     }
 
     const foundColliders = sceneObject.getComponents(
-      "Physics.ColliderComponent"
+      "Physics.ColliderComponent",
     )
     const collidersRegistered =
       foundColliders.find((collider: ColliderComponent) =>
-        this.colliderToInteractableMap.has(collider)
+        this.colliderToInteractableMap.has(collider),
       ) !== undefined
 
     if (collidersRegistered) {
       this.log.w(
-        `Some colliders in ${sceneObject.name} were already registered with an Interactable object.`
+        `Some colliders in ${sceneObject.name} were already registered with an Interactable object.`,
       )
     }
 
@@ -548,13 +613,13 @@ export class InteractionManager {
 
   private disableOtherInteractorsIfMobileInputTypeIsDetected() {
     const mobileInteractors = this.getInteractorsByType(
-      InteractorInputType.Mobile
+      InteractorInputType.Mobile,
     )
     if (mobileInteractors.length === 0) {
       return
     }
     const handInteractors = this.getInteractorsByType(
-      InteractorInputType.BothHands
+      InteractorInputType.BothHands,
     )
     const shouldEnableOtherInteractors = !mobileInteractors[0].isActive()
 
@@ -570,10 +635,10 @@ export class InteractionManager {
       }
 
       handInteractors.forEach((handInteractor: Interactor) =>
-        handInteractor.setInputEnabled(shouldEnableOtherInteractors)
+        handInteractor.setInputEnabled(shouldEnableOtherInteractors),
       )
       const mouseInteractors = this.getInteractorsByType(
-        InteractorInputType.Mouse
+        InteractorInputType.Mouse,
       )
       if (mouseInteractors.length > 0) {
         mouseInteractors.forEach((mouseInteractor: Interactor) => {

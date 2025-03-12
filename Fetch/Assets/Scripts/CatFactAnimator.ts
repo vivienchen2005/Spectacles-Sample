@@ -3,6 +3,11 @@ import { FetchCatFacts } from "./FetchCatFacts";
 import { Interactable } from "SpectaclesInteractionKit/Components/Interaction/Interactable/Interactable";
 import { LSTween } from "LSTween/LSTween";
 
+const TEXT_NO_INTERNET = "Purr... I can't share my secrets without internet!";
+const TEXT_SLEEPING =
+  "Zzz... I'm napping. Come back later for more purr-fect facts!";
+const TEXT_ACTIVE = "Meow! I'm back and ready to share some pawsome facts!";
+
 @component
 export class CatFactAnimator extends BaseScriptComponent {
   @input
@@ -27,20 +32,47 @@ export class CatFactAnimator extends BaseScriptComponent {
 
   // Flag to check if the interaction has been activated once
   private hasBeenActivatedOnce = false;
+  private catIsActive = false;
+  private textBubbleIsShown = false;
 
   onAwake() {
     // Initialize the thought bubble with no alpha
     this.initializeThoughtBubble();
 
+    this.createEvent("OnPauseEvent").bind(() => {
+      if (this.catIsActive) {
+        this.dectivateCat();
+        this.thoughtBubbleText.text = TEXT_SLEEPING;
+      }
+    });
+
+    this.createEvent("OnResumeEvent").bind(() => {
+      if (this.hasBeenActivatedOnce) {
+        this.activateCat(false);
+        this.thoughtBubbleText.text = TEXT_ACTIVE;
+      }
+    });
+
+    global.deviceInfoSystem.onInternetStatusChanged.add((args) => {
+      if (args.isInternetAvailable) {
+        if (this.hasBeenActivatedOnce) {
+          this.activateCat(false);
+          this.thoughtBubbleText.text = TEXT_ACTIVE;
+        }
+      } else {
+        this.dectivateCat();
+        this.thoughtBubbleText.text = TEXT_NO_INTERNET;
+      }
+    });
+
     // Add event listener for cat interaction
     this.catInteractable.onTriggerStart.add((args) => {
-      if (!this.hasBeenActivatedOnce) {
-        this.hasBeenActivatedOnce = true;
-        this.playAnimationOnTrigger();
+      if (global.deviceInfoSystem.isInternetAvailable()) {
+        this.activateCat(true);
+      } else {
+        this.animateShowingTextBubble();
+        this.thoughtBubbleText.text = TEXT_NO_INTERNET;
       }
-
-      // Fetch cat facts when interaction is triggered
-      this.fetchCatFacts.getCatFacts();
     });
 
     // Update thought bubble text when a cat fact is received
@@ -49,8 +81,27 @@ export class CatFactAnimator extends BaseScriptComponent {
     });
   }
 
+  private activateCat(fetchFacts: boolean) {
+    if (!this.catIsActive) {
+      this.catIsActive = true;
+      this.hasBeenActivatedOnce = true;
+
+      this.animateShowingTextBubble();
+
+      this.animationStateMachine.setTrigger("stand");
+    }
+
+    // Fetch cat facts when interaction is triggered
+    if (fetchFacts) {
+      this.fetchCatFacts.getCatFacts();
+    }
+  }
+
   // Play animation when the interaction is triggered
-  private playAnimationOnTrigger() {
+  private animateShowingTextBubble() {
+    if (this.textBubbleIsShown) return;
+    this.textBubbleIsShown = true;
+
     // Delay the animation for 1.5 seconds
     LSTween.rawTween(1500)
       .onComplete(() => {
@@ -80,9 +131,11 @@ export class CatFactAnimator extends BaseScriptComponent {
     LSTween.alphaTo(this.hintImage.mainMaterial, 0, 300)
       .easing(Easing.Cubic.Out)
       .start();
+  }
 
-    // Play standing animation
-    this.animationStateMachine.setTrigger("stand");
+  private dectivateCat() {
+    this.catIsActive = false;
+    this.animationStateMachine.setTrigger("sleep");
   }
 
   // Initialize the thought bubble with no alpha

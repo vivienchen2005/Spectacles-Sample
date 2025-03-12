@@ -1,5 +1,5 @@
 - !<AssetImportMetadata/847415b7-71f2-4ae4-9b8f-7fea40073924>
-  ImporterSettings: !<AssetImporterSettings/6c9f964c-761c-4b15-941a-aff44b7e7e0c>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   ImportedAssetIds:
     TypeScriptAsset: !<reference> f6187420-257f-4dca-949f-af6a2530f5ef
@@ -12,6 +12,8 @@
   DependentFiles:
     []
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<TypeScriptAssetData/88fc7810-c50b-4dbc-b010-2875cd0d9984>
   Icon: ""
   Description: ""
@@ -19,7 +21,7 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ComponentUid: 83c03658-4b59-4025-80c9-045202dbf018
   ExportUid: 00000000-0000-0000-0000-000000000000
   CurrentVisibility: Editable
   MaxVisibility: Editable
@@ -36,3 +38,4 @@
   InputLines:
     []
   SvgIcon: ""
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

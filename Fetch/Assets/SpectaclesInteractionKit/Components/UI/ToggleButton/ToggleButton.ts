@@ -1,6 +1,6 @@
-import {Interactable} from "../../Interaction/Interactable/Interactable"
-import ReplayEvent from "../../../Utils/ReplayEvent"
 import {createCallback} from "../../../Utils/InspectorCallbacks"
+import ReplayEvent from "../../../Utils/ReplayEvent"
+import {Interactable} from "../../Interaction/Interactable/Interactable"
 
 /**
  * This class provides basic toggle functionality for a prefab toggle button. It manages the toggle state and provides methods to handle toggle events and update the button's visual state.
@@ -59,6 +59,8 @@ export class ToggleButton extends BaseScriptComponent {
           this.toggleState()
         }
       })
+
+      this.onStateChangedEvent.invoke(this._isToggledOn)
     })
 
     if (this.editEventCallbacks && this.customFunctionForOnStateChanged) {
@@ -71,7 +73,6 @@ export class ToggleButton extends BaseScriptComponent {
     }
 
     this.refreshVisual()
-    this.onStateChangedEvent.invoke(this._isToggledOn)
   }
 
   /**

@@ -9,15 +9,17 @@
     ObjectPrefab: !<own> 85ce9d99-2b7d-4c45-acf8-0ae9642cfcee
   DependentFiles:
     []
-  ImporterSettings: !<AssetImporterSettings/a8cfe49b-ec44-497b-bb8e-45d1e9622dc3>
+  ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+  ExtraData:
+    {}
 - !<ColliderComponent/0f9de0f4-fc36-4784-b745-887751900367>
   PrefabRemaps:
     []
   Name: Physics Collider
   Enabled: true
-  Shape: !<Box/00000000-0000-0000-0000-000000000000>
+  Shape: !<Box>
     Size: {x: 1.000000, y: 1.000000, z: 0.050000}
     FitVisual: false
   ForceCompound: false
