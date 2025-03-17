@@ -25,11 +25,11 @@ export namespace Conversions {
         return sec / 3600;
     }
 
-    export function ftPerSecToMPH(speedFtPerSec:number){
-        return speedFtPerSec * 3600 / 5280;
+    export function ftPerSecToMPH(paceFtPerSec:number){
+        return paceFtPerSec * 3600 / 5280;
     }
 
-    export function cmPerSecToMPH(speedCmPerSec:number){
-        return speedCmPerSec * 3600 / (30.48 * 5280);
+    export function cmPerSecToMPH(paceCmPerSec:number){
+        return paceCmPerSec * 3600 / (30.48 * 5280);
     }
 }

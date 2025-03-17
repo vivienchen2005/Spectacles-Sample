@@ -1,5 +1,5 @@
 import { PathMaker } from './PathMaker';
-import { PathRunner } from './PathRunner';
+import { PathWalker } from './PathWalker';
 import { UI } from './UI';
 import { SprintPathData } from "./BuiltPathData";
 import { TutorialController } from "./TutorialController";
@@ -14,10 +14,10 @@ export class LensInitializer extends BaseScriptComponent {
     tutorialController: TutorialController;
 
     @input
-    pathmaker: PathMaker
+    pathMaker: PathMaker
 
     @input
-    pathrunner: PathRunner
+    pathWalker: PathWalker
 
     @input
     camSo: SceneObject
@@ -52,11 +52,10 @@ export class LensInitializer extends BaseScriptComponent {
 
         this.camTr = this.camSo.getTransform();
 
-        this.pathmaker.init();
-        this.pathrunner.init();
+        this.pathMaker.init();
+        this.pathWalker.init();
 
         this.ui.getSceneObject().enabled = true;
-        this.ui.init();
 
         this.tutorialController.startTutorial(() => {
             this.startHomeState();
@@ -85,12 +84,12 @@ export class LensInitializer extends BaseScriptComponent {
         this.ui.showHomeUi();
         const pathClickedRemover = this.ui.createPathClicked.add(() => {
             pathClickedRemover();
-            this.pathmaker.start();
-            const remover = this.pathmaker.pathMade.add((data) => {
+            this.pathMaker.start();
+            const remover = this.pathMaker.pathMade.add((data) => {
                 remover();
                 if (!data.isLoop) {
                     const dataSprint = data as SprintPathData;
-                    this.pathrunner.start(
+                    this.pathWalker.start(
                         dataSprint.splinePoints,
                         dataSprint.isLoop,
                         dataSprint.startObject.getTransform(),
@@ -100,7 +99,7 @@ export class LensInitializer extends BaseScriptComponent {
                         }
                     );
                 } else {
-                    this.pathrunner.start(
+                    this.pathWalker.start(
                         data.splinePoints,
                         data.isLoop,
                         data.startObject.getTransform(),

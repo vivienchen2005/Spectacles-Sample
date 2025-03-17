@@ -1,6 +1,6 @@
 import { LinearAlgebra } from "./Helpers/LinearAlgebra";
 import { PathCollisionEvents } from "./PathCollisionEvents";
-import { PathRunner } from "./PathRunner";
+import { PathWalker } from "./PathWalker";
 import { SoundController } from "./SoundController";
 @component
 export class LineController extends BaseScriptComponent {
@@ -51,9 +51,9 @@ export class LineController extends BaseScriptComponent {
     pathCollisionEvents:PathCollisionEvents
 
     @input
-    pathRunner:PathRunner
+    pathWalker:PathWalker
 
-    private enableRunCountdown:boolean = false;
+    private enableWalkCountdown:boolean = false;
     private lapCounterSo:SceneObject = null;
     private visualTr:Transform = null;
 
@@ -79,7 +79,7 @@ export class LineController extends BaseScriptComponent {
         this.pathCollisionEvents.init(this.isStart ? "start" : "finish",
             this.camCol.getSceneObject().getParent().getTransform(),
             this.camCol,
-            this.pathRunner
+            this.pathWalker
         )
     }
 
@@ -96,11 +96,11 @@ export class LineController extends BaseScriptComponent {
         this.hintVisualsParent.enabled = false;
     }
 
-    setEnableRunCountdown(){
-        this.enableRunCountdown = true;
+    setEnableWalkCountdown(){
+        this.enableWalkCountdown = true;
     }
 
-    private runCountDown(){
+    private startCountDown(){
         let delay = 1;
         for(let i=0; i<this.countdownSoArray.length+1; i++){
 
@@ -141,14 +141,14 @@ export class LineController extends BaseScriptComponent {
     }
 
     onSprintStartAreaCollision(){
-        this.enableRunCountdown = false;
+        this.enableWalkCountdown = false;
         if(this.collisionStayRemover){
             this.countdownCollider.onCollisionStay.remove(this.collisionStayRemover);
         }
         this.countdownCollider.enabled = false;
 
         if(this.isStart){
-            this.runCountDown();
+            this.startCountDown();
         }
     }
 
@@ -168,10 +168,10 @@ export class LineController extends BaseScriptComponent {
     }
 
     onCollisionStay(e:CollisionEnterEventArgs){
-        if(this.enableRunCountdown){
+        if(this.enableWalkCountdown){
             if(e.collision.collider.isSame(this.camCol)){
-                this.pathRunner.onSprintStartAreaCollision(!this.isStart);
-                this.enableRunCountdown = false;
+                this.pathWalker.onSprintStartAreaCollision(!this.isStart);
+                this.enableWalkCountdown = false;
             }
         }
     }

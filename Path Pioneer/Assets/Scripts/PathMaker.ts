@@ -1,4 +1,4 @@
-import { PlayerSpeedCalculator } from "./PlayerSpeedCalculator";
+import { PlayerPaceCalculator } from "./PlayerPaceCalculator";
 import { IPathMakerState } from "./PathMakerStates/IPathMakerState";
 import { IdleState } from "./PathMakerStates/IdleState";
 import { PlacingStartState } from "./PathMakerStates/PlacingStartState";
@@ -36,7 +36,7 @@ export class PathMaker extends BaseScriptComponent {
     finalPathDistText: Text
 
     @input
-    playerSpeedCalculator: PlayerSpeedCalculator
+    playerPaceCalculator: PlayerPaceCalculator
 
     @input
     pathmakingPlayerFeedback:PathmakingPlayerFeedback
@@ -110,7 +110,7 @@ export class PathMaker extends BaseScriptComponent {
             startRotation,
             startObject,
             this.ui,
-            this.playerSpeedCalculator,
+            this.playerPaceCalculator,
             this.pathmakingPlayerFeedback,
             this.bigMoveDistanceThreshold,
             this.hermiteResolution,

@@ -27,40 +27,43 @@
   MaxVisibility: Editable
   ScriptInputsHidden:
     arrowSpawner: false
+    averagePaceText: false
     cam: false
     lapCountText: false
-    paceText: false
     pathRmv: false
-    playerSpeedCalulator: false
+    playerPaceCalulator: false
     progressBarController: false
-    runPathScreenHUD: false
     timerScript: false
     uiScript: false
+    walkPathScreenHUD: false
+    warningController: false
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
     - timerScript: !<MappingBased.Timer> 00000000-0000-0000-0000-000000000000
-      runPathScreenHUD: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       cam: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       uiScript: !<MappingBased.UI> 00000000-0000-0000-0000-000000000000
       progressBarController: !<MappingBased.ProgressBarController> 00000000-0000-0000-0000-000000000000
       arrowSpawner: !<MappingBased.ArrowsSpawner> 00000000-0000-0000-0000-000000000000
       lapCountText: !<reference.Text> 00000000-0000-0000-0000-000000000000
-      playerSpeedCalulator: !<MappingBased.PlayerSpeedCalculator> 00000000-0000-0000-0000-000000000000
       pathRmv: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
-      paceText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      warningController: !<MappingBased.WarningController> 00000000-0000-0000-0000-000000000000
+      playerPaceCalulator: !<MappingBased.PlayerPaceCalculator> 00000000-0000-0000-0000-000000000000
+      averagePaceText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      walkPathScreenHUD: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input SceneObject cam
-    - // @input SceneObject runPathScreenHUD
-    - // @input Component.Text paceText
+    - // @input SceneObject walkPathScreenHUD
+    - // @input Component.Text averagePaceText
     - // @input Component.Text lapCountText
     - // @input Timer timerScript
     - // @input UI uiScript
     - // @input ProgressBarController progressBarController
     - // @input ArrowsSpawner arrowSpawner
-    - // @input PlayerSpeedCalculator playerSpeedCalulator
+    - // @input PlayerPaceCalculator playerPaceCalulator
+    - // @input WarningController warningController
     - // @input Component.RenderMeshVisual pathRmv
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

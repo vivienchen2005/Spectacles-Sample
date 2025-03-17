@@ -37,7 +37,7 @@
     hintVisualsParent: false
     lapCounter3Dtext: false
     pathCollisionEvents: false
-    pathRunner: false
+    pathWalker: false
     realVisualsParent: false
     startLineTurnArrow: false
     startVisual: false
@@ -61,7 +61,7 @@
       hintStartVisual: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       hintFinishVisual: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       pathCollisionEvents: !<MappingBased.PathCollisionEvents> 00000000-0000-0000-0000-000000000000
-      pathRunner: !<MappingBased.PathRunner> 00000000-0000-0000-0000-000000000000
+      pathWalker: !<MappingBased.PathWalker> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -81,5 +81,5 @@
     - // @input SceneObject hintStartVisual
     - // @input SceneObject hintFinishVisual
     - // @input PathCollisionEvents pathCollisionEvents
-    - // @input PathRunner pathRunner
+    - // @input PathWalker pathWalker
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

@@ -1,4 +1,4 @@
-import { PathRunner } from "./PathRunner";
+import { PathWalker } from "./PathWalker";
 
 @component
 export class PathCollisionEvents extends BaseScriptComponent {
@@ -8,18 +8,18 @@ export class PathCollisionEvents extends BaseScriptComponent {
     private col:ColliderComponent;
     private tr:Transform;
 
-    private pathRunner:PathRunner
+    private pathWalker:PathWalker
 
     private camTr:Transform;
     private camCol:ColliderComponent;
 
     private enterPoint:vec3 = null;
 
-    init(myMsg:string, myCamTr:Transform, myCamCol:ColliderComponent, myPathRunner:PathRunner){
+    init(myMsg:string, myCamTr:Transform, myCamCol:ColliderComponent, myPathWalker:PathWalker){
         this.msg = myMsg;
         this.camTr = myCamTr;
         this.camCol = myCamCol;
-        this.pathRunner = myPathRunner;
+        this.pathWalker = myPathWalker;
 
         this.tr = this.sceneObject.getTransform();
         this.col = this.sceneObject.getChild(0).getComponent("ColliderComponent");
@@ -43,9 +43,9 @@ export class PathCollisionEvents extends BaseScriptComponent {
                 dir = dir.normalize();
                 let dot = this.tr.forward.dot(dir);
                 if(this.msg.includes("start")){
-                    this.pathRunner.onStartCollisionExit(dot);
+                    this.pathWalker.onStartCollisionExit(dot);
                 }else if(this.msg.includes("finish")){
-                    this.pathRunner.onFinishCollisionExit(dot);
+                    this.pathWalker.onFinishCollisionExit(dot);
                 }
                 // Reset
                 this.enterPoint = null;

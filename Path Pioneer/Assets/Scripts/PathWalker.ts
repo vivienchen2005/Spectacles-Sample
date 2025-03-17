@@ -7,27 +7,28 @@ import { LensInitializer } from "./LensInitializer";
 import { CatmullRomSpline } from "./Helpers/CatmullRomSpline";
 import { PathBuilder } from "./PathBuilder";
 import { Conversions } from "./Conversions";
-import { PlayerSpeedCalculator } from "./PlayerSpeedCalculator";
+import { PlayerPaceCalculator } from "./PlayerPaceCalculator";
 import { LineController } from "./LineController";
 import { LinearAlgebra } from "./Helpers/LinearAlgebra";
+import { WarningController } from "./WarningController";
 
-enum PathRunnerState {
+enum PathWalkerState {
     None,
     GoToStart,
-    Running
+    Walking
 }
 
 @component
-export class PathRunner extends BaseScriptComponent {
+export class PathWalker extends BaseScriptComponent {
 
     @input
     cam: SceneObject
 
     @input
-    runPathScreenHUD: SceneObject
+    walkPathScreenHUD: SceneObject
 
     @input
-    paceText: Text
+    averagePaceText: Text
 
     @input
     lapCountText: Text
@@ -45,7 +46,10 @@ export class PathRunner extends BaseScriptComponent {
     arrowSpawner: ArrowsSpawner
 
     @input
-    playerSpeedCalulator: PlayerSpeedCalculator
+    playerPaceCalulator: PlayerPaceCalculator
+
+    @input
+    warningController: WarningController
 
     @input
     protected pathRmv: RenderMeshVisual;
@@ -54,9 +58,9 @@ export class PathRunner extends BaseScriptComponent {
     private state: number = 0;
     private isOutsideSprint: boolean = false;
     public lapCount: number = -1;
-    private totalTimeRunning: number = 0;
-    private totalDistRun: number = 0;
-    private onRunningFinished: (() => void) | undefined = undefined;
+    private totalTimeWalking: number = 0;
+    private totalDistWalked: number = 0;
+    private onWalkingFinished: (() => void) | undefined = undefined;
 
     // Path data
     private splinePoints: { position: vec3; rotation: quat }[] = []; // batched update based on resolution
@@ -69,13 +73,14 @@ export class PathRunner extends BaseScriptComponent {
 
     // Ui Related data
     private isUiShown: boolean = false;
-    private currentState = PathRunnerState.None;
+    private currentState = PathWalkerState.None;
+    private isWarningShown: boolean = false;
 
     public init() {
         this.uiScript.endSessionClicked.add(() => {
             this.stop();
-            if (this.onRunningFinished) {
-                this.onRunningFinished();
+            if (this.onWalkingFinished) {
+                this.onWalkingFinished();
             }
         });
         this.resetState();
@@ -92,9 +97,21 @@ export class PathRunner extends BaseScriptComponent {
                 break;
             case 1: // prep
                 break;
-            case 2: // running
-                let stats = this.playerSpeedCalulator.getSpeed(LensInitializer.getInstance().getPlayerGroundPos());
-                if (stats.speed > 13) {
+            case 2: // walking
+                let stats = this.playerPaceCalulator.getPace(LensInitializer.getInstance().getPlayerGroundPos());
+
+                // Implement warning at 15mph.
+                let paceMph = Conversions.cmPerSecToMPH(stats.pace);
+                let threshold = 15;
+                if(this.isWarningShown && paceMph < threshold){
+                    this.isWarningShown = false;
+                    this.warningController.toggleWaring(this.isWarningShown);
+                }else if(!this.isWarningShown && paceMph > threshold){
+                    this.isWarningShown = true;
+                    this.warningController.toggleWaring(this.isWarningShown);
+                }
+
+                if (stats.pace > 13) {
                     this.ensureUiHidden();
                 } else {
                     this.ensureUiShown();
@@ -123,13 +140,13 @@ export class PathRunner extends BaseScriptComponent {
         this.progressBarController.setProgress(addjustedT);
     }
 
-    private setPlayerStats(stats: { nPos: vec3, speed: number, dist: number, dt: number }) {
-        // calculate and update total average speed text
-        this.totalDistRun += stats.dist;
-        this.totalTimeRunning += stats.dt;
-        if (this.totalTimeRunning > 0) {
-            let paceMPH = Conversions.cmPerSecToMPH(this.totalDistRun / this.totalTimeRunning);
-            this.paceText.text = paceMPH.toFixed(1);
+    private setPlayerStats(stats: { nPos: vec3, pace: number, dist: number, dt: number }) {
+        // calculate and update total average pace text
+        this.totalDistWalked += stats.dist;
+        this.totalTimeWalking += stats.dt;
+        if (this.totalTimeWalking > 0) {
+            let averagePaceMPH = Conversions.cmPerSecToMPH(this.totalDistWalked / this.totalTimeWalking);
+            this.averagePaceText.text = averagePaceMPH.toFixed(1);
         }
     }
 
@@ -138,29 +155,29 @@ export class PathRunner extends BaseScriptComponent {
             // We are in the direction of the start line
             if (this.state === 1) { // prep
                 // We passed start for the first time
-                this.playerSpeedCalulator.start(LensInitializer.getInstance().getPlayerGroundPos());
-                this.runPathScreenHUD.enabled = true;
+                this.playerPaceCalulator.start(LensInitializer.getInstance().getPlayerGroundPos());
+                this.walkPathScreenHUD.enabled = true;
                 this.updateProgressBar(0);
                 this.lapCount = 0;
-                this.currentState = PathRunnerState.Running;
+                this.currentState = PathWalkerState.Walking;
                 this.updateUi();
                 this.timerScript.start();
                 this.state = 2;
 
-                SoundController.getInstance().playSound("startRunPath");
+                SoundController.getInstance().playSound("startWalkPath");
 
                 // SoundController.getInstance().playSound("onStartLap");
 
                 this.arrowSpawner.start(this.pathPoints.concat([]).reverse(), this.splinePoints, this.pathLength);
 
-                // We show the lap we will complete once we run through
+                // We show the lap we will complete once we walk through
                 if (this.isLoop) {
                     this.startLineController.onIncrementLoop(this.lapCount + 1);
                 } else {
                     this.startLineController.onStartSprint();
                     this.finishLineController.onStartSprint();
                 }
-            } else if (this.state === 2) { // running
+            } else if (this.state === 2) { // walking
                 if (this.isLoop) {
                     // We are making a lap in the loop
                     this.incrementLap();
@@ -173,7 +190,7 @@ export class PathRunner extends BaseScriptComponent {
             }
         } else {
             // We are going in reverse direction of the start line
-            if (this.state === 2) { // running
+            if (this.state === 2) { // walking
                 if (this.isLoop) {
                     // There is no use case for this
                 } else {
@@ -276,8 +293,8 @@ export class PathRunner extends BaseScriptComponent {
         this.state = 0;
         this.isOutsideSprint = false;
         this.lapCount = -1;
-        this.totalTimeRunning = 0;
-        this.totalDistRun = 0;
+        this.totalTimeWalking = 0;
+        this.totalDistWalked = 0;
 
         // Path data
         this.pathIsForwards = true;
@@ -301,10 +318,10 @@ export class PathRunner extends BaseScriptComponent {
         if(this.timerScript.getSceneObject().isEnabledInHierarchy){
             this.timerScript.stop();
         }
-        this.paceText.text = "0";
+        this.averagePaceText.text = "0";
         this.lapCountText.text = "0";
 
-        this.runPathScreenHUD.enabled = false;
+        this.walkPathScreenHUD.enabled = false;
 
         // UI data
         this.ensureUiHidden();
@@ -315,7 +332,7 @@ export class PathRunner extends BaseScriptComponent {
         myIsLoop: boolean,
         myStartLineTr: Transform,
         myFinishLineTr: Transform | undefined = undefined,
-        onRunningFinished: (() => void) | undefined = undefined,
+        onWalkingFinished: (() => void) | undefined = undefined,
     ) {
         // state
         this.resetState();
@@ -333,17 +350,17 @@ export class PathRunner extends BaseScriptComponent {
         this.pathRmv.enabled = true;
 
         this.startLineController = myStartLineTr.getSceneObject().getComponent(LineController.getTypeName());
-        this.startLineController.setEnableRunCountdown();
+        this.startLineController.setEnableWalkCountdown();
 
         if (!isNull(myFinishLineTr)) {
             this.finishLineController = myFinishLineTr.getSceneObject().getComponent(LineController.getTypeName());
-            this.finishLineController.setEnableRunCountdown();
+            this.finishLineController.setEnableWalkCountdown();
         }
 
         this.createEvent("UpdateEvent").bind(() => this.onUpdate());
-        this.currentState = PathRunnerState.GoToStart;
+        this.currentState = PathWalkerState.GoToStart;
         this.ensureUiShown();
-        this.onRunningFinished = onRunningFinished;
+        this.onWalkingFinished = onWalkingFinished;
 
         this.arrowSpawner.start(this.pathPoints.concat([]).reverse(), this.splinePoints, this.pathLength);
     }
@@ -378,12 +395,12 @@ export class PathRunner extends BaseScriptComponent {
 
     private showUi() {
         switch (this.currentState) {
-            case PathRunnerState.None:
+            case PathWalkerState.None:
                 return
-            case PathRunnerState.GoToStart:
+            case PathWalkerState.GoToStart:
                 this.uiScript.showGoToStartUi(this.pathLength);
                 return;
-            case PathRunnerState.Running:
+            case PathWalkerState.Walking:
                 this.uiScript.showEndSessionUi();
                 return;
         }

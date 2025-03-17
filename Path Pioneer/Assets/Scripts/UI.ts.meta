@@ -37,6 +37,7 @@
     tutorialAnimationPlayer: false
     tutorialText: false
     tutorialUI: false
+    warningTutorialUI: false
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
@@ -51,6 +52,7 @@
       tutorialUI: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       tutorialText: !<reference.Text> 00000000-0000-0000-0000-000000000000
       tutorialAnimationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
+      warningTutorialUI: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -63,6 +65,7 @@
     - // @input SceneObject endSessionUI
     - // @input Asset.ObjectPrefab pfbLoopUi
     - // @input SceneObject backplateSo
+    - // @input SceneObject warningTutorialUI
     - // @input SceneObject tutorialUI
     - // @input Component.AnimationPlayer tutorialAnimationPlayer
     - // @input Component.Text tutorialText

@@ -35,7 +35,7 @@
     pfbLine: false
     pfbSurfaceDetection: false
     placingStartFinishLinesForwardDisplace: false
-    playerSpeedCalculator: false
+    playerPaceCalculator: false
     ui: false
   ScriptTypesHidden:
     {}
@@ -45,12 +45,12 @@
       pathDistText: !<reference.Text> 00000000-0000-0000-0000-000000000000
       pathRmv: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
       finalPathDistText: !<reference.Text> 00000000-0000-0000-0000-000000000000
-      playerSpeedCalculator: !<MappingBased.PlayerSpeedCalculator> 00000000-0000-0000-0000-000000000000
       ui: !<MappingBased.UI> 00000000-0000-0000-0000-000000000000
       placingStartFinishLinesForwardDisplace: !<float> 200.000000
       pfbSurfaceDetection: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
       pfbLine: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
       pathmakingPlayerFeedback: !<MappingBased.PathmakingPlayerFeedback> 00000000-0000-0000-0000-000000000000
+      playerPaceCalculator: !<MappingBased.PlayerPaceCalculator> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -62,7 +62,7 @@
     - // @input SceneObject camObjOffset
     - // @input Component.Text pathDistText
     - // @input Component.Text finalPathDistText
-    - // @input PlayerSpeedCalculator playerSpeedCalculator
+    - // @input PlayerPaceCalculator playerPaceCalculator
     - // @input PathmakingPlayerFeedback pathmakingPlayerFeedback
     - // @input UI ui
     - // @input float placingStartFinishLinesForwardDisplace = 200

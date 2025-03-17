@@ -27,25 +27,25 @@
   MaxVisibility: Editable
   ScriptInputsHidden:
     camSo: false
-    pathmaker: false
-    pathrunner: false
+    pathMaker: false
+    pathWalker: false
     tutorialController: false
     ui: false
   ScriptTypesHidden:
     {}
   DefaultScriptInputs:
     - ui: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      pathmaker: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      pathrunner: !<MappingBased.PathRunner> 00000000-0000-0000-0000-000000000000
       tutorialController: !<MappingBased.TutorialController> 00000000-0000-0000-0000-000000000000
       camSo: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      pathMaker: !<MappingBased.PathMaker> 00000000-0000-0000-0000-000000000000
+      pathWalker: !<MappingBased.PathWalker> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input UI ui
     - // @input TutorialController tutorialController
-    - // @input PathMaker pathmaker
-    - // @input PathRunner pathrunner
+    - // @input PathMaker pathMaker
+    - // @input PathWalker pathWalker
     - // @input SceneObject camSo
   DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000

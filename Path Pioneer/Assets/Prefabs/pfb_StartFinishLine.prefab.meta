@@ -139,7 +139,7 @@
       hintStartVisual: !<reference.SceneObject> ad74dadf-dbfd-4edd-b973-963ceb72dc4c
       hintFinishVisual: !<reference.SceneObject> 09b51bed-b831-408d-a925-e9d013476409
       pathCollisionEvents: !<MappingBased.PathCollisionEvents> 5ddfc16b-56bd-4a5e-b0fa-02334b5d7604
-      pathRunner: !<MappingBased.PathRunner> c27cdde8-1a94-4608-950a-f0f50b7e2fce
+      pathWalker: !<MappingBased.PathWalker> c27cdde8-1a94-4608-950a-f0f50b7e2fce
   ScriptTypes:
     "":
       {}

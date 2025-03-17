@@ -29,6 +29,9 @@ export class UI extends BaseScriptComponent {
     backplateSo:SceneObject
 
     @input
+    warningTutorialUI:SceneObject
+
+    @input
     tutorialUI:SceneObject
 
     @input 
@@ -68,6 +71,7 @@ export class UI extends BaseScriptComponent {
     private tutorialCompleteEvent: Event = new Event();
     private endSessionClickedEvent: Event = new Event();
 
+    private warningTr = null;
     private tutorialTr = null;
     private homeTr = null;
     private duringPathCreationUiTr: Transform = null;
@@ -80,6 +84,7 @@ export class UI extends BaseScriptComponent {
     private loopUiController:LoopController | undefined;
 
     onAwake(){
+        this.warningTr = this.warningTutorialUI.getTransform();
         this.tutorialTr = this.tutorialUI.getTransform();
         this.homeTr = this.homeUI.getTransform();
         this.duringPathCreationUiTr = this.duringPathCreationUI.getTransform();
@@ -102,7 +107,7 @@ export class UI extends BaseScriptComponent {
     showTutorialUi(){
         this.tryHideCurrentActive();
         this.tutorialStepCount = 0;
-        this.currentActiveTr = this.tutorialTr;
+        this.currentActiveTr = this.warningTr;
         this.show(this.currentActiveTr);
     }
 
@@ -146,20 +151,16 @@ export class UI extends BaseScriptComponent {
         this.currentActiveTr = null;
     }
 
-    init(){
-        let evt = this.createEvent("DelayedCallbackEvent");
-        evt.bind(()=>{
-            this.show(this.tutorialTr);
-        })
-        evt.reset(.5);
-    }
-
     onProgressTutorial(){
         if(this.tutorialStepCount === 0){
+            this.tryHideCurrentActive();
+            this.currentActiveTr = this.tutorialTr;
+            this.show(this.currentActiveTr);
+        } else if(this.tutorialStepCount === 1){
             this.tutorialAnimationPlayer.setClipEnabled("Sprint_Layer", false);
             this.tutorialAnimationPlayer.setClipEnabled("Loop_Layer", true);
             this.tutorialText.text = "MAKE A LOOP";
-        } else if(this.tutorialStepCount === 1){
+        } else if(this.tutorialStepCount === 2){
             this.hide(this.tutorialTr);
             this.tutorialCompleteEvent.invoke();
         }
@@ -187,7 +188,7 @@ export class UI extends BaseScriptComponent {
         this.resetPathClickedEvent.invoke();
     }
 
-    onStopRunningButton(){
+    onStopWalkingButton(){
         this.hide(this.endSessionUiTr);
         this.endSessionClickedEvent.invoke();
     }

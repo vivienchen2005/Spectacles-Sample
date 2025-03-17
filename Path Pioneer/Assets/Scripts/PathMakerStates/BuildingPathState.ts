@@ -3,7 +3,7 @@ import { UI } from "../UI";
 import { Conversions } from "../Conversions";
 import { PathBuilder } from "../PathBuilder";
 import { LensInitializer } from "../LensInitializer";
-import { PlayerSpeedCalculator } from "../PlayerSpeedCalculator";
+import { PlayerPaceCalculator } from "../PlayerPaceCalculator";
 import { PaintOnFloorBehavior } from "../PathPrevewBehaviors/PaintOnFloorBehavior";
 import { LookAtFloorBehavior } from "../PathPrevewBehaviors/LookAtFloorBehavior";
 import { LinearAlgebra } from "../Helpers/LinearAlgebra";
@@ -28,7 +28,7 @@ export class BuildingPathState implements IPathMakerState {
         protected startRotation: quat,
         protected startObject: SceneObject,
         protected ui: UI,
-        protected speedCalculator: PlayerSpeedCalculator,
+        protected paceCalculator: PlayerPaceCalculator,
         protected pathmakingPlayerFeedback: PathmakingPlayerFeedback,
         protected bigMoveDistanceThreshold: number,
         protected hermiteResolution: number,
@@ -137,7 +137,7 @@ export class BuildingPathState implements IPathMakerState {
         )
         this.paintPreview.start(this.displaceForward(this.prevCameraPositionForPath));
         this.lookPreview.start();
-        this.speedCalculator.start(this.prevCameraPositionForPath);
+        this.paceCalculator.start(this.prevCameraPositionForPath);
 
         this.resetClickedRemover = this.ui.resetPathClicked.add(() => {
             this.reset();
@@ -182,10 +182,10 @@ export class BuildingPathState implements IPathMakerState {
             return;
         }
 
-        // Check speed
+        // Check pace
         let nPos = LensInitializer.getInstance().getPlayerGroundPos();
-        let stats = this.speedCalculator.getSpeed(nPos);
-        if (stats.speed < 13 && this.pathPoints.length > 4) {
+        let stats = this.paceCalculator.getPace(nPos);
+        if (stats.pace < 13 && this.pathPoints.length > 4) {
             this.ensureUiShown();
         } else {
             this.ensureUiHidden();

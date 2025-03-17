@@ -1,11 +1,11 @@
 @component
-export class PlayerSpeedCalculator extends BaseScriptComponent {
+export class PlayerPaceCalculator extends BaseScriptComponent {
 
     private oPos: vec3;
     private t: number;
     private cps: number;
 
-    // How often we calculate speed in seconds
+    // How often we calculate pace in seconds
     private testIncrement: number;
 
     start(pos:vec3){
@@ -15,7 +15,7 @@ export class PlayerSpeedCalculator extends BaseScriptComponent {
         this.oPos = pos;
     }
 
-    getSpeed(pos:vec3){
+    getPace(pos:vec3){
         let dt = getDeltaTime();
         this.t += dt;
         let dist = 0;
@@ -26,12 +26,12 @@ export class PlayerSpeedCalculator extends BaseScriptComponent {
             dist = pos.distance(this.oPos);
             this.oPos = pos;
 
-            // Speed in cm per sec (cps)
+            // Pace in cm per sec (cps)
             this.cps = dist / this.t;
 
             this.t = 0;
         }
 
-        return {nPos: pos, speed: this.cps, dist, dt};
+        return {nPos: pos, pace: this.cps, dist, dt};
     }
 }
