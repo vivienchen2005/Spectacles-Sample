@@ -1,6 +1,7 @@
 import { CancelFunction } from "../../SpectaclesInteractionKit/Utils/animate";
 import { LensConfig } from "../../SpectaclesInteractionKit/Utils/LensConfig";
-import MapConfig from "./MapConfig";
+
+export const EPSILON = 0.000001;
 
 // |SceneObject| Have an iterator function called on each SceneObject in a sub tree. Optionally [defaulting to true] including the scene object starting scene object.
 export function forEachSceneObjectInSubHierarchy(
@@ -467,7 +468,32 @@ export function normalizeAngle(angle: number): number {
   return angle;
 }
 
+/**
+ * Converts a quaternion to a roll angle in radians.
+ * @param quaternion - The quaternion to convert.
+ * @returns The roll angle in radians.
+ */
+export function quaternionToRoll(quaternion: quat): number {
+  // Calculate the roll angle from the quaternion
+  const sinRoll =
+    2.0 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+  const cosRoll =
+    1.0 - 2.0 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+  return Math.atan2(sinRoll, cosRoll);
+}
+
+/**
+ * Converts a quaternion to a pitch angle in radians.
+ * @param quaternion - The quaternion to convert.
+ * @returns The pitch angle in radians.
+ */
 export function quaternionToPitch(quaternion: quat): number {
+  const roll = quaternionToRoll(quaternion);
+
+  const inverseRollQuaternion = quat.fromEulerVec(new vec3(0, 0, -roll));
+
+  quaternion = quaternion.multiply(inverseRollQuaternion);
+
   let sinPitch =
     2.0 * (quaternion.w * quaternion.x - quaternion.y * quaternion.z);
 
@@ -490,6 +516,49 @@ export function easeOutElastic(x: number): number {
     : Math.pow(2, -10 * x) *
         Math.sin((x * 10 - 0.75) * easeOutElasticConstant) +
       1;
+}
+
+export function customGetEuler(quaternion: quat): vec3 {
+  const singularityTestValue = 0.4999;
+  const sqw: number = quaternion.w * quaternion.w;
+  const sqx: number = quaternion.x * quaternion.x;
+  const sqy: number = quaternion.y * quaternion.y;
+  const sqz: number = quaternion.z * quaternion.z;
+
+  const unit: number = sqx + sqy + sqz + sqw;
+  const test: number =
+    quaternion.x * quaternion.y + quaternion.z * quaternion.w;
+
+  let yaw: number, pitch: number, roll: number;
+
+  // singularity at north pole
+  if (test > singularityTestValue * unit) {
+    yaw = 2 * Math.atan2(quaternion.x, quaternion.w);
+    pitch = Math.PI / 2;
+    roll = 0;
+  }
+  // singularity at south pole
+  else if (test < -singularityTestValue * unit) {
+    yaw = -2 * Math.atan2(quaternion.x, quaternion.w);
+    pitch = -Math.PI / 2;
+    roll = 0;
+  } else {
+    yaw = Math.atan2(
+      2 * quaternion.y * quaternion.w - 2 * quaternion.x * quaternion.z,
+      sqx - sqy - sqz + sqw
+    );
+    pitch = Math.asin((2 * test) / unit);
+    roll = Math.atan2(
+      2 * quaternion.x * quaternion.w - 2 * quaternion.y * quaternion.z,
+      -sqx + sqy - sqz + sqw
+    );
+  }
+  const r = new vec3(
+    pitch < 0 ? pitch + Math.PI * 2 : pitch,
+    yaw < 0 ? yaw + Math.PI * 2 : yaw,
+    roll < 0 ? roll + Math.PI * 2 : roll
+  );
+  return r;
 }
 
 export interface ILocationJson {

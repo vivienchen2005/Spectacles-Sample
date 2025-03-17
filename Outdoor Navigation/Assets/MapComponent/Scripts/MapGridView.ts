@@ -2,7 +2,13 @@ import { clamp } from "../../SpectaclesInteractionKit/Utils/mathUtils";
 import MapConfig from "./MapConfig";
 import { Cell } from "./Cell";
 import { MapController } from "./MapController";
-import { mod, setScreenTransformRect01, setVec2, isFunction } from "./MapUtils";
+import {
+  mod,
+  setScreenTransformRect01,
+  setVec2,
+  isFunction,
+  customGetEuler,
+} from "./MapUtils";
 import { MapPin } from "./MapPin";
 
 export class MapGridView {
@@ -429,8 +435,9 @@ export class MapGridView {
     const distance = Math.sqrt(
       localPosition.x * localPosition.x + localPosition.y * localPosition.y
     );
-    const mapRotInRad =
-      this.config.gridScreenTransform.rotation.toEulerAngles().z;
+    const mapRotInRad = customGetEuler(
+      this.config.gridScreenTransform.rotation
+    ).z;
     const adjustedRotationInRad = degInRad - mapRotInRad;
     const adjustedLocalPosition = new vec2(
       Math.cos(adjustedRotationInRad),

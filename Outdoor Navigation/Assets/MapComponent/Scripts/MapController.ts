@@ -21,11 +21,12 @@ import {
   addRenderMeshVisual,
   makeCircle2DMesh,
   makeLineStrip2DMeshWithJoints,
+  normalizeAngle,
+  customGetEuler,
 } from "./MapUtils";
 import { PinOffsetter } from "./PinOffsetter";
 import { PlaceInfo, SnapPlacesProvider } from "./SnapPlacesProvider";
 
-const DEG_TO_RAD = Math.PI / 180;
 const TEXTURE_SIZE = 512;
 
 const MAX_LATITUDE = 85.05112878;
@@ -251,7 +252,11 @@ export class MapController extends BaseScriptComponent {
 
   private handleNorthAlignedOrientationUpdate(orientation: quat) {
     this.orientation = orientation;
-    this.heading = GeoLocation.getNorthAlignedHeading(orientation) * DEG_TO_RAD;
+
+    // GeoLocation.getNorthAlignedHeading() currently returns a offsetted heading when the user tilts their head in multiple axis.
+    // (e.g. tilting upward in x-axis and then to the left along the z-axis. The heading calculated from GeoLocation.getNorthAlignedHeading() will then start shifting to the left)
+    // This is a temporary fix to minimize the shifting. This will be replaced by GeoLocation.getNorthAlignedHeading when the issue is fixed.
+    this.heading = normalizeAngle(customGetEuler(orientation).y);
   }
 
   private updateRotations() {
@@ -473,6 +478,7 @@ export class MapController extends BaseScriptComponent {
       pin.location.longitude,
       pin.location.latitude
     );
+    pin.location.altitude = this.userLocation.altitude;
 
     this.onMapPinAddedEvent.invoke(pin);
   }
@@ -1081,8 +1087,9 @@ export class MapController extends BaseScriptComponent {
     const distance = Math.sqrt(
       localPosition.x * localPosition.x + localPosition.y * localPosition.y
     );
-    const mapRotInRad =
-      this.config.gridScreenTransform.rotation.toEulerAngles().z;
+    const mapRotInRad = customGetEuler(
+      this.config.gridScreenTransform.rotation
+    ).z;
     const adjustedRotationInRad = degInRad - mapRotInRad;
     const adjustedLocalPosition = new vec2(
       Math.cos(adjustedRotationInRad),

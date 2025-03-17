@@ -20,6 +20,7 @@ import NativeLogger from "../SpectaclesInteractionKit/Utils/NativeLogger";
 import WorldCameraFinderProvider from "../SpectaclesInteractionKit/Providers/CameraProvider/WorldCameraFinderProvider";
 import { validate } from "../SpectaclesInteractionKit/Utils/validate";
 import { MapComponent } from "../MapComponent/Scripts/MapComponent";
+import { customGetEuler } from "../MapComponent/Scripts/MapUtils";
 
 export type TranslateEventArg = {
   interactable: Interactable;
@@ -591,7 +592,7 @@ export class InteractableManipulation extends BaseScriptComponent {
   }
 
   private limitQuatRotation(rotation: quat): quat {
-    let euler = rotation.toEulerAngles();
+    let euler = customGetEuler(rotation);
 
     return quat.fromEulerVec(euler);
   }

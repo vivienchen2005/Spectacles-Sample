@@ -4,7 +4,7 @@ import { PlaceInfo } from "./SnapPlacesProvider";
 
 let pinAvailableID = 0;
 const HIGHLIGHT_TWEEN_DURATION = 1;
-const LABEL_BOUNDARY_PADDING = 2;
+const LABEL_BOUNDARY_PADDING = 4;
 const LABEL_CIRCLE_BOUNDARY_PADDING = 4;
 
 export class MapPin {
@@ -92,15 +92,34 @@ export class MapPin {
     }
 
     if (this.label !== undefined) {
+      const worldPosition = this.screenTransform
+        .getTransform()
+        .getWorldPosition();
+      const leftPadding = topLeftToTopRight
+        .normalize()
+        .uniformScale(LABEL_BOUNDARY_PADDING);
+      const topPadding = topLeftToBottomLeft
+        .normalize()
+        .uniformScale(LABEL_BOUNDARY_PADDING);
+
+      const fromCorner = worldPosition.sub(
+        topLeftCorner.add(leftPadding).add(topPadding)
+      );
+      const paddedVertical = topLeftToBottomLeft.sub(topPadding);
+      const paddedHorizontal = topLeftToTopRight.sub(
+        leftPadding.uniformScale(2)
+      );
+      const dotVerticalVector = paddedVertical.dot(paddedVertical);
+      const dotVerticalFromCorner = fromCorner.dot(paddedVertical);
+      const dotHorizontalFromCorner = fromCorner.dot(paddedHorizontal);
+      const dotHorizontalVector = paddedHorizontal.dot(paddedHorizontal);
       if (
-        this.screenTransform.position.x <
-          -topLeftToTopRight.x / 2 + LABEL_BOUNDARY_PADDING * 2 ||
-        this.screenTransform.position.x >
-          topLeftToTopRight.x / 2 - LABEL_BOUNDARY_PADDING * 2 ||
-        this.screenTransform.position.y <
-          topLeftToBottomLeft.y / 2 + LABEL_BOUNDARY_PADDING ||
-        this.screenTransform.position.y >
-          -topLeftToBottomLeft.y / 2 - LABEL_BOUNDARY_PADDING * 2
+        Math.min(
+          dotVerticalVector > dotVerticalFromCorner ? 1 : 0,
+          dotVerticalFromCorner,
+          dotHorizontalVector > dotHorizontalFromCorner ? 1 : 0,
+          dotHorizontalFromCorner
+        ) <= 0
       ) {
         this.label.backgroundSettings.enabled = false;
       } else {

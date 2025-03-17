@@ -2,6 +2,7 @@ import { MapComponent } from "../MapComponent/Scripts/MapComponent";
 import { MapPin } from "../MapComponent/Scripts/MapPin";
 import {
   calculateBearing,
+  customGetEuler,
   getPhysicalDistanceBetweenLocations,
   map,
   normalizeAngle,
@@ -13,6 +14,7 @@ import { LensConfig } from "../SpectaclesInteractionKit/Utils/LensConfig";
 import { UpdateDispatcher } from "../SpectaclesInteractionKit/Utils/UpdateDispatcher";
 import { UICollisionSolver } from "./UICollisionDetector";
 
+const BOUNDARY_HALF_WIDTH_PROJECTION = 35;
 const BOUNDARY_HALF_WIDTH = 26;
 const BOUNDARY_HALF_HEIGHT = 35;
 const Y_POSITION_LERP_BUFFER = 10 * MathUtils.DegToRad;
@@ -315,17 +317,14 @@ export class QuestMarkController extends BaseScriptComponent {
     let screenPosition: vec2;
     if (inView || isOnTheBack) {
       const cameraForward = this.cameraTransform.back;
-      const userForward = new vec3(
-        cameraForward.x,
-        0,
-        cameraForward.z
-      ).normalize();
+      const userForward = cameraForward.projectOnPlane(vec3.up()).normalize();
       const markerLocationWorldPos: vec3 = this.cameraTransform
         .getWorldPosition()
         .add(
           quat
             .fromEulerAngles(0, -bearing, 0)
-            .multiplyVec3(userForward.uniformScale(distance * 100))
+            .multiplyVec3(userForward)
+            .uniformScale(distance * 100)
         )
         .add(
           new vec3(
@@ -334,14 +333,18 @@ export class QuestMarkController extends BaseScriptComponent {
             0
           )
         );
-      screenPosition = this.camera.worldSpaceToScreenSpace(
-        markerLocationWorldPos
+      const cameraRoll = normalizeAngle(
+        customGetEuler(this.cameraTransform.getLocalRotation()).z
       );
+      const unrolledWorldPos = quat
+        .fromEulerAngles(0, 0, cameraRoll)
+        .multiplyVec3(markerLocationWorldPos);
+      screenPosition = this.camera.worldSpaceToScreenSpace(unrolledWorldPos);
 
       screenPosition = new vec2(
         MathUtils.clamp(
           (screenPosition.x - 0.5) *
-            BOUNDARY_HALF_WIDTH *
+            BOUNDARY_HALF_WIDTH_PROJECTION *
             2 *
             (isOnTheBack ? -1 : 1),
           -BOUNDARY_HALF_WIDTH,
@@ -349,8 +352,8 @@ export class QuestMarkController extends BaseScriptComponent {
         ),
         MathUtils.clamp(
           (0.5 - screenPosition.y) * BOUNDARY_HALF_HEIGHT * 2,
-          -BOUNDARY_HALF_WIDTH,
-          BOUNDARY_HALF_WIDTH
+          -BOUNDARY_HALF_HEIGHT,
+          BOUNDARY_HALF_HEIGHT
         )
       );
     } else {
