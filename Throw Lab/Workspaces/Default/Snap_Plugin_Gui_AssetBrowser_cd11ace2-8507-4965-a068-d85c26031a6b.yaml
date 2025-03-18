@@ -1,11 +1,15 @@
 CollapsedEntities:
   type: stringset
   value:
-    size: 502
+    size: 508
     values:
+      - AssetDart
+      - AssetDart/3d resources
       - AssetDart/3d resources/Materials
       - AssetDart/3d resources/Materials/Mat_Dart_1.mat
       - AssetDart/3d resources/Materials/Mat_Dart_2.mat
+      - AssetDart/3d resources/Scenes
+      - AssetDart/3d resources/Scenes/board_dart.fbx
       - AssetDart/3d resources/Scenes/board_dart.fbx/.hidden
       - AssetDart/3d resources/Scenes/board_dart.fbx/.hidden/b
       - AssetDart/3d resources/Scenes/board_dart.fbx/.hidden/white
@@ -17,6 +21,7 @@ CollapsedEntities:
       - AssetDart/3d resources/Scenes/board_dart.fbx/Meshes/board
       - AssetDart/3d resources/Scenes/board_dart.fbx/Meshes/d1_0
       - AssetDart/3d resources/Scenes/board_dart.fbx/Meshes/d2_0
+      - AssetDart/3d resources/Scenes/board_dart.fbx/board_dart
       - AssetDart/3d resources/Shayders
       - AssetDart/3d resources/Shayders 1
       - AssetDart/3d resources/Shayders 1/Sh_dart.ss_graph
@@ -38,6 +43,7 @@ CollapsedEntities:
       - AssetDart/3d resources/Textures/refl_metall.jpg
       - AssetDart/3d resources/Textures/refl_plast.jpg
       - AssetDart/SceneHierarchy.prefab
+      - AssetDart/board_dart.fbx
       - AssetDart/board_dart.fbx/.hidden
       - AssetDart/board_dart.fbx/.hidden/b
       - AssetDart/board_dart.fbx/.hidden/white
@@ -49,9 +55,14 @@ CollapsedEntities:
       - AssetDart/board_dart.fbx/Meshes/board
       - AssetDart/board_dart.fbx/Meshes/d1_0
       - AssetDart/board_dart.fbx/Meshes/d2_0
+      - AssetDart/board_dart.fbx/board_dart
       - Base.png
+      - Board
+      - Board/3d resources
       - Board/3d resources/Materials
       - Board/3d resources/Materials/Mat_Board.mat
+      - Board/3d resources/Scenes
+      - Board/3d resources/Scenes/board_dart.fbx
       - Board/3d resources/Scenes/board_dart.fbx/.hidden
       - Board/3d resources/Scenes/board_dart.fbx/.hidden/b
       - Board/3d resources/Scenes/board_dart.fbx/.hidden/white
@@ -63,6 +74,7 @@ CollapsedEntities:
       - Board/3d resources/Scenes/board_dart.fbx/Meshes/board
       - Board/3d resources/Scenes/board_dart.fbx/Meshes/d1_0
       - Board/3d resources/Scenes/board_dart.fbx/Meshes/d2_0
+      - Board/3d resources/Scenes/board_dart.fbx/board_dart
       - Board/3d resources/Shayders
       - Board/3d resources/Shayders/Sh_board.ss_graph
       - Board/3d resources/Textures
@@ -130,16 +142,12 @@ CollapsedEntities:
       - Physics/TennisBallMatter.matter
       - Physics/oil_paint.ss_graph
       - Plane.mesh
-      - Prefabs
       - Prefabs/DartBoard.prefab
       - Prefabs/Dart_Red.prefab
       - Prefabs/Dart_Yellow.prefab
-      - Prefabs/PingPongBall.prefab
       - Prefabs/TennisBall.prefab
       - Render Target.renderTarget
       - RobotoMono-SemiBold.ttf
-      - SFX
-      - SFX/PingPongSound.wav
       - SFX/dart_miss.wav
       - SFX/dart_whoosh.wav
       - SFX/dart_whooshh.wav
@@ -148,11 +156,9 @@ CollapsedEntities:
       - SFX/tennis_ball_1.wav
       - SFX/tennis_ball_2.wav
       - Scene.scene
-      - Scripts
       - Scripts/DartBehavior.ts
       - Scripts/DartBoardController.ts
       - Scripts/Grabbable.ts
-      - Scripts/PingPongBallBehavior.ts
       - Scripts/RacketGrabbable.ts
       - Scripts/TennisBallBehavior.ts
       - Scripts/ThrowBehavior.ts

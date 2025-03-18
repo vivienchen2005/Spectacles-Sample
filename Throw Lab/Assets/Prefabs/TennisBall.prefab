@@ -102,7 +102,7 @@
     "":
       audio: !<reference.AudioComponent> 9624b6d5-2bf1-40ac-9b61-1ecbb0ff48f3
       targetOutlineMaterial: !<reference.Material> 7231c7bc-6c14-4331-ad23-9ab928107707
-      meshVisual: !<reference.RenderMeshVisual> 45ae402e-67fb-4c5d-9d1f-f7a818223f06
+      meshVisual: !<reference.RenderMeshVisual> 7cf00fe5-58b3-4853-b4ef-a0970e36fd56
   ScriptTypes:
     "":
       {}

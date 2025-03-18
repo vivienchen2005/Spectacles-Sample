@@ -6,7 +6,7 @@
 
 ## Overview
 
-This is a sample Lens Studio project that demonstrates how to implement simple but realistic throwing mechanic in Lens Studio based on physics. It showcases a clean, componentized architecture that takes advantage of the new **Hand Velocity API** introduced in Lens Studio v3.4.
+This is a sample Lens Studio project that demonstrates how to implement simple but realistic throwing mechanic in Lens Studio based on physics. It showcases a clean, componentized architecture that takes advantage of the new **Hand Velocity API**.
 By exploring the ThrowLab project, you’ll gain a practical understanding of implementing realistic throwing mechanics in AR. This foundation will help you build more engaging and interactive Lens Studio lenses.
 
 > **NOTE:**
@@ -19,7 +19,7 @@ Get started using our [Design Guidelines](https://developers.snap.com/spectacles
 
 ## Prerequisites
 
-- **Lens Studio**: v5.7.1+
+- **Lens Studio**: v5.7.2+
 - **Spectacles OS Version**: v5.60+
 - **Spectacles App iOS**: v0.60.1.1+
 - **Spectacles App Android**: v0.60.1.1+

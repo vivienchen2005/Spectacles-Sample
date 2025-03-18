@@ -174,12 +174,15 @@
   Enabled: true
   ScriptAsset: !<reference> 16736bf8-9deb-41df-bba4-c6f13d3a082b
   ScriptInputsDefault:
-    {}
+    targetOutlineMaterial: true
+    meshVisual: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       audio: !<reference.AudioComponent> 22da7cd5-79e1-409a-8d49-ed5d6a434529
+      targetOutlineMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      meshVisual: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     "":
       {}
