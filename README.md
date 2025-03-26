@@ -393,7 +393,36 @@ Extended Permissions mode on device must be enabled in some of the projects to a
   <img src="https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3" />
 </a>
       </p>
-      <p>Convert your 2D images to 3D.</p>
+     <p>Convert your 2D images to 3D.</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33%">
+      <a href="#">
+        <img src="./Remote Object Detection/README-ref/sample-list-remote-object-detection-rounded-edges.gif" alt="remote-object-detection" width="250px" />
+      </a>
+      <h3>Remote Object Detection</h3>
+      <p>
+        <a href="https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?">
+          <img src="https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/lens-studio/features/ar-tracking/world/overview">
+          <img src="https://img.shields.io/badge/World%20Tracking-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/lens-studio/features/ar-tracking/world/object-tracking">
+          <img src="https://img.shields.io/badge/Object%20Tracking-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/spectacles/about-spectacles-features/apis/camera-module?">
+          <img src="https://img.shields.io/badge/Camera%20Access-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/spectacles/about-spectacles-features/apis/fetch?">
+          <img src="https://img.shields.io/badge/Fetch-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/lens-studio/api/lens-scripting/classes/Built-In.RayCastHit.html">
+          <img src="https://img.shields.io/badge/Raycast-Light%20Gray?color=D3D3D3" />
+        </a>
+      </p>
+      <p>Detect objects around you.</p>
     </td>
   </tr>
 </table>
