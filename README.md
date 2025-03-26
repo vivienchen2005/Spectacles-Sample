@@ -31,7 +31,7 @@ New to spatial experiences? Explore our [Introduction to Spatial Design](https:/
 git lfs install
 
 # Clone the repository with LFS support
-git clone https://github.com/your-repo/sample-projects.git
+git clone git@github.com:Snapchat/Spectacles-Sample.git
 
 ```
 
