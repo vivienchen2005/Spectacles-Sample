@@ -424,6 +424,30 @@ Extended Permissions mode on device must be enabled in some of the projects to a
       </p>
       <p>Detect objects around you.</p>
     </td>
+      <td align="center" valign="top" width="33%">
+      <a href="#">
+        <img src="./Public Speaker/README-ref/public-speaker-rounded-edges.gif" alt="public-speaker" width="250px" />
+      </a>
+      <h3>Public Speaker</h3>
+      <p>
+        <a href="https://developers.snap.com/spectacles/spectacles-frameworks/spectacles-interaction-kit/features/overview?">
+          <img src="https://img.shields.io/badge/SIK-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/lens-studio/features/audio/playing-audio?">
+          <img src="https://img.shields.io/badge/Audio-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/spectacles/about-spectacles-features/apis/gesture-module?">
+          <img src="https://img.shields.io/badge/Gesture%20Module-Light%20Gray?color=D3D3D3" />
+        </a>
+        <a href="https://developers.snap.com/spectacles/about-spectacles-features/apis/motion-controller?">
+          <img src="https://img.shields.io/badge/Motion%20Controller-Light%20Gray?color=D3D3D3" />
+        </a>
+      </p>
+      <p>Teleprompter lens for public speaking practice and presentation delivery.</p>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <!-- Third cell can be left empty or filled with another sample -->
+    </td>
   </tr>
 </table>
 
