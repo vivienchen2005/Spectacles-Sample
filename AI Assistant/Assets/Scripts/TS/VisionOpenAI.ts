@@ -82,33 +82,34 @@ export class VisionOpenAI extends BaseScriptComponent {
         ],
       };
 
-      const request = new Request(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${this.apiKey}`,
-          },
-          body: JSON.stringify(requestPayload),
-        }
-      );
-      // More about the fetch API: https://developers.snap.com/spectacles/about-spectacles-features/apis/fetch
-      let response = await this.remoteServiceModule.fetch(request);
-      if (response.status === 200) {
-        let responseData = await response.json();
-        this.textOutput.text = responseData.choices[0].message.content;
-        print(responseData.choices[0].message.content);
-
-        // Call TTS to generate and play speech from the response
-        if (this.ttsComponent) {
-          this.ttsComponent.generateAndPlaySpeech(
-            responseData.choices[0].message.content
-          );
-        }
-      } else {
-        print("Failure: response not successful");
-      }
+//      const request = new Request(
+//        "https://api.openai.com/v1/chat/completions",
+//        {
+//          method: "POST",
+//          headers: {
+//            "Content-Type": "application/json",
+//            Authorization: `Bearer ${this.apiKey}`,
+//          },
+//          body: JSON.stringify(requestPayload),
+//        }
+//      );
+//      // More about the fetch API: https://developers.snap.com/spectacles/about-spectacles-features/apis/fetch
+//      let response = await this.remoteServiceModule.fetch(request);
+//      if (response.status === 200) {
+////        let responseData = await response.json();
+//        this.textOutput.text = responseData.choices[0].message.content;
+//        print(responseData.choices[0].message.content);
+//
+//        // Call TTS to generate and play speech from the response
+//        if (this.ttsComponent) {
+//          this.ttsComponent.generateAndPlaySpeech(
+//            responseData.choices[0].message.content
+//          );
+//        }
+//      } else {
+//        print("Failure: response not successful");
+//      }
+            this.textOutput.text = "Hello";
     } catch (error) {
       print("Error: " + error);
     } finally {
