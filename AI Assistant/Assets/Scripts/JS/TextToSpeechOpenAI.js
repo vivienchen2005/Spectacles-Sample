@@ -5,7 +5,7 @@
 // Remote service module for fetching data
 var remoteServiceModule = require("LensStudio:RemoteServiceModule");
 
-const apiKey = "Insert your Open AI Key";
+const apiKey = "";
 
 // Make generateAndPlaySpeech globally accessible
 script.api.generateAndPlaySpeech = async function(inputText) {
