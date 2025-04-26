@@ -1,2 +1,23 @@
+# Ignore macOS system files
 .DS_Store
 **/.DS_Store
+
+# Ignore Lens Studio auto-generated files
+**/LensStudioCache/
+**/build/
+**/temp/
+**/cache/
+**/Library/
+**/Assets/Audio/
+**/Assets/Models/
+**/Assets/Textures/
+**/*.fbx
+**/*.wav
+**/*.mp3
+**/*.mp4
+**/*.meta
+**/*.mat
+**/*.shader
+**/*.jpg
+**/*.png
+**/*.avi
